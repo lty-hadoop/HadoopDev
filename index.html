@@ -190,25 +190,34 @@
     <script src="js/jquery.metisMenu.js"></script>
     <script>
         $(function($){
+            //配置侧边栏导航
+            $.ajax({
+                url:'nav.json',
+                type:'get',
+                dataType:'json',
+                success:function(data){
+                    console.log(data)
+                }
+            })
                 // Add body-small class if window less than 768px
                 if ($(this).width() < 769) {
                     $('body').addClass('body-small')
                 } else {
                     $('body').removeClass('body-small')
                 }
-            var  $loadContent = null;
-            $loadContent = $(".loadContent");
-             $loadContent.load('loadIndex.html');
-            $("#side-menu").on('click', '.test1', function(event) {
-                event.preventDefault();
-                /* Act on the event */
-                 $loadContent.load("loadIndex.html");
-            });
-            $("#side-menu").on('click', '.test', function(event) {
-                event.preventDefault();
-                /* Act on the event */
-                 $loadContent.load("test.html");
-            });
+            // var  $loadContent = null;
+            // $loadContent = $(".loadContent");
+            //  $loadContent.load('loadIndex.html');
+            // $("#side-menu").on('click', '.test1', function(event) {
+            //     event.preventDefault();
+            //     /* Act on the event */
+            //      $loadContent.load("loadIndex.html");
+            // });
+            // $("#side-menu").on('click', '.test', function(event) {
+            //     event.preventDefault();
+            //     /* Act on the event */
+            //      $loadContent.load("test.html");
+            // });
                 var setBarFlag = true;
                 //设置侧边栏导航最初显示形式；
                     SmoothlyMenu();
