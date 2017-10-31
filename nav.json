@@ -1,0 +1,20 @@
+{[
+    {'navigationName':'位移密集区域与OD趋势',navigationUrl:'html/test1.html',scriptName:'test1.js',navChild':[]},
+    {'navigationName':'线路优化和资源调配',navigationUrl:'html/test.html',scriptName:'test.js','navChild':[]},
+    {'navigationName':'服务质量与乘客体验',navigationUrl:'',scriptName:'',
+        'navChild':[
+                {'navigationName':'评价地图',navigationUrl:'html/1.html',scriptName:'1.js'},
+                {'navigationName':'站点评价',navigationUrl:'html/2.html',scriptName:'2.js'},
+                {'navigationName':'路线评价',navigationUrl:'html/3.html',scriptName:'3.js'},
+                {'navigationName':'车辆评估',navigationUrl:'html/4.html',scriptName:'4.js'},
+                {'navigationName':'司机评估',navigationUrl:'html/5.html',scriptName:'5.js'},
+                {'navigationName':'订阅乘客评价指数',navigationUrl:'html/6.html',scriptName:'6.js'}
+        ]},
+    {'navigationName':'线路优化和资源调配',navigationUrl:'',scriptName:'',
+        'navChild':[
+                {'navigationName':'候车时长与满意度分析',navigationUrl:'html/7.html',scriptName:'7.js'},
+                {'navigationName':'满载率与拥挤满意度',navigationUrl:'html/8.html',scriptName:'8.js'},
+                {'navigationName':'满意度与单车盈亏分析',navigationUrl:'html/9.html',scriptName:'9.js'},
+                {'navigationName':'订阅乘客满意度指数',navigationUrl:'html/10.html',scriptName:'10.js'}
+        ]}
+]}
