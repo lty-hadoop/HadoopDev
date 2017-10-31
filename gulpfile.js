@@ -18,10 +18,10 @@ gulp.task("webserver",function(){
 })
 //监听
 gulp.task("watch",function(){
-    gulp.watch("inspinia/html",["html"]);
-    gulp.watch("inspinia/js/**",["js"]);
-    gulp.watch("inspinia/css",["css"]);
-    gulp.watch("inspinia",["html"]);
+    gulp.watch("HadoopDev/html",["html"]);
+    gulp.watch("HadoopDev/js/**",["js"]);
+    gulp.watch("HadoopDev/css",["css"]);
+    gulp.watch("HadoopDev",["html"]);
 
 })
 gulp.task("default",["webserver","watch"],function(){
