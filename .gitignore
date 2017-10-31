@@ -1,1 +1,5 @@
+# 忽略文件夹
 node_module/
+
+# 忽略文件
+package-lock.json*
