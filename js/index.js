@@ -81,7 +81,6 @@
         function navBindEvent(){
             var clickFlag = true;
           $navUl.on("click",'.navFrist',function(){
-            // $navUl.find("li").removeClass('active');
             var data = $(this).data('data');
                 if(data.navigationUrl!=''){
                     // $loadContent.load(data.navigationUrl,function(){
@@ -92,7 +91,7 @@
                     var _this = $(this);
                     var $down = $navUl.find('.down');
                     if( $down.length!=0){
-                        $down.find("ul").slideUp(200);
+                        $down.find("ul").slideUp(280);
                         $down.attr("slideFlag",1).removeClass('down');
                     }
                         if(flag == 1){
@@ -107,7 +106,7 @@
                             setTimeout(function(){
                                 _this.removeClass('down');
                             },150);
-                            $(this).find("ul").slideUp(200);
+                            $(this).find("ul").slideUp(220);
                         }
                 }
                 $(this).addClass('active').siblings(".navFrist").removeClass('active');
