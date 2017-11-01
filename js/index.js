@@ -50,9 +50,10 @@
                 }else{
                     var flag = $(this).attr("slideFlag");
                     var _this = $(this);
-                    if( $navUl.find('.down').length!=0){
-                        $navUl.find('.down').find("ul").slideUp(200);
-                        $navUl.find('.down').attr("slideFlag",1).removeClass('down');
+                    var $down = $navUl.find('.down');
+                    if( $down.length!=0){
+                        $down.find("ul").slideUp(200);
+                        $down.attr("slideFlag",1).removeClass('down');
                     }
                         if(flag == 1){
                             $(this).attr("slideFlag",2);
