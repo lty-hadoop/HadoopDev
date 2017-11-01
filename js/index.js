@@ -92,7 +92,7 @@
                     var _this = $(this);
                     var $down = $navUl.find('.down');
                     if( $down.length!=0){
-                        $down.find("ul").slideUp(200);
+                        $down.find("ul").slideUp(280);
                         $down.attr("slideFlag",1).removeClass('down');
                     }
                         if(flag == 1){
