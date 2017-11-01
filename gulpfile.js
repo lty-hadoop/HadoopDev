@@ -16,6 +16,7 @@ gulp.task("webserver",function(){
             }
         }))
 })
+
 //监听
 gulp.task("watch",function(){
     gulp.watch("HadoopDev/html",["html"]);
