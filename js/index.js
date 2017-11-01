@@ -81,7 +81,6 @@
         function navBindEvent(){
             var clickFlag = true;
           $navUl.on("click",'.navFrist',function(){
-            // $navUl.find("li").removeClass('active');
             var data = $(this).data('data');
                 if(data.navigationUrl!=''){
                     // $loadContent.load(data.navigationUrl,function(){
