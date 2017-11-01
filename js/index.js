@@ -80,9 +80,8 @@ $(function ($) {
             })
         }
     }
-
+    //绑定侧边栏导航点击事件；
     function navBindEvent() {
-        var clickFlag = true;
         $navUl.on("click", '.navFrist', function () {
             var data = $(this).data('data');
             if (data.navigationUrl != '') {
