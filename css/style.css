@@ -48,7 +48,7 @@ body{
 .fa.arrow:before {
   content: "\f104";
 }
-.active > a > .fa.arrow:before {
+.down>a>.fa.arrow:before {
   content: "\f107";
 }
 .loadContent{
@@ -5531,115 +5531,6 @@ body.body-small .vote-icon {
   padding: 8px 15px;
   font-weight: bold;
   color: #fff;
-}
-.small-chat-box .chat-date {
-  opacity: 0.6;
-  font-size: 10px;
-  font-weight: normal;
-}
-.small-chat-box .content {
-  padding: 15px 15px;
-}
-.small-chat-box .content .author-name {
-  font-weight: bold;
-  margin-bottom: 3px;
-  font-size: 11px;
-}
-.small-chat-box .content > div {
-  padding-bottom: 20px;
-}
-.small-chat-box .content .chat-message {
-  padding: 5px 10px;
-  border-radius: 6px;
-  font-size: 11px;
-  line-height: 14px;
-  max-width: 80%;
-  background: #f3f3f4;
-  margin-bottom: 10px;
-}
-.small-chat-box .content .chat-message.active {
-  background: #1ab394;
-  color: #fff;
-}
-.small-chat-box .content .left {
-  text-align: left;
-  clear: both;
-}
-.small-chat-box .content .left .chat-message {
-  float: left;
-}
-.small-chat-box .content .right {
-  text-align: right;
-  clear: both;
-}
-.small-chat-box .content .right .chat-message {
-  float: right;
-}
-.small-chat-box .form-chat {
-  padding: 10px 10px;
-}
-/*
- * metismenu - v2.0.2
- * A jQuery menu plugin
- * https://github.com/onokumus/metisMenu
- *
- * Made by Osman Nuri Okumus
- * Under MIT License
- */
-.metismenu .plus-minus,
-.metismenu .plus-times {
-  float: right;
-}
-.metismenu .arrow {
-  float: right;
-  line-height: 1.42857;
-}
-.metismenu .glyphicon.arrow:before {
-  content: "\e079";
-}
-.metismenu .active > a > .glyphicon.arrow:before {
-  content: "\e114";
-}
-.metismenu .fa.arrow:before {
-  content: "\f104";
-}
-.metismenu .active > a > .fa.arrow:before {
-  content: "\f107";
-}
-.metismenu .ion.arrow:before {
-  content: "\f3d2";
-}
-.metismenu .active > a > .ion.arrow:before {
-  content: "\f3d0";
-}
-.metismenu .fa.plus-minus:before,
-.metismenu .fa.plus-times:before {
-  content: "\f067";
-}
-.metismenu .active > a > .fa.plus-times {
-  -webkit-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  transform: rotate(45deg);
-}
-.metismenu .active > a > .fa.plus-minus:before {
-  content: "\f068";
-}
-.metismenu .collapse {
-  display: none;
-}
-.metismenu .collapse.in {
-  display: block;
-}
-.metismenu .collapsing {
-  position: relative;
-  height: 0;
-  overflow: hidden;
-  -webkit-transition-timing-function: ease;
-  transition-timing-function: ease;
-  -webkit-transition-duration: .35s;
-  transition-duration: .35s;
-  -webkit-transition-property: height, visibility;
-  transition-property: height, visibility;
 }
 /*
  *  Usage:

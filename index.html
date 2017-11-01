@@ -7,7 +7,7 @@
     <title>大数据展示平台</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">  
+    <link href="css/style.css" rel="stylesheet">
     <link rel="icon" href="img/data.ico" type="image/x-icon">
 </head>
 
@@ -141,7 +141,7 @@
                             IN+
                         </div>
                     </li>
-                    <li class="active test1" style="margin-top:5px;">
+<!--                     <li class="active test1" style="">
                         <a href="index.html"><i class="fa fa-stack-exchange "></i> <span class="nav-label">位移密集区域与OD趋势</span></a>
                     </li>
                     <li class="test">
@@ -166,7 +166,7 @@
                             <li><a href="mailbox.html">满意度与单车盈亏分析</a></li>
                             <li><a href="mailbox.html">订阅乘客满意度指数</a></li>
                         </ul>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
         </nav>
@@ -185,84 +185,9 @@
 
     </div>
 
-    <script src="js/jquery-2.1.1.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery.metisMenu.js"></script>
-    <script>
-        $(function($){
-            //配置侧边栏导航
-            $.ajax({
-                url:'nav.json',
-                type:'get',
-                dataType:'json',
-                success:function(data){
-                    console.log(data)
-                }
-            })
-                // Add body-small class if window less than 768px
-                if ($(this).width() < 769) {
-                    $('body').addClass('body-small')
-                } else {
-                    $('body').removeClass('body-small')
-                }
-            // var  $loadContent = null;
-            // $loadContent = $(".loadContent");
-            //  $loadContent.load('loadIndex.html');
-            // $("#side-menu").on('click', '.test1', function(event) {
-            //     event.preventDefault();
-            //     /* Act on the event */
-            //      $loadContent.load("loadIndex.html");
-            // });
-            // $("#side-menu").on('click', '.test', function(event) {
-            //     event.preventDefault();
-            //     /* Act on the event */
-            //      $loadContent.load("test.html");
-            // });
-                var setBarFlag = true;
-                //设置侧边栏导航最初显示形式；
-                    SmoothlyMenu();
-                // 初始化侧边栏导航
-                $('#side-menu').metisMenu();
-                //根据窗口大小变化动态设置当前侧边栏导航的形式
-                $(window).on("resize",function(){
-                        SmoothlyMenu()
-                });
-                function SmoothlyMenu() {
-                var winWidth = null;
-                    if (window.innerWidth)
-                        winWidth = window.innerWidth;
-                        else if ((document.body) && (document.body.clientWidth))
-                        winWidth = document.body.clientWidth;
-                    if(winWidth<768&&setBarFlag){
-                       setBarFlag = false;
-                       $('body').addClass('body-small')
-                   }else if(winWidth>768&&!setBarFlag){
-                        setBarFlag = true;
-                         $('body').removeClass('body-small')
-                   }else{
-                        return;
-                   }
-                    $("body").toggleClass("mini-navbar");
-                    if (!$('body').hasClass('mini-navbar') || $('body').hasClass('body-small')) {
-                        // Hide menu in order to smoothly turn on when maximize menu
-                        $('#side-menu').hide();
-                        // For smoothly turn on menu
-                        setTimeout(
-                            function () {
-                                $('#side-menu').fadeIn(200);
-                            }, 150);
-                    } else if ($('body').hasClass('fixed-sidebar')) {
-                        $('#side-menu').hide();
-                        setTimeout(
-                            function () {
-                                $('#side-menu').fadeIn(200);
-                            }, 100);
-                    } else {
-                        // Remove all inline style from jquery fadeIn function to reset menu state
-                        $('#side-menu').removeAttr('style');
-                    }
-                }
-});
-    </script>
+    <script type="text/javascript"  src="js/common/jquery-2.1.1.js"></script>
+    <script type="text/javascript"  src="js/common/bootstrap.min.js"></script>
+    <script type="text/javascript"  src="js/common/jquery.metisMenu.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
 </body>
 </html>
