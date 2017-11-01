@@ -107,7 +107,7 @@
                             setTimeout(function(){
                                 _this.removeClass('down');
                             },150);
-                            $(this).find("ul").slideUp(200);
+                            $(this).find("ul").slideUp(210);
                         }
                 }
                 $(this).addClass('active').siblings(".navFrist").removeClass('active');
