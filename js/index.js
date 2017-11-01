@@ -50,17 +50,24 @@
                 }else{
                     var flag = $(this).attr("slideFlag");
                     var _this = $(this);
+                    if( $navUl.find('.down').length!=0){
+                        $navUl.find('.down').find("ul").slideUp(200);
+                        $navUl.find('.down').attr("slideFlag",1).removeClass('down');
+                    }
                         if(flag == 1){
                             $(this).attr("slideFlag",2);
-                            $(this).find("ul").slideDown(400,function(){
-                                 _this.addClass('down');
-                            });
+                            setTimeout(function(){
+                                _this.addClass('down');
+                            },150);
+                            $(this).find("ul").slideDown(300);
 
                         }else{
                             $(this).attr("slideFlag",1);
-                            $(this).find("ul").slideUp(200,function(){
+                            setTimeout(function(){
                                 _this.removeClass('down');
-                            });
+                            },150);
+                            $(this).find("ul").slideUp(200);
+
 
                         }
 
