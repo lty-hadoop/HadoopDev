@@ -85,9 +85,9 @@ $(function ($) {
         $navUl.on("click", '.navFrist', function () {
             var data = $(this).data('data');
             if (data.navigationUrl != '') {
-                // $loadContent.load(data.navigationUrl,function(){
-                //         $(document.body).append('')
-                // })
+                $loadContent.load(data.navigationUrl,function(){
+                        $(document.body).append('')
+                })
             } else {
                 var flag = $(this).attr("slideFlag");
                 var _this = $(this);
