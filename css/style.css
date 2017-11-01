@@ -192,3 +192,6 @@ body.mini-navbar.fixed-sidebar .profile-element,
     margin: 0;
   }
 }
+li a:hover {
+  cursor: pointer;
+}
