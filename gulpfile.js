@@ -15,7 +15,7 @@ gulp.task("webserver",function(){
                 path:"./"         //作用的文件目录范围
             }
         }))
-})
+});
 
 //监听
 gulp.task("watch",function(){
@@ -24,7 +24,7 @@ gulp.task("watch",function(){
     gulp.watch("hadoopDev/css",["css"]);
     gulp.watch("hadoopDev",["html"]);
 
-})
+});
 gulp.task("default",["webserver","watch"],function(){
 
 });

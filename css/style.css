@@ -4,7 +4,7 @@ body {
   background-color: #2f4050;
   font-size: 13px;
   color: #676a6c;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 .arrow {
   float: right;
@@ -15,8 +15,26 @@ body {
 .down>a>.fa.arrow:before {
   content: "\f107";
 }
-
-
+.loadContent{
+  overflow:hidden;
+  overflow-y:auto;
+  position:absolute;
+  left:0px;
+  right:-30px;
+  top:0;
+  bottom:15px;
+}
+#page-wrapper {
+  min-height: 568px;
+  position: relative !important;
+}
+@media (min-width: 768px) {
+  #page-wrapper {
+    position: inherit;
+    margin: 0 0 0 240px;
+    min-height: 2002px;
+  }
+}
 /***需要的***/
 .nav > li > a {
   color: #a7b1c2;

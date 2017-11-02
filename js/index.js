@@ -1,5 +1,12 @@
 $(function ($) {
     var $navUl = null;
+    var $loadContent = $(".loadContent");
+    // 针对不同屏幕设置显示样式
+    if ($(this).width() < 769) {
+        $('body').addClass('body-small')
+    } else {
+        $('body').removeClass('body-small')
+    }
     $navUl = $("#side-menu");
 
     var setBarFlag = true;
@@ -42,14 +49,6 @@ $(function ($) {
         } else {
             $('#side-menu').removeAttr('style');
         }
-    }
-
-    var $loadContent = $(".loadContent");
-    // 针对不同屏幕设置显示样式
-    if ($(this).width() < 769) {
-        $('body').addClass('body-small')
-    } else {
-        $('body').removeClass('body-small')
     }
     //配置侧边栏导航
     $.ajax({
