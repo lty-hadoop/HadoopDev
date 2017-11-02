@@ -32,3 +32,13 @@
 .pagination li {
     display: inline-block;
 }
+
+/* color */
+.color_1ab394 {color: #1ab394;}
+.color_e9e9e9 {color: #e9e9e9;}
+.color_ccc {color: #ccc;}
+
+/* background-color */
+.bg_1ab394 {background-color: #1ab394;}
+.bg_f8ac59 {background-color: #f8ac59;}
+.bg_ed5565 {background-color: #ed5565;}
