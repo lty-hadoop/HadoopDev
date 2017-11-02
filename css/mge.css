@@ -1,0 +1,37 @@
+@charset "utf-8";
+
+.clearfix::after {
+    clear: both;
+    height: 0;
+    display: block;
+    visibility: hidden;
+    zoom: 1;
+}
+.fr {
+    float: right;
+}
+.identical-table {
+    background-color: #fff;
+    width: 100%;
+    padding: 20px;
+}
+.identical-table .table {
+    text-align: center;
+    border: 1px solid #e0dddd;
+}
+.identical-table .identical-thead {
+    background-color: #f5f5f6;
+}
+.identical-table .identical-thead tr th {
+    vertical-align: middle;
+}
+.identical-table .identical-thead tr th {
+    text-align: center;
+    font-weight: normal;
+    border-right: 1px solid #e0dddd;
+    border-bottom: 0;
+}
+.identical-table .table tbody tr td {
+    vertical-align: middle;
+    border-right: 1px solid #e0dddd;
+}
