@@ -1,0 +1,37 @@
+{
+  "sites": [
+    {
+      "id": "1",
+      "startPoint": "丛台广场",
+      "pass": "市民中心、体育中心、高铁东站、赵苑公园、复兴东路",
+      "endPoint": "公交公司",
+      "startTime": "10:25:00",
+      "endTime": "15:50:00",
+      "peakSegmentNumber": "3",
+      "frequency": "6",
+      "allocationNumber": "12"
+    },
+    {
+      "id": "2",
+      "startPoint": "南苑小区",
+      "pass": "二十五中、市一医院、人民广场、金桥",
+      "endPoint": "古城路",
+      "startTime": "10:25:00",
+      "endTime": "15:50:00",
+      "peakSegmentNumber": "3",
+      "frequency": "5",
+      "allocationNumber": "10"
+    },
+    {
+      "id": "3",
+      "startPoint": "市民之家",
+      "pass": "购物公园、火车站、中华路、望京南、望京西、十一中、铁路公园、科技馆",
+      "endPoint": "南湖广场",
+      "startTime": "10:25:00",
+      "endTime": "15:50:00",
+      "peakSegmentNumber": "3",
+      "frequency": "4",
+      "allocationNumber": "8"
+    }
+  ]
+}

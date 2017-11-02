@@ -188,21 +188,21 @@
                         <th>配人数</th>
                     </tr>
                     </thead>
-                    <tbody>
-                    <tr>
-                        <td>丛台广场</td>
-                        <td>市民中心、体育中心、高铁东站、赵苑公园、复兴东路</td>
-                        <td>公交公司</td>
-                        <td>10:25:00</td>
-                        <td>15:50:00</td>
-                        <td>3</td>
-                        <td>6</td>
-                        <td>12</td>
-                    </tr>
+                    <tbody class="list-data">
+                    <!--<tr>-->
+                        <!--<td>丛台广场</td>-->
+                        <!--<td>市民中心、体育中心、高铁东站、赵苑公园、复兴东路</td>-->
+                        <!--<td>公交公司</td>-->
+                        <!--<td>10:25:00</td>-->
+                        <!--<td>15:50:00</td>-->
+                        <!--<td>3</td>-->
+                        <!--<td>6</td>-->
+                        <!--<td>12</td>-->
+                    <!--</tr>-->
                     </tbody>
                 </table>
             </div>
-            <div class="fr">
+            <div class="flex">
                 <ul class="pagination">
                     <!--<li><a href="#">&laquo;</a></li>-->
                     <!--<li><a href="#">1</a></li>-->
@@ -229,5 +229,48 @@
 <script type="text/javascript" src="js/common/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/common/jquery.metisMenu.js"></script>
 <script type="text/javascript" src="js/index.js"></script>
+<script>
+    function getData(currentpage, pagesize) {
+        $.ajax({
+            type: "GET",
+            url: "js/table.json",
+//            data: {
+//                currentPage: currentpage,
+//                pageSize: pagesize
+//            },
+            success: function(res){
+                $.each(res.sites, function(index, value){
+                    //console.log(value.id)
+                    let li = `<li><a>${value.id}</a></li>`;
+                    $('.pagination li:first').addClass('active');
+                    let tr = `<tr>
+                                <td>${value.startPoint}</td>
+                                <td>${value.pass}</td>
+                                <td>${value.endPoint}</td>
+                                <td>${value.startTime}'</td>
+                                <td>${value.endTime}</td>
+                                <td>${value.peakSegmentNumber}</td>
+                                <td>${value.frequency}</td>
+                                <td>${value.allocationNumber}</td>
+                            </tr>`;
+                    $('.pagination').append(li);
+                    $('.list-data').append(tr);
+                })
+            }
+        });
+    }
+
+    $(function(){
+        $('.pagination').on('click','li',function(){
+            $(this).addClass('active').siblings().removeClass('active');
+            getData();
+        });
+
+        getData();
+    });
+//    function jump(type) {
+//        console.log(type.innerHTML)
+//    }
+</script>
 </body>
 </html>

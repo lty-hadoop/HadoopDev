@@ -1,14 +1,8 @@
 @charset "utf-8";
 
-.clearfix::after {
-    clear: both;
-    height: 0;
-    display: block;
-    visibility: hidden;
-    zoom: 1;
-}
-.fr {
-    float: right;
+.flex {
+    display: flex;
+    justify-content: flex-end;
 }
 .identical-table {
     background-color: #fff;
@@ -35,3 +29,12 @@
     vertical-align: middle;
     border-right: 1px solid #e0dddd;
 }
+.pagination li {
+    display: inline-block;
+}
+
+/* height */
+.h_10 {height: 10px;}.h_15{height: 15px;}.h_20{height: 20px;}.h_25{height: 25px;}.h_30{height: 30px;}.h_35{height: 35px;}.h_40{height: 40px;}.h_45{height: 45px;}.h_50{height: 50px;}.h_auto{height:100%;}
+
+/* line-height */
+.line_h10{line-height: 10px;}.line_h15{line-height: 15px;}.line_h20{line-height: 20px;}.line_h25{line-height: 25px;}.line_h30{line-height: 30px;}.line_h35{line-height: 35px;}.line_h40{line-height: 40px;}.line_h45{line-height: 45px;}.line_h50{line-height: 50px;}
