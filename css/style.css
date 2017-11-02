@@ -24,7 +24,7 @@ body {
   padding: 14px 20px 14px 25px;
 }
 .nav.navbar-right > li > a {
-  color: #999c9e;
+  color: #fff;
 }
 .nav > li.active > a {
   color: #ffffff;
@@ -102,6 +102,24 @@ body {
   display: none;
   padding: 18px 0;
 }
+
+/* 首页 */
+.img-circle {
+  width: 50px;
+  height: 50px;
+}
+.logo {
+  background: url(../img/logo.png) no-repeat;
+  background-size: 100% 100%;
+  width: 110px;
+  height: 30px;
+  display: inline-block;
+  margin: 15px 0 0 15px;
+}
+.font18 {
+  font-size: 18px;
+}
+
 
 body.mini-navbar .profile-element,
 body.mini-navbar .nav-label,
