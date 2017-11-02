@@ -56,6 +56,23 @@ html[xmlns] .clear { display: block; }
 /*文字居中*/
 .text_c{text-align:center;}
 
+/*弹性盒子元素水平居中*/
+.jst_c{justify-content: center;}
+/*弹性盒子元素水平从左开始排列*/
+.jst_l{justify-content: flex-start;}
+/*弹性盒子元素水平从右开始排列*/
+.jst_r{justify-content: flex-end;}
+/*弹性盒子元素水平环绕*/
+.jst_sa{justify-content: space-around;}
+/*弹性盒子元素水平两端分散*/
+.jst_sb{justify-content: space-between;}
+/*弹性盒子元素垂直居中*/
+.item_c{algin-items:center;}
+/*弹性盒子元素垂直起点开始排列*/
+.item_s{algin-items:start;}
+/*弹性盒子元素垂直结束点排列*/
+.item_e{algin-items:end;}
+
 /***边框****/
 .bd_1{border:1px solid #e4e4e4; }.bd_2{border:2px solid #e4e4e4;}
 .bd_t1{border-top:1px solid #e4e4e4; }.bd_t2{border-top:2px solid #e4e4e4;}
