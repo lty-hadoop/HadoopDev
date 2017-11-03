@@ -89,13 +89,15 @@ $(function ($) {
                         $(document.body).append('')
                 });
             } else {
+                // $(this).find('.scNav').removeClass('active');
                 var flag = $(this).attr("slideFlag");
                 var _this = $(this);
                 var $down = $navUl.find('.down');
-                if ($down.length != 0) {
-                    $down.find("ul").slideUp(280);
-                    $down.attr("slideFlag", 1).removeClass('down');
-                }
+                //关闭其他展开的tab
+                // if ($down.length != 0) {
+                //     $down.find("ul").slideUp(280);
+                //     $down.attr("slideFlag", 1).removeClass('down');
+                // }
                 if (flag == 1) {
                     $(this).attr("slideFlag", 2);
                     setTimeout(function () {
