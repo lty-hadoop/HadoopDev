@@ -81,12 +81,13 @@ $(function ($) {
     }
     //绑定侧边栏导航点击事件；
     function navBindEvent() {
-        $navUl.on("click", '.navFrist', function () {
+        $navUl.on("click", 'li', function (e) {
+            e.stopPropagation();
             var data = $(this).data('data');
             if (data.navigationUrl != '') {
                 $loadContent.load(data.navigationUrl,function(){
                         $(document.body).append('')
-                })
+                });
             } else {
                 var flag = $(this).attr("slideFlag");
                 var _this = $(this);
@@ -110,7 +111,7 @@ $(function ($) {
                     $(this).find("ul").slideUp(220);
                 }
             }
-            $(this).addClass('active').siblings(".navFrist").removeClass('active');
+            $(this).addClass('active').siblings('li').removeClass('active');
         })
     }
 });
