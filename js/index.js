@@ -83,21 +83,29 @@ $(function ($) {
     function navBindEvent() {
         $navUl.on("click", 'li', function (e) {
             e.stopPropagation();
+            var $down = $navUl.find('.down');
             var data = $(this).data('data');
             if (data.navigationUrl != '') {
+                $navUl.find('.scNav').removeClass('active');
                 $loadContent.load(data.navigationUrl,function(){
-                        $(document.body).append('')
+                    $(document.body).append('')
                 });
+                if(e.currentTarget.className!='scNav'){
+                    //关闭其他展开的tab
+                    if ($down.length != 0) {
+                        $down.find("ul").slideUp(280);
+                        $down.attr("slideFlag", 1).removeClass('down');
+                    }
+                }
             } else {
                 // $(this).find('.scNav').removeClass('active');
                 var flag = $(this).attr("slideFlag");
                 var _this = $(this);
-                var $down = $navUl.find('.down');
                 //关闭其他展开的tab
-                // if ($down.length != 0) {
-                //     $down.find("ul").slideUp(280);
-                //     $down.attr("slideFlag", 1).removeClass('down');
-                // }
+                if ($down.length != 0) {
+                    $down.find("ul").slideUp(280);
+                    $down.attr("slideFlag", 1).removeClass('down');
+                }
                 if (flag == 1) {
                     $(this).attr("slideFlag", 2);
                     setTimeout(function () {

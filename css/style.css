@@ -123,16 +123,20 @@ body {
   background-color: #2f4050;
   font-size: 13px;
   color: #676a6c;
-  overflow: hidden;
+  height: 100%;
+  overflow-x:hidden ;
+  position: relative;
 }
+html{
+  height:100%;}
 
 /*top顶部通栏和侧边栏样式*/
 .arrow {float: right;}
 .fa.arrow:before {content: "\f104"; }
 .down>a>.fa.arrow:before {content: "\f107";  }
-.loadContent{overflow:hidden;overflow-y:auto;position:absolute;left:0;right:0;top:0;bottom:15px;}
-#page-wrapper {min-height: 568px;position: relative !important;  }
-@media (min-width: 768px) {#page-wrapper {position: inherit;margin: 0 0 0 240px;min-height: 2002px;}  }
+.loadContent{position:absolute;left:0;right:0;top:0;bottom:15px;}
+#page-wrapper {overflow:hidden;overflow-y:auto;position:absolute;left:0;right:0;top:65px;bottom:0;background:#ffffff;}
+@media (min-width: 768px) {#page-wrapper {position: inherit;margin: 0 0 0 240px;}  }
 .nav > li > a {color: #a7b1c2;font-weight: 600;padding: 14px 20px 14px 25px;  }
 .nav.navbar-right > li > a {color: #fff;  }
 .nav > li.active > a {color: #ffffff;  }
@@ -172,19 +176,21 @@ body.canvas-menu .logo-element {  display: none;  }
 body.mini-navbar .nav-header {  padding: 0;  background-color: #1ab394;  }
 body.mini-navbar #page-wrapper {  margin: 0 0 0 70px;  }
 body.mini-navbar.fixed-sidebar .profile-element, .block {  display: block !important;  }
-@media (min-width: 768px) {  #page-wrapper {  position: inherit;  margin: 0 0 0 220px;  min-height: 1200px;}
-  .navbar-static-side {  z-index: 2001;  position: absolute;  width: 220px;  }
+@media (min-width: 768px) {  #page-wrapper {overflow:hidden;overflow-y:auto;position:absolute;left:0;right:0;top:65px;bottom:0;}
+  .navbar-static-side {  z-index: 2001;  position: absolute;  width: 220px; top:65px; }
   .navbar-top-links .dropdown-messages,
   .navbar-top-links .dropdown-tasks,
   .navbar-top-links .dropdown-alerts {  margin-left: auto;  }  }
+.loadContent{overflow:hidden;overflow-y:auto;position:absolute;left:0;right:0;top:0;bottom:15px;}
 @media (max-width: 768px) {
-  #page-wrapper {  position: inherit;  margin: 0 0 0 0;  min-height: 1000px;  }
+  #page-wrapper {overflow:hidden;overflow-y:auto;position:absolute;left:0;right:0;top:65px;bottom:0px;}
   .body-small .navbar-static-side {  display: none;  z-index: 2001;  position: absolute;  width: 70px;
   }
   .body-small.mini-navbar .navbar-static-side {  display: block;  }
   .lock-word {  display: none;  }
   .navbar-form-custom {  display: none;  }
   .navbar-header {  display: inline;  float: left;  }
+  .loadContent{overflow:hidden;overflow-y:auto;position:absolute;left:0;right:0;top:0;bottom:15px;}
 }
 @media (max-width: 1000px) {
   .welcome-message {  display: none;  }
