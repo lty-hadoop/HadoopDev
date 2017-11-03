@@ -32,6 +32,95 @@
       "peakSegmentNumber": "3",
       "frequency": "4",
       "allocationNumber": "8"
+    },
+    {
+      "id": "4",
+      "startPoint": "市民之家",
+      "pass": "购物公园、火车站、中华路、望京南、望京西、十一中、铁路公园、科技馆",
+      "endPoint": "古城路",
+      "startTime": "10:25:00",
+      "endTime": "15:50:00",
+      "peakSegmentNumber": "3",
+      "frequency": "4",
+      "allocationNumber": "8"
+    },
+    {
+      "id": "5",
+      "startPoint": "市民之家",
+      "pass": "购物公园、火车站、中华路、望京南、望京西、十一中、铁路公园、科技馆",
+      "endPoint": "南湖广场",
+      "startTime": "10:25:00",
+      "endTime": "15:50:00",
+      "peakSegmentNumber": "3",
+      "frequency": "4",
+      "allocationNumber": "8"
+    },
+    {
+      "id": "6",
+      "startPoint": "市民之家",
+      "pass": "购物公园、火车站、中华路、望京南、望京西、十一中、铁路公园、科技馆",
+      "endPoint": "古城路",
+      "startTime": "10:25:00",
+      "endTime": "15:50:00",
+      "peakSegmentNumber": "3",
+      "frequency": "4",
+      "allocationNumber": "8"
+    },
+    {
+      "id": "7",
+      "startPoint": "市民之家",
+      "pass": "购物公园、火车站、中华路、望京南、望京西、十一中、铁路公园、科技馆",
+      "endPoint": "南湖广场",
+      "startTime": "10:25:00",
+      "endTime": "15:50:00",
+      "peakSegmentNumber": "3",
+      "frequency": "4",
+      "allocationNumber": "8"
+    },
+    {
+      "id": "8",
+      "startPoint": "市民之家",
+      "pass": "购物公园、火车站、中华路、望京南、望京西、十一中、铁路公园、科技馆",
+      "endPoint": "古城路",
+      "startTime": "10:25:00",
+      "endTime": "15:50:00",
+      "peakSegmentNumber": "3",
+      "frequency": "4",
+      "allocationNumber": "8"
+    },
+    {
+      "id": "9",
+      "startPoint": "市民之家",
+      "pass": "购物公园、火车站、中华路、望京南、望京西、十一中、铁路公园、科技馆",
+      "endPoint": "南湖广场",
+      "startTime": "10:25:00",
+      "endTime": "15:50:00",
+      "peakSegmentNumber": "3",
+      "frequency": "4",
+      "allocationNumber": "8"
+    },
+    {
+      "id": "10",
+      "startPoint": "市民之家",
+      "pass": "购物公园、火车站、中华路、望京南、望京西、十一中、铁路公园、科技馆",
+      "endPoint": "南湖广场",
+      "startTime": "10:25:00",
+      "endTime": "15:50:00",
+      "peakSegmentNumber": "3",
+      "frequency": "4",
+      "allocationNumber": "8"
+    },
+    {
+      "id": "11",
+      "startPoint": "市民之家",
+      "pass": "购物公园、火车站、中华路、望京南、望京西、十一中、铁路公园、科技馆",
+      "endPoint": "南湖广场",
+      "startTime": "10:25:00",
+      "endTime": "15:50:00",
+      "peakSegmentNumber": "3",
+      "frequency": "4",
+      "allocationNumber": "8"
     }
-  ]
+  ],
+  "total": "21"
 }

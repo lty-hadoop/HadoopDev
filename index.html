@@ -202,17 +202,6 @@
                     </tbody>
                 </table>
             </div>
-            <div class="flex">
-                <ul class="pagination">
-                    <!--<li><a href="#">&laquo;</a></li>-->
-                    <!--<li><a href="#">1</a></li>-->
-                    <!--<li><a href="#">2</a></li>-->
-                    <!--<li><a href="#">3</a></li>-->
-                    <!--<li><a href="#">4</a></li>-->
-                    <!--<li><a href="#">5</a></li>-->
-                    <!--<li><a href="#">&raquo;</a></li>-->
-                </ul>
-            </div>
         </div>
 
         <!-- 以上是内容区域  -->
@@ -228,49 +217,5 @@
 <script type="text/javascript" src="js/common/jquery-2.1.1.js"></script>
 <script type="text/javascript" src="js/common/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/common/jquery.metisMenu.js"></script>
-<script type="text/javascript" src="js/index.js"></script>
-<script>
-    function getData(currentpage, pagesize) {
-        $.ajax({
-            type: "GET",
-            url: "js/table.json",
-//            data: {
-//                currentPage: currentpage,
-//                pageSize: pagesize
-//            },
-            success: function(res){
-                $.each(res.sites, function(index, value){
-                    //console.log(value.id)
-                    let li = `<li><a>${value.id}</a></li>`;
-                    $('.pagination li:first').addClass('active');
-                    let tr = `<tr>
-                                <td>${value.startPoint}</td>
-                                <td>${value.pass}</td>
-                                <td>${value.endPoint}</td>
-                                <td>${value.startTime}</td>
-                                <td>${value.endTime}</td>
-                                <td>${value.peakSegmentNumber}</td>
-                                <td>${value.frequency}</td>
-                                <td>${value.allocationNumber}</td>
-                            </tr>`;
-                    $('.pagination').append(li);
-                    $('.list-data').append(tr);
-                })
-            }
-        });
-    }
-
-    $(function(){
-        $('.pagination').on('click','li',function(){
-            $(this).addClass('active').siblings().removeClass('active');
-            getData();
-        });
-
-        getData();
-    });
-//    function jump(type) {
-//        console.log(type.innerHTML)
-//    }
-</script>
 </body>
 </html>
