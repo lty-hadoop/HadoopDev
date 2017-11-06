@@ -1,7 +1,12 @@
-$(function(){
+/*
+* 第一个参数YLnumber     表示左侧y轴的最大值
+* 第二个参数symbol       表示y轴的单位
+* 第三个桉树array        表示要显示的图例组件名字，没有则传[]，有则传[{},{}]
+* */
+function getEchartsData (url, YLnumber, symbol, array) {
     var myChart = echarts.init(document.getElementById('carzxt'));
 
-    $.get('js/chartData.json', function(data){
+    $.get(url, function(data){
         option = {
             data:[],
             title: {
@@ -19,16 +24,14 @@ $(function(){
                     label: {
                         backgroundColor: '#505765'
                     }
-                }
+                },
                 // formatter: function (obj) {
                 //     var value = obj.value;
                 //     return value
+                // }
             },
             legend: {
-                data: [
-                    {name: '候车满意度',icon: 'rect'},
-                    {name: '候车时长',icon: 'rect'}
-                ],
+                data: array,
                 right: '10%',
                 itemGap: 35,
                 itemWidth: 50
@@ -45,9 +48,9 @@ $(function(){
             yAxis: [
                 {
                     type: 'value',
-                    max: 100,
+                    max: YLnumber,
                     axisLabel: {
-                        formatter: '{value}%'
+                        formatter: symbol
                     }
                 },
                 {
@@ -79,6 +82,7 @@ $(function(){
                     data: data[0].degree
                 },
                 {
+                    polarIndex: 0,
                     name:'候车时长',
                     type:'line',
                     yAxisIndex: 1,
@@ -116,4 +120,4 @@ $(function(){
         console.log(data[0].waiting)
         myChart.setOption(option);
     })
-});
+}

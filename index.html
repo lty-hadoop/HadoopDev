@@ -225,5 +225,13 @@
 <script src="js/index.js"></script>
 <!-- 图形 -->
 <script type="text/javascript" src="js/figure.js"></script>
+<script>
+    $(function(){
+        getEchartsData ('js/chartData.json', 90,'{value}kg',[
+            {name: '候车满意度',icon: 'rect'},
+            {name: '候车时长',icon: 'rect'}
+        ])
+    });
+</script>
 </body>
 </html>
