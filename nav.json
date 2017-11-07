@@ -4,7 +4,7 @@
    {"navigationName":"服务质量与乘客体验","navigationUrl":"","scriptName":"","icon":"fa-thumbs-o-up","navChild":[
                 {"navigationName":"评价地图","navigationUrl":"html/1.html","scriptName":"1.js"},
                 {"navigationName":"站点评价","navigationUrl":"html/site-evaluation.html","scriptName":"js/site-evaluation.js"},
-                {"navigationName":"路线评价","navigationUrl":"html/3.html","scriptName":"3.js"},
+                {"navigationName":"线路评价","navigationUrl":"html/route-evaluation.html","scriptName":"js/route-evaluation.js"},
                 {"navigationName":"车辆评估","navigationUrl":"html/4.html","scriptName":"4.js"},
                 {"navigationName":"司机评估","navigationUrl":"html/5.html","scriptName":"5.js"},
                 {"navigationName":"订阅乘客评价指数","navigationUrl":"html/6.html","scriptName":"6.js"}
