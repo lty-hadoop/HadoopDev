@@ -1,4 +1,6 @@
 //分页插件  样式还可以优化
+
+
 $.fn.creatPage = function(option){
     option.el = $(this);
     var page = new Initpage(option);
@@ -49,6 +51,7 @@ Initpage.prototype = {
     },
     bindEvent:function(){
         var _this = this;
+        this.callBack(this.nowPage);
         //直接点击页码
         this.$ul.on("click",".pageLi",function(ev){
             _this.stopEvent(ev);
@@ -120,19 +123,12 @@ Initpage.prototype = {
     }
 };
 
-//排名模块
-/*显示条数是变化的*/
-/*title是变化的*/
-/*渲染的件名不同*/
-/*是否分页*/
-/*来源*/
-
 $.fn.creatList = function(option){
     option.el = $(this);
     var list = new CreatList(option);
     return list;
 };
-$.fn.opts  = {
+$.fn.creatList.opts  = {
     //显示条数
     showNum : 6,
     //是否显示数据来源,默认不显示
@@ -141,9 +137,111 @@ $.fn.opts  = {
     getPage : false,
     //是否显示分页,默认不显示分页
     showPage : false,
+    //分页显示多少页码
+    pageNull: 5,
+    //总页数为多少
+    allList : null,
     //标题默认背景颜色，为一个由16进制的颜色值前面加#号组成
-    topColot : ['#1c84c6','#23c6c8','#1ab394','#1ab394','#1ab394','#1ab394']
-}
-function CreatList(options){
+    topColot : ['#1c84c6','#23c6c8','#1ab394','#1ab394','#1ab394','#1ab394'],
+    //数据来源路径
+    url : null,
+    //请求方式
+    type : 'get',
+    //请求数据类型
+    dataType : 'json',
+    simpleData:{
+        "name":"name",
+        "hotData":"hotData",
+        "dataTitle":"dataTitle",
+        "dataFrom":"dataFrom"
+    },
+    //标题
+    dataTitle : null,
+    //数据来源名称
+    dataFrom : null
 
 }
+function CreatList(options){
+    //配置项继承
+    this.opts = $.extend({}, $.fn.creatList.opts, options);
+    //目标元素
+    this.$ele = options.el;
+    //回调函数
+    this.cbFn = options.cbFn || function() {};
+    //自定义的渲染函数
+    this.renderFn = options.renderFn || null;
+    //初始化容器
+    this.init();
+
+
+}
+
+CreatList.prototype = {
+    //初始化容器
+    init : function(){
+        this.$content = $('<div class="plugin-topList w_auto"></div>');
+        this.$page = $('<div></div>');
+        this.$ele.append(this.$content).append(this.$page);
+        //获取初始化数据
+        this.getData();
+    },
+    getData : function () {
+        var _this = this;
+        //判断是否需要分页
+        if(!this.opts.getPage){
+
+            $.ajax({
+                url : this.opts.url,
+                type : this.opts.type,
+                dataType : this.opts.dataType,
+                success:function(data){
+                    //如果用户有传入自定义的渲染函数,就执行用户传入的，没有就自己渲染
+                    _this.renderFn!=null?_this.renderFn(data):randerData.call(_this,data.data);
+                }
+            });
+        }else{
+            $.ajax({
+                url : this.opts.url,
+                type : this.opts.type,
+                dataType : this.opts.dataType,
+                success:function(data){
+                    _this.$page.creatPage({
+                        itemSize : data.totle,
+                        callBack : function(page){
+                            console.log(page);
+                            $.ajax({
+                                url : _this.opts.url,
+                                type : _this.opts.type,
+                                dataType : _this.opts.dataType,
+                                data: {},
+                                success:function(data){
+                                    //如果用户有传入自定义的渲染函数,就执行用户传入的，没有就自己渲染
+                                    _this.renderFn!=null?_this.renderFn(data):randerData.call(_this,data.data);
+                                }
+                            })
+                        }
+                    });
+                }
+            });
+
+        }
+        //渲染函数
+        function randerData(data){
+            var _this = this;
+            this.$content.html("");
+            if(data.dataTitle&&data.dataFrom){
+                this.opts.dataTitle = data.dataTitle;
+                this.opts.dataFrom = data.dataFrom;
+            }
+            this.$title = this.opts.sourceFlag?$('<div class="title"><div class="titleName">'+this.opts.titleData+'</div><div class="dataSouce">'+this.opts.dataFrom+'</div>\n' +
+                '        </div>'):$('<h2 class="bd_b1">'+this.opts.dataTitle+'</h2>');
+            this.$ul = $('<ul class="pd_25 pd_t5"></ul>');
+            $.each(data,function(index,value){
+                _this.$li = $('<li class="bd_b1 h_40 dis_f jst_sb item_c"><div class="dis_f item_c"><p style="background:'+_this.opts.topColot[index]+'"  class="w_25 h_25 text_c line_h25 mg_r20">'+(index*1+1)+'</p><span>'+value[_this.opts.simpleData.name]+'</span></div><span>'+value[_this.opts.simpleData.hotData]+'</span></li>')
+                _this.$ul.append( _this.$li);
+            });
+            this.$content.append(this.$title).append(this.$ul);
+        }
+    }
+};
+
