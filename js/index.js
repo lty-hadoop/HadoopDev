@@ -9,7 +9,7 @@ $(function ($) {
     }
     $navUl = $("#side-menu");
     //默认加载页面
-    $loadContent.load('html/driver-evaluation.html');
+    $loadContent.load('html/top.html');
     var setBarFlag = true;
     //设置侧边栏导航最初显示形式；
     SmoothlyMenu();

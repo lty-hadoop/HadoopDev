@@ -22,7 +22,7 @@ img{border:none;display: block;}
 /**内边距**/
 .pd_0{padding: 0;}.pd_10{padding:10px;}.pd_15{padding:15px;}.pd_20{padding:20px;}.pd_25{padding:25px;}.pd_30{padding:30px;}.pd_15{padding:35px;}.pd_40{padding:40px;}.pd_45{padding:45px;}.pd_50{padding:50px;}.pd_55{padding:55px;}
 /***padding-top****/
-.pd_t0{padding-top:0;}.pd_t10{padding-top:10px;}.pd_t15{padding-top:15px;}.pd_t20{padding-top:20px;}.pd_t25{padding-top:25px;}.pd_t30{padding-top:30px;}.pd_t15{padding-top:35px;}.pd_t40{padding-top:40px;}.pd_t45{padding-top:45px;}.pd_t50{padding-top:50px;}.pd_t55{padding-top:55px;}
+.pd_t0{padding-top:0;}.pd_t5{padding-top:5px;}.pd_t10{padding-top:10px;}.pd_t15{padding-top:15px;}.pd_t20{padding-top:20px;}.pd_t25{padding-top:25px;}.pd_t30{padding-top:30px;}.pd_t15{padding-top:35px;}.pd_t40{padding-top:40px;}.pd_t45{padding-top:45px;}.pd_t50{padding-top:50px;}.pd_t55{padding-top:55px;}
 /***padding-right****/
 .pd_r0{padding-right:0;}.pd_r10{padding-right:10px;}.pd_r15{padding-right:15px;}.pd_r20{padding-right:20px;}.pd_r25{padding-right:25px;}.pd_r30{padding-right:30px;}.pd_r15{padding-right:35px;}.pd_r40{padding-right:40px;}.pd_r45{padding-right:45px;}.pd_r50{padding-right:50px;}.pd_r55{padding-right:55px;}
 /***padding-bottom****/
@@ -138,13 +138,37 @@ h2{
   color: #ffffff;
 }
 .pageInfo li{cursor:pointer;}
+/*排行模块的样式*/
+.plugin-topList{
+
+}
+.plugin-topList p {
+  border-radius: 2px;
+  color: #ffffff;
+  background:green;
+}
+.plugin-topList .title{
+  padding-top :15px;
+}
+.plugin-topList .title .titleName{
+  color:#666666;
+  font-size:20px;
+  height:48px;
+  line-height: 48px;
+  padding-left: 25px;
+}
+.plugin-topList .title .dataSouce{
+  font-size:12px;
+  padding-left: 25px;
+  color: #999999;
+}
 body {
   font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   background-color: #2f4050;
   font-size: 13px;
   color: #676a6c;
   height: 100%;
-  overflow-x:hidden ;
+  overflow:hidden ;
   position: relative;
 }
 html{
@@ -156,7 +180,7 @@ html{
 .down>a>.fa.arrow:before {content: "\f107";  }
 .loadContent{position:absolute;left:0;right:0;top:0;bottom:15px;}
 #page-wrapper {overflow:hidden;overflow-y:auto;position:absolute;left:0;right:0;top:65px;bottom:0;background:#ffffff;}
-@media (min-width: 768px) {#page-wrapper {position: inherit;margin: 0 0 0 240px;}  }
+@media (min-width: 768px) {#page-wrapper {position: inherit;margin: 0 0 0 220px;}  }
 .nav > li > a {color: #a7b1c2;font-weight: 600;padding: 14px 20px 14px 25px;  }
 .nav.navbar-right > li > a {color: #fff;  }
 .nav > li.active > a {color: #ffffff;  }
