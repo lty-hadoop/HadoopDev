@@ -3,8 +3,7 @@ $.fn.creatPage = function(option){
     option.el = $(this);
     var page = new Initpage(option);
     return page;
-}
-
+};
 function Initpage(data){
     //目标元素
     this.$elem = data.el;
@@ -119,4 +118,32 @@ Initpage.prototype = {
         if(ev.stopPropagation) ev.stopPropagation();
         else ev.cancelbubble = true;
     }
+};
+
+//排名模块
+/*显示条数是变化的*/
+/*title是变化的*/
+/*渲染的件名不同*/
+/*是否分页*/
+/*来源*/
+
+$.fn.creatList = function(option){
+    option.el = $(this);
+    var list = new CreatList(option);
+    return list;
+};
+$.fn.opts  = {
+    //显示条数
+    showNum : 6,
+    //是否显示数据来源,默认不显示
+    sourceFlag: false,
+    //是需要示分页，默认不需要分页
+    getPage : false,
+    //是否显示分页,默认不显示分页
+    showPage : false,
+    //标题默认背景颜色，为一个由16进制的颜色值前面加#号组成
+    topColot : ['#1c84c6','#23c6c8','#1ab394','#1ab394','#1ab394','#1ab394']
+}
+function CreatList(options){
+
 }
