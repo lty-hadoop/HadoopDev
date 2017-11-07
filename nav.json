@@ -3,7 +3,7 @@
    {"navigationName":"线路优化和资源调配","navigationUrl":"html/test.html","scriptName":"/js/test.js","icon":"fa-exchange","navChild":[]},
    {"navigationName":"服务质量与乘客体验","navigationUrl":"","scriptName":"","icon":"fa-thumbs-o-up","navChild":[
                 {"navigationName":"评价地图","navigationUrl":"html/1.html","scriptName":"1.js"},
-                {"navigationName":"站点评价","navigationUrl":"html/2.html","scriptName":"2.js"},
+                {"navigationName":"站点评价","navigationUrl":"html/site-evaluation.html","scriptName":"js/site-evaluation.js"},
                 {"navigationName":"路线评价","navigationUrl":"html/3.html","scriptName":"3.js"},
                 {"navigationName":"车辆评估","navigationUrl":"html/4.html","scriptName":"4.js"},
                 {"navigationName":"司机评估","navigationUrl":"html/5.html","scriptName":"5.js"},
