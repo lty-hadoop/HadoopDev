@@ -124,8 +124,9 @@ h2{
   color: #666666;
   height:50px;
   width:100%;
+  line-height: 50px;
+  padding-left: 15px;
   border-top:2px solid #e4e4e4;
-  border-bottom:1px solid #cccccc;
 }
 /*分页的高亮样式*/
 .pageInfo .active{
