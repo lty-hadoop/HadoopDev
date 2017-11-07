@@ -8,7 +8,10 @@ $(function ($) {
         $('body').removeClass('body-small')
     }
     $navUl = $("#side-menu");
-
+    //默认加载页面
+    $loadContent.load('html/passengerFlow.html',function(){
+        $(document.body).append('<script src="passengerFlow.js"></script>');
+    })
     var setBarFlag = true;
     //设置侧边栏导航最初显示形式；
     SmoothlyMenu();
@@ -61,7 +64,7 @@ $(function ($) {
             });
             navBindEvent();
         }
-    })
+    });
 
     function creatNav(data, index) {
         var $li = $('<li class="navFrist" slideFlag="1"><a><i class="fa ' + data.icon + '"></i><span class="nav-label">' + data.navigationName + '</span></a></li>');

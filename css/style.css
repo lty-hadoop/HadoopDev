@@ -105,9 +105,18 @@ h1{
 
 /*文本区域样式*/
 .loadContent{
-  
+  background:#f2f2f2;
 }
 /*一级标题*/
+h1{
+  color: #999999;
+  font-size:24px;
+  border-bottom: 1px solid #e4e4e4;
+  padding:10px 0 0 20px;
+  line-height: 46px;
+  background:#ffffff;
+  margin-bottom: 10px;
+}
 /**二级标题***/
 h2{
   font-size:16px;
@@ -206,3 +215,4 @@ body.mini-navbar.fixed-sidebar .profile-element, .block {  display: block !impor
   #page-wrapper {  margin: 0;  }
 }
 li a:hover {  cursor: pointer;}
+/*位移密集区域与OD趋势*/
