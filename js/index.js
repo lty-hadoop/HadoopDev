@@ -9,7 +9,7 @@ $(function ($) {
     }
     $navUl = $("#side-menu");
     //默认加载页面
-    $loadContent.load('html/passengerFlow.html',function(){
+    $loadContent.load('html/route-optimization/waiting-and-analysis.html',function(){
         $(document.body).append('<script src="js/passengerFlow.js"></script>');
     });
     var setBarFlag = true;
