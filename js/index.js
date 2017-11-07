@@ -9,8 +9,8 @@ $(function ($) {
     }
     $navUl = $("#side-menu");
     //默认加载页面
-    $loadContent.load('html/passengerFlow.html',function(){
-        $(document.body).append('<script src="js/passengerFlow.js"></script>');
+    $loadContent.load('html/provisioning.html',function(){
+        $(document.body).append('<script src="js/provisioning.js"></script>');
     });
     var setBarFlag = true;
     //设置侧边栏导航最初显示形式；
