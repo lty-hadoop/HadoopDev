@@ -70,4 +70,33 @@
 .total-red {
     color: #ED5565;
 }
+.total-blue {
+    color: #1C84C6;
+}
+.color_999 {
+    color: #999;
+}
 
+/* 乘车时长与满意度分析 */
+.peak-value {
+    height: 140px;
+}
+.peak-value-high {
+    line-height: 140px;
+}
+.other-peak {
+    margin:0 5px;
+}
+.identical-peak {
+    display: inline-block;
+    width: 33%;
+    text-align: center;
+}
+.identical-time {
+    height: 44px;
+    line-height: 44px;
+    font-size: 16px;
+    font-weight: bold;
+    border-bottom: 1px solid #e4e4e4;
+    display: block;
+}

@@ -32,14 +32,7 @@ $(function(){
                 { name: '市场（Marketing）', max: 25000}
             ]
         },
-        series: [
-            {
-                type: 'radar',
-                data: [
-                    {name: '预算', value: [1,2,3,4,5]}
-                ]
-            }
-        ]
+        series: []
     };
 
     myChart.setOption(option);

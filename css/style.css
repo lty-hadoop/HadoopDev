@@ -53,6 +53,7 @@ img{border:none;display: block;}
 .bg_f8ac59 {background-color: #f8ac59;}
 .bg_ed5565 {background-color: #ed5565;}
 .bg_fff{background:#ffffff;}
+.bg_f3f6fb {background-color: #f3f6fb;}
 
 /* 清除浮动 */
 .clear:after { content: "."; display: block; clear: both; visibility: hidden; line-height: 0; height: 0; }
