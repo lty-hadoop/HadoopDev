@@ -111,6 +111,7 @@ h1{
 /*文本区域样式*/
 .loadContent{
   background:#f2f2f2;
+  padding-bottom: 30px;
 }
 /*一级标题*/
 h1{
@@ -139,9 +140,6 @@ h2{
 }
 .pageInfo li{cursor:pointer;}
 /*排行模块的样式*/
-.plugin-topList{
-
-}
 .plugin-topList p {
   border-radius: 2px;
   color: #ffffff;
@@ -220,28 +218,23 @@ body.canvas-menu .logo-element {  display: none;  }
 body.mini-navbar .nav-header {  padding: 0;  background-color: #1ab394;  }
 body.mini-navbar #page-wrapper {  margin: 0 0 0 70px;  }
 body.mini-navbar.fixed-sidebar .profile-element, .block {  display: block !important;  }
-@media (min-width: 768px) {  #page-wrapper {overflow:hidden;overflow-y:auto;position:absolute;left:0;right:0;top:65px;bottom:0;}
-  .navbar-static-side {  z-index: 2001;  position: absolute;  width: 220px; top:65px; }
-  .navbar-top-links .dropdown-messages,
-  .navbar-top-links .dropdown-tasks,
-  .navbar-top-links .dropdown-alerts {  margin-left: auto;  }  }
+@media (min-width: 768px) {  #page-wrapper {overflow:hidden;overflow-y:auto;position:absolute;left:0;right:0;top:65px;bottom:0;}  .navbar-static-side {  z-index: 2001;  position: absolute;  width: 220px; top:65px; }  .navbar-top-links .dropdown-messages, .navbar-top-links .dropdown-tasks, .navbar-top-links .dropdown-alerts {  margin-left: auto;  }  }
 .loadContent{overflow:hidden;overflow-y:auto;position:absolute;left:0;right:0;top:0;bottom:15px;}
-@media (max-width: 768px) {
-  #page-wrapper {overflow:hidden;overflow-y:auto;position:absolute;left:0;right:0;top:65px;bottom:0px;}
-  .body-small .navbar-static-side {  display: none;  z-index: 2001;  position: absolute;  width: 70px;
-  }
-  .body-small.mini-navbar .navbar-static-side {  display: block;  }
-  .lock-word {  display: none;  }
-  .navbar-form-custom {  display: none;  }
-  .navbar-header {  display: inline;  float: left;  }
-  .loadContent{overflow:hidden;overflow-y:auto;position:absolute;left:0;right:0;top:0;bottom:15px;}
-}
-@media (max-width: 1000px) {
-  .welcome-message {  display: none;  }
-}
-@media print {
-  nav.navbar-static-side {  display: none;  }
-  #page-wrapper {  margin: 0;  }
-}
+@media (max-width: 768px) {  #page-wrapper {overflow:hidden;overflow-y:auto;position:absolute;left:0;right:0;top:65px;bottom:0px;}  .body-small .navbar-static-side {  display: none;  z-index: 2001;  position: absolute;  width: 70px;  }  .body-small.mini-navbar .navbar-static-side {  display: block;  }  .lock-word {  display: none;  }  .navbar-form-custom {  display: none;  }  .navbar-header {  display: inline;  float: left;  }  .loadContent{overflow:hidden;overflow-y:auto;position:absolute;left:0;right:0;top:0;bottom:15px;}  }
+@media (max-width: 1000px) {  .welcome-message {  display: none;  }  }
+@media print {  nav.navbar-static-side {  display: none;  }  #page-wrapper {  margin: 0;  }  }
 li a:hover {  cursor: pointer;}
+.nav-second-level li,
+.nav-third-level li {  border-bottom: none !important;  }
+.nav-second-level li a {  padding: 7px 10px 7px 10px;  padding-left: 52px;  }
+.nav-third-level li a {  padding-left: 62px;  }
+.nav-second-level li:last-child {  margin-bottom: 10px;  }
+body:not(.fixed-sidebar):not(.canvas-menu).mini-navbar .nav li:hover > .nav-second-level,
+.mini-navbar .nav li:focus > .nav-second-level {  display: block;  border-radius: 0 2px 2px 0;  min-width: 140px;  height: auto;  }
+body.mini-navbar .navbar-default .nav > li > .nav-second-level li a {  font-size: 12px;  border-radius: 3px;  }
+.fixed-nav .slimScrollDiv #side-menu {  padding-bottom: 60px;  }
+.mini-navbar .nav-second-level li a {  padding: 10px 10px 10px 15px;  }
+.mini-navbar .nav-second-level {  position: absolute;  left: 70px;  top: 0;  background-color: #2f4050;  padding: 10px 10px 10px 10px;  font-size: 12px;  }
+.canvas-menu.mini-navbar .nav-second-level {  background: #293846;  }
+.mini-navbar li.active .nav-second-level {left: 65px;  }
 /*位移密集区域与OD趋势*/
