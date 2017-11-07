@@ -8,9 +8,8 @@ $(function ($) {
         $('body').removeClass('body-small')
     }
     $navUl = $("#side-menu");
-    //默认加载页面
-    $loadContent.load('html/provisioning.html',function(){
-        $(document.body).append('<script src="js/provisioning.js"></script>');
+    $loadContent.load('html/route-optimization/waiting-and-analysis.html',function(){
+        $(document.body).append('<script src="js/passengerFlow.js"></script>');
     });
     var setBarFlag = true;
     //设置侧边栏导航最初显示形式；
