@@ -102,6 +102,12 @@ h1{
   height:66px;
   width:100%;
 }
+
+/*文本区域样式*/
+.loadContent{
+  
+}
+/*一级标题*/
 /**二级标题***/
 h2{
   font-size:16px;
@@ -151,7 +157,7 @@ html{
 .navbar {  border: 0; }
 .navbar-default { background-color: transparent;  border-color: #2f4050;  }
 .navbar-top-links li { display: inline-block;  }
-.navbar-top-links li:last-child { margin-right: 40px;  }
+.navbar-top-links li:last-child { margin-right: 40px;}
 .body-small .navbar-top-links li:last-child {  margin-right: 0;  }
 .navbar-top-links li a {  padding: 20px 10px;  min-height: 50px;  }
 .nav.navbar-top-links .dropdown-alerts a {  font-size: 12px;  }
