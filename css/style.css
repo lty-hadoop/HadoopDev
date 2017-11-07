@@ -50,6 +50,7 @@ img{border:none;display: block;}
 .bg_1ab394 {background-color: #1ab394;}
 .bg_f8ac59 {background-color: #f8ac59;}
 .bg_ed5565 {background-color: #ed5565;}
+.bg_fff{background:#ffffff;}
 
 /* 清除浮动 */
 .clear:after { content: "."; display: block; clear: both; visibility: hidden; line-height: 0; height: 0; }
@@ -95,15 +96,6 @@ html[xmlns] .clear { display: block; }
 
 /***公用的块****/
 /***一级标题***/
-h1{
-  color:#cccccc;
-  font-size:28px;
-  padding-top:20px;
-  height:66px;
-  width:100%;
-}
-
-/*文本区域样式*/
 .loadContent{
   background:#f2f2f2;
 }
@@ -124,8 +116,9 @@ h2{
   color: #666666;
   height:50px;
   width:100%;
+  line-height: 50px;
   border-top:2px solid #e4e4e4;
-  border-bottom:1px solid #cccccc;
+  padding-left: 15px;
 }
 /*分页的高亮样式*/
 .pageInfo .active{
