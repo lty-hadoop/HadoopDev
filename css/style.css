@@ -41,6 +41,8 @@ img{border:none;display: block;}
 /* line-height */
 .line_h10{line-height: 10px;}.line_h15{line-height: 15px;}.line_h20{line-height: 20px;}.line_h25{line-height: 25px;}.line_h30{line-height: 30px;}.line_h35{line-height: 35px;}.line_h40{line-height: 40px;}.line_h45{line-height: 45px;}.line_h50{line-height: 50px;}
 
+/* height + line-height */
+.hei-line10{height: 10px;line-height: 10px;}.hei-line20{height: 20px;line-height: 20px;}.hei-line30{height: 30px;line-height: 30px;}.hei-line40{height: 40px;line-height: 40px;}.hei-line50{height: 50px;line-height: 50px;}.hei-line60{height: 60px;line-height: 60px;}
 /* color */
 .color_1ab394 {color: #1ab394;}
 .color_e9e9e9 {color: #e9e9e9;}
@@ -85,6 +87,8 @@ html[xmlns] .clear { display: block; }
 .item_s{align-items:start;}
 /*弹性盒子元素垂直结束点排列*/
 .item_e{align-items:end;}
+/* 换行 */
+.flex-wrap {flex-wrap: wrap;}
 
 /***边框****/
 .bd_1{border:1px solid #e4e4e4; }.bd_2{border:2px solid #e4e4e4;}

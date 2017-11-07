@@ -33,3 +33,41 @@
     display: inline-block;
 }
 
+/* 服务质量与乘客体验Start*/
+/* ->站点评价 */
+.evaluation-tag {
+    border: 1px solid #e4e4e4;
+    background-color: #fff;
+}
+#carzxt {
+    width: 100%;
+    height: 360px;
+}
+.statistics-area {
+    padding: 20px 30px;
+}
+.statistics-block {
+    width: 391px;
+    background-color: #f3f6fb;
+    margin-bottom: 20px;
+}
+.statistics-type {
+    border-bottom: 1px solid #e4e4e4;
+}
+.col33 {
+    -webkit-flex: 0 0 30%;
+    flex: 0 0 30%;
+}
+.total {
+    font-size: 30px;
+}
+.total-green {
+    color: #1AB394;
+}
+.total-orange {
+    color: #F8AC59;
+}
+.total-red {
+    color: #ED5565;
+}
+

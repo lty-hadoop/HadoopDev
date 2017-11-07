@@ -1,3 +1,3 @@
-(function(){
-    console.log(11)
-})();
+$(function(){
+    getEchartsData ('js/chartData.json', 5, '{value}')
+});
