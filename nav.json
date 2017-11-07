@@ -3,14 +3,14 @@
    {"navigationName":"线路优化和资源调配","navigationUrl":"html/test.html","scriptName":"/js/test.js","icon":"fa-exchange","navChild":[]},
    {"navigationName":"服务质量与乘客体验","navigationUrl":"","scriptName":"","icon":"fa-thumbs-o-up","navChild":[
                 {"navigationName":"评价地图","navigationUrl":"html/1.html","scriptName":"1.js"},
-                {"navigationName":"站点评价","navigationUrl":"html/site-evaluation.html","scriptName":"js/site-evaluation.js"},
-                {"navigationName":"线路评价","navigationUrl":"html/route-evaluation.html","scriptName":"js/route-evaluation.js"},
-                {"navigationName":"车辆评价","navigationUrl":"html/vehicle-evaluation.html","scriptName":"js/vehicle-evaluation.js"},
-                {"navigationName":"司机评价","navigationUrl":"html/driver-evaluation.html","scriptName":"js/driver-evaluation.js"},
+                {"navigationName":"站点评价","navigationUrl":"html/service-quality/site-evaluation.html","scriptName":"js/service-quality/site-evaluation.js"},
+                {"navigationName":"线路评价","navigationUrl":"html/service-quality/route-evaluation.html","scriptName":"js/service-quality/route-evaluation.js"},
+                {"navigationName":"车辆评价","navigationUrl":"html/service-quality/vehicle-evaluation.html","scriptName":"js/service-quality/vehicle-evaluation.js"},
+                {"navigationName":"司机评价","navigationUrl":"html/service-quality/driver-evaluation.html","scriptName":"js/service-quality/driver-evaluation.js"},
                 {"navigationName":"订阅乘客评价指数","navigationUrl":"html/6.html","scriptName":"6.js"}
         ]},
    {"navigationName":"线路优化和资源调配","navigationUrl":"","scriptName":"","icon":"fa-balance-scale","navChild":[
-                {"navigationName":"候车时长与满意度分析","navigationUrl":"html/waiting-and-analysis.html","scriptName":"js/waiting-and-analysis.js"},
+                {"navigationName":"候车时长与满意度分析","navigationUrl":"html/route-optimization/waiting-and-analysis.html","scriptName":"js/route-optimization/waiting-and-analysis.js"},
                 {"navigationName":"满载率与拥挤满意度","navigationUrl":"html/8.html","scriptName":"8.js"},
                 {"navigationName":"满意度与单车盈亏分析","navigationUrl":"html/9.html","scriptName":"9.js"},
                 {"navigationName":"订阅乘客满意度指数","navigationUrl":"html/10.html","scriptName":"10.js"}

@@ -2,7 +2,7 @@
 * 司机评价
 * */
 $(function(){
-    getEchartsData ('js/chartData.json', 5, '{value}');
+    getEchartsData ('../js/chartData.json', 5, '{value}');
 
     var myChart = echarts.init(document.getElementById('driver'));
     var option = {
