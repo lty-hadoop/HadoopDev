@@ -15,7 +15,7 @@ $(function ($) {
     // 初始化侧边栏导航
     //根据窗口大小变化动态设置当前侧边栏导航的形式
     $(window).on("resize", function () {
-        SmoothlyMenu()
+        SmoothlyMenu();
     });
 
     function SmoothlyMenu() {
@@ -88,7 +88,7 @@ $(function ($) {
             if (data.navigationUrl != '') {
                 $navUl.find('.scNav').removeClass('active');
                 $loadContent.load(data.navigationUrl,function(){
-                    $(document.body).append('')
+                    $(document.body).append('<script src='+data.scriptName+'></script>');
                 });
                 if(e.currentTarget.className!='scNav'){
                     //关闭其他展开的tab
