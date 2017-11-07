@@ -6,7 +6,7 @@
                 {"navigationName":"站点评价","navigationUrl":"html/site-evaluation.html","scriptName":"js/site-evaluation.js"},
                 {"navigationName":"线路评价","navigationUrl":"html/route-evaluation.html","scriptName":"js/route-evaluation.js"},
                 {"navigationName":"车辆评价","navigationUrl":"html/vehicle-evaluation.html","scriptName":"js/vehicle-evaluation.js"},
-                {"navigationName":"司机评估","navigationUrl":"html/5.html","scriptName":"5.js"},
+                {"navigationName":"司机评价","navigationUrl":"html/driver-evaluation.html","scriptName":"js/driver-evaluation.js"},
                 {"navigationName":"订阅乘客评价指数","navigationUrl":"html/6.html","scriptName":"6.js"}
         ]},
    {"navigationName":"线路优化和资源调配","navigationUrl":"","scriptName":"","icon":"fa-balance-scale","navChild":[
