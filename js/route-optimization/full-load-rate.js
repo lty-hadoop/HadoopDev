@@ -12,7 +12,7 @@ $(function() {
                 textStyle: {
                     color: '#666'
                 },
-                left: '10%'
+                left: '6%'
             },
             tooltip: {
                 trigger: 'axis',
