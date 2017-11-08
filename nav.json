@@ -11,8 +11,8 @@
         ]},
    {"navigationName":"线路优化和资源调配","navigationUrl":"","scriptName":"","icon":"fa-balance-scale","navChild":[
                 {"navigationName":"候车时长与满意度分析","navigationUrl":"html/route-optimization/waiting-and-analysis.html","scriptName":"js/route-optimization/waiting-and-analysis.js"},
-                {"navigationName":"满载率与拥挤满意度","navigationUrl":"html/8.html","scriptName":"8.js"},
-                {"navigationName":"满意度与单车盈亏分析","navigationUrl":"html/9.html","scriptName":"9.js"},
+                {"navigationName":"满载率与拥挤满意度","navigationUrl":"html/route-optimization/full-load-rate.html","scriptName":"js/route-optimization/full-load-rate.js"},
+                {"navigationName":"满意度与单车盈亏分析","navigationUrl":"html/route-optimization/satisfaction-and-single.html","scriptName":"js/route-optimization/satisfaction-and-single.js"},
                 {"navigationName":"订阅乘客满意度指数","navigationUrl":"html/10.html","scriptName":"10.js"}
 
         ]}
