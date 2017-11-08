@@ -84,6 +84,9 @@
 }
 .other-peak {
     margin:0 5px;
+    display: flex;
+    flex: 1;
+    flex-wrap: wrap;
 }
 .identical-peak {
     display: inline-block;
@@ -97,4 +100,13 @@
     font-weight: bold;
     border-bottom: 1px solid #e4e4e4;
     display: block;
+}
+.col25 {
+    flex: 0 0 25%;
+}
+.peak-table {
+    font-size: 16px;
+    height: 65px;
+    line-height:65px;
+    border-bottom: 1px solid #e4e4e4;
 }
