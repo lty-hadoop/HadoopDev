@@ -112,3 +112,14 @@
     line-height:65px;
     border-bottom: 1px solid #e4e4e4;
 }
+.satisfaction-identical {
+    width:620px;
+    height:180px;
+    border: 1px solid #e4e4e4;
+    padding: 40px 60px 60px 30px;
+    text-indent: 80px;
+    margin-bottom: 20px;
+}
+.col49 {
+    flex: 0 0 49%;
+}
