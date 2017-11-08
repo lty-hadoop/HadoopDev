@@ -84,7 +84,7 @@ $(function ($) {
     //绑定侧边栏导航点击事件；
     function navBindEvent() {
         $navUl.on("click", 'li', function (e) {
-            // e.stopPropagation();
+            e.stopPropagation();
             var $down = $navUl.find('.down');
             var data = $(this).data('data');
             if (data.navigationUrl != '') {
@@ -99,7 +99,7 @@ $(function ($) {
                         $down.attr("slideFlag", 1).removeClass('down');
                     }
                 }
-            } else {
+            } else if( $(window).width()>769){
                 // $(this).find('.scNav').removeClass('active');
                 var flag = $(this).attr("slideFlag");
                 var _this = $(this);
@@ -125,10 +125,6 @@ $(function ($) {
             }
             $(this).addClass('active').siblings('li').removeClass('active');
 
-        })
-        $navUl.on("click", '.scNav',function(e){
-            e.stopPropagation();
-            $(".body-small").find(".collapse").hide(300);
-        })
+        });
     }
 });

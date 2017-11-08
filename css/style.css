@@ -39,8 +39,7 @@ img{border:none;display: block;}
 .h_10 {height: 10px;}.h_15{height: 15px;}.h_20{height: 20px;}.h_25{height: 25px;}.h_30{height: 30px;}.h_35{height: 35px;}.h_40{height: 40px;}.h_45{height: 45px;}.h_50{height: 50px;}.h_auto{height:100%;}
 
 /* line-height */
-.line_h10{line-height: 10px;}.line_h15{line-height: 15px;}.line_h20{line-height: 20px;}.line_h25{line-height: 25px;}.line_h30{line-height: 30px;}.line_h35{line-height: 35px;}.line_h40{line-height: 40px;}.line_h45{line-height: 45px;}.line_h50{line-height: 50px;}
-
+.line_h10{line-height: 10px;}.line_h15{line-height: 15px;}.line_h20{line-height: 20px;}.line_h25{line-height: 25px;}.line_h30{line-height: 30px;}.line_h35{line-height: 35px;}.line_h40{line-height: 40px;}.line_h45{line-height: 45px;}.line_h50{line-height: 50px;}  .line_h78{line-height: 78px;}
 /* height + line-height */
 .hei-line10{height: 10px;line-height: 10px;}.hei-line20{height: 20px;line-height: 20px;}.hei-line30{height: 30px;line-height: 30px;}.hei-line40{height: 40px;line-height: 40px;}.hei-line50{height: 50px;line-height: 50px;}.hei-line60{height: 60px;line-height: 60px;}
 /* color */
@@ -55,7 +54,7 @@ img{border:none;display: block;}
 .bg_ed5565 {background-color: #ed5565;}
 .bg_fff{background:#ffffff;}
 .bg_f3f6fb {background-color: #f3f6fb;}
-
+.b{font-weight: 500;}
 /* 清除浮动 */
 .clear:after { content: "."; display: block; clear: both; visibility: hidden; line-height: 0; height: 0; }
 html[xmlns] .clear { display: block; }
@@ -97,82 +96,25 @@ html[xmlns] .clear { display: block; }
 .bd_b1{border-bottom:1px solid #e4e4e4; }.bd_b2{border-bottom:2px solid #e4e4e4;}
 .bd_r1{border-right:1px solid #e4e4e4; }.bd_r2{border-right:2px solid #e4e4e4;}
 .bd_l1{border-left:1px solid #e4e4e4; }.bd_l2{border-left:2px solid #e4e4e4;}
-
-
 /***公用的块****/
 /***一级标题***/
-h1{
-  color:#cccccc;
-  font-size:28px;
-  padding-top:20px;
-  height:66px;
-  width:100%;
-}
-
+h1{  color:#cccccc;  font-size:28px;  padding-top:20px;  height:66px;  width:100%;  }
 /*文本区域样式*/
-.loadContent{
-  background:#f2f2f2;
-  padding-bottom: 30px;
-}
+.loadContent{  background:#f2f2f2;  padding-bottom: 30px;  }
 /*一级标题*/
-h1{
-  color: #999999;
-  font-size:24px;
-  border-bottom: 1px solid #e4e4e4;
-  padding:10px 0 0 20px;
-  line-height: 46px;
-  background:#ffffff;
-  margin-bottom: 10px;
-}
+h1{  color: #999999;  font-size:24px;  border-bottom: 1px solid #e4e4e4;  padding:10px 0 0 20px;  line-height: 46px;  background:#ffffff;  margin-bottom: 10px;  }
 /**二级标题***/
-h2{
-  font-size:16px;
-  font-weight: normal;
-  color: #666666;
-  height:50px;
-  width:100%;
-  line-height: 50px;
-  border-top:2px solid #e4e4e4;
-  padding-left: 15px;}
+h2{  font-size:16px;  font-weight: normal;  color: #666666;  height:50px;  width:100%;  line-height: 50px;  border-top:2px solid #e4e4e4;  padding-left: 15px;}
 /*分页的高亮样式*/
-.pageInfo .active{
-  background:green;
-  color: #ffffff;
-}
+.pageInfo .active{  background:green;  color: #ffffff;  }
 .pageInfo li{cursor:pointer;}
 /*排行模块的样式*/
-.plugin-topList p {
-  border-radius: 2px;
-  color: #ffffff;
-  background:green;
-}
-.plugin-topList .title{
-  padding-top :15px;
-}
-.plugin-topList .title .titleName{
-  color:#666666;
-  font-size:20px;
-  height:48px;
-  line-height: 48px;
-  padding-left: 25px;
-}
-.plugin-topList .title .dataSouce{
-  font-size:12px;
-  padding-left: 25px;
-  color: #999999;
-}
-body {
-  font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  background-color: #2f4050;
-  font-size: 13px;
-  color: #676a6c;
-  height: 100%;
-  overflow:hidden ;
-  position: relative;
-}
-html{
-  height:100%;}
-
+.plugin-topList p {  border-radius: 2px;  color: #ffffff;  background:green;  }
+.plugin-topList .title{  padding-top :15px;  }
+.plugin-topList .title .titleName{  color:#666666;  font-size:20px;  height:48px;  line-height: 48px;  padding-left: 25px;  }
+.plugin-topList .title .dataSouce{  font-size:12px;  padding-left: 25px;  color: #999999;  }
+body {  font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;  background-color: #2f4050;  font-size: 13px;  color: #676a6c;  height: 100%;  overflow:hidden ;  position: relative;  }
+html{  height:100%;}
 /*top顶部通栏和侧边栏样式*/
 .arrow {float: right;}
 .fa.arrow:before {content: "\f104"; }
@@ -239,3 +181,19 @@ body.mini-navbar .navbar-default .nav > li > .nav-second-level li a {  font-size
 .canvas-menu.mini-navbar .nav-second-level {  background: #293846;  }
 .mini-navbar li.active .nav-second-level {left: 65px;  }
 /*位移密集区域与OD趋势*/
+
+/*分页样式*/
+/*枚举样式*/
+.selectDiv{padding-left: 20px;margin-right:20px; position: relative;}
+.selectDiv p{color:#999999;  font-size:18px;font-weight: 500;line-height: 38px;}
+.selectDiv .select{height:30px;line-height: 30px;outline: none;border:1px solid #e4e4e4;border-radius: 3px;width:100%; background: url('../img/icon.png')no-repeat right center;background-size:24px 10px;  cursor: pointer;}
+
+.selectpickDiv{  position:absolute;  border:1px solid #e4e4e4;background:#ffffff;  }
+.selectpickDiv .selectpickUl {margin-bottom: 25px;padding: 0 10px;}
+.selectpickDiv .selectpickUl li{ padding-left: 10px; list-style:none; font-size:16px;  line-height:30px;  border-bottom:1px solid #e4e4e4;  }
+.selectpickDiv .selectpickUl li:hover{  background:#2f4050;  color:#ffffff;  }
+.selectpickDiv .active{  background:#2f4050;  color:#ffffff;  }
+
+
+
+.radioDiv {margin-left:20px;padding-top: 40px;color: #999999;}
