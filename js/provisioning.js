@@ -5,3 +5,12 @@ $(".getSelect").selectpick({
         console.log(data)
     }
 });
+
+var listData = {
+    url : 'tastList.json',
+    dataTitle : '待优化线路列表',
+    sourceFlag:false
+};
+$(".optimize").creatList(listData);
+
+$(".driverTop").creatList(listData);

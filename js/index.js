@@ -8,8 +8,8 @@ $(function ($) {
         $('body').removeClass('body-small')
     }
     $navUl = $("#side-menu");
-    $loadContent.load('html/route-optimization/full-load-rate.html',function(){
-        $(document.body).append('<script src="js/route-optimization/full-load-rate.js"></script>');
+    $loadContent.load('html/provisioning.html',function(){
+        $(document.body).append('<script src="js/provisioning.js"></script>');
     });
     var setBarFlag = true;
     //设置侧边栏导航最初显示形式；
