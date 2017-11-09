@@ -3,16 +3,13 @@
 * */
 $(function(){
     getEchartsData ('js/chartData.json', 5, '{value}');
-
-    var myChart = echarts.init(document.getElementById('driver'));
-    var option = {
+    var myChart1 = echarts.init(document.getElementById('driver'));
+    var option1 = {
         title: {
-            text: '基础雷达图'
+            text: '司机状态'
         },
         tooltip: {},
-        legend: {
-            data: ['预算分配（Allocated Budget）']
-        },
+        legend: {},
         radar: {
             // shape: 'circle',
             name: {
@@ -32,9 +29,19 @@ $(function(){
                 { name: '市场（Marketing）', max: 25000}
             ]
         },
-        series: []
+        series: [{
+            name: '预算 vs 开销（Budget vs spending）',
+            type: 'radar',
+            // areaStyle: {normal: {}},
+            data : [
+                {
+                    value : [4300, 10000, 28000, 35000, 50000, 19000],
+                    name : '预算分配（Allocated Budget）'
+                }
+            ]
+        }]
     };
 
-    myChart.setOption(option);
+    myChart1.setOption(option1);
 
 });

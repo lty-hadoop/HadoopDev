@@ -61,21 +61,6 @@
 .total {
     font-size: 30px;
 }
-.total-green {
-    color: #1AB394;
-}
-.total-orange {
-    color: #F8AC59;
-}
-.total-red {
-    color: #ED5565;
-}
-.total-blue {
-    color: #1C84C6;
-}
-.mg_t5{
-    margin-top: 5px;
-}
 
 /* 乘车时长与满意度分析 */
 .peak-value {
@@ -122,4 +107,16 @@
 }
 .col49 {
     flex: 0 0 49%;
+}
+.workinput {
+    width: 240px;
+    line-height: 20px;
+    border: 1px #ddd solid;
+    border-radius: 4px;
+    padding: 5px;
+    background-color: #fff;
+    font-size: 14px;
+}
+.wicon {
+    background: url(../img/date.png) no-repeat right center;
 }
