@@ -83,9 +83,9 @@ $(function ($) {
     }
     //绑定侧边栏导航点击事件；
     function navBindEvent() {
-        var animate = ["animation","animation1","animation2","animation3"];
+        var animate = ["","animation","animation1","animation2","animation3"];
         $navUl.on("click", 'li', function (e) {
-            var index = Math.ceil(Math.random()*3);
+            var index = Math.ceil(Math.random()*4);
             var animateClass = animate[index];
             e.stopPropagation();
             var $down = $navUl.find('.down');

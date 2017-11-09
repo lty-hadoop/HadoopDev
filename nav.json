@@ -2,7 +2,7 @@
     {"navigationName":"位移密集区域与OD趋势","navigationUrl":"html/passengerFlow.html","scriptName":"/js/passengerFlow.js","icon":"fa-stack-exchange","navChild":[]},
    {"navigationName":"线路优化和资源调配","navigationUrl":"html/provisioning.html","scriptName":"/js/provisioning.js","icon":"fa-exchange","navChild":[]},
    {"navigationName":"服务质量与乘客体验","navigationUrl":"","scriptName":"","icon":"fa-thumbs-o-up","navChild":[
-                {"navigationName":"评价地图","navigationUrl":"html/1.html","scriptName":"1.js"},
+                {"navigationName":"评价地图","navigationUrl":"html/service-quality/EvaluationMap.html","scriptName":"js/service-quality/EvaluationMap.js"},
                 {"navigationName":"站点评价","navigationUrl":"html/service-quality/site-evaluation.html","scriptName":"js/service-quality/site-evaluation.js"},
                 {"navigationName":"线路评价","navigationUrl":"html/service-quality/route-evaluation.html","scriptName":"js/service-quality/route-evaluation.js"},
                 {"navigationName":"车辆评价","navigationUrl":"html/service-quality/vehicle-evaluation.html","scriptName":"js/service-quality/vehicle-evaluation.js"},
