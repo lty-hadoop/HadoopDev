@@ -11,7 +11,7 @@ img{border:none;display: block;}
 /***外边距***/
 .mg_10{margin:10px;}.mg_15{margin:15px;}.mg_20{margin:20px;}.mg_25{margin:25px;}.mg_30{margin:30px;}.mg_15{margin:35px;}.mg_40{margin:40px;}.mg_45{margin:45px;}.mg_50{margin:50px;}.mg55{margin:55px;}
 /***margin-top***/
-.mg_t10{margin-top:10px;}.mg_t15{margin-top:15px;}.mg_t20{margin-top:20px;}.mg_t25{margin-top:25px;}.mg_t30{margin-top:30px;}.mg_t15{margin-top:35px;}.mg_t40{margin-top:40px;}.mg_t45{margin-top:45px;}.mg_t50{margin-top:50px;}.mg_t55{margin-top:55px;}
+.mg_t5{ margin-top: 5px; }.mg_t10{margin-top:10px;}.mg_t15{margin-top:15px;}.mg_t20{margin-top:20px;}.mg_t25{margin-top:25px;}.mg_t30{margin-top:30px;}.mg_t15{margin-top:35px;}.mg_t40{margin-top:40px;}.mg_t45{margin-top:45px;}.mg_t50{margin-top:50px;}.mg_t55{margin-top:55px;}
 /***margin-right****/
 .mg_r10{margin-right:10px;}.mg_r15{margin-right:15px;}.mg_r20{margin-right:20px;}.mg_r25{margin-right:25px;}.mg_r30{margin-right:30px;}.mg_r15{margin-right:35px;}.mg_r40{margin-right:40px;}.mg_r45{margin-right:45px;}.mg_r50{margin-right:50px;}.mg_r55{margin-right:55px;}
 /***margin-left****/
@@ -47,6 +47,13 @@ img{border:none;display: block;}
 .color_e9e9e9 {color: #e9e9e9;}
 .color_ccc {color: #ccc;}
 .color_999 {color: #999;}
+
+/* 评价统计颜色块 */
+.total-green { color: #1AB394;}
+.total-orange { color: #F8AC59;}
+.total-red { color: #ED5565;}
+.total-blue { color: #1C84C6;}
+
 
 /* background-color */
 .bg_1ab394 {background-color: #1ab394;}
