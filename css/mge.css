@@ -108,3 +108,16 @@
 .col49 {
     flex: 0 0 49%;
 }
+.workinput {
+    width: 240px;
+    line-height: 20px;
+    border: 1px #ddd solid;
+    border-radius: 4px;
+    padding: 5px;
+    background-color: #fff;
+    float: left;
+    font-size: 14px;
+}
+.wicon {
+    background: url(../img/date.png) no-repeat right center;
+}
