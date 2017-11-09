@@ -9,7 +9,8 @@ $(".getSelect").selectpick({
 var listData = {
     url : 'tastList.json',
     dataTitle : '待优化线路列表',
-    sourceFlag:false
+    sourceFlag:false,
+    getPage:true
 };
 $(".optimize").creatList(listData);
 

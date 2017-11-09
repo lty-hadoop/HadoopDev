@@ -83,14 +83,23 @@ $(function ($) {
     }
     //绑定侧边栏导航点击事件；
     function navBindEvent() {
+        var animate = ["animation","animation1","animation2","animation3"];
         $navUl.on("click", 'li', function (e) {
+            var index = Math.ceil(Math.random()*3);
+            var animateClass = animate[index];
             e.stopPropagation();
             var $down = $navUl.find('.down');
             var data = $(this).data('data');
             if (data.navigationUrl != '') {
+                $loadContent.addClass(animateClass);
                 $navUl.find('.scNav').removeClass('active');
                 $loadContent.load(data.navigationUrl,function(){
+                    $loadContent.animate({'scrollTop':0},100,function(){
+                        setTimeout(function(){$loadContent.removeClass(animateClass);},600)
+
+                    });
                     $(document.body).append('<script src='+data.scriptName+'></script>');
+
                 });
                 if(e.currentTarget.className!='scNav'){
                     //关闭其他展开的tab

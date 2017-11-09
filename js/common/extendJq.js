@@ -8,7 +8,6 @@
     }
     //分页插件  样式还可以优化
     $.fn.creatPage = function(option){
-
         option.el = $(this);
         var page = new Initpage(option);
         return page;
@@ -206,7 +205,7 @@
                     dataType : this.opts.dataType,
                     success:function(data){
                         _this.$page.creatPage({
-                            itemSize : data.totle,
+                            itemSize : data.total,
                             callBack : function(page){
                                 $.ajax({
                                     url : _this.opts.url,
