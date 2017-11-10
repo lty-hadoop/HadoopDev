@@ -19,10 +19,10 @@ gulp.task("webserver",function(){
 
 //监听
 gulp.task("watch",function(){
-    gulp.watch("hadoopDev/html",["html"]);
-    gulp.watch("hadoopDev/js/**",["js"]);
-    gulp.watch("hadoopDev/css",["css"]);
-    gulp.watch("hadoopDev",["html"]);
+    gulp.watch("/html/**",["html"]);
+    gulp.watch("/js/**",["js"]);
+    gulp.watch("/css/**",["css"]);
+    gulp.watch("/**",["html"]);
 
 });
 gulp.task("default",["webserver","watch"],function(){
