@@ -54,34 +54,28 @@
     var jefn = jeTable.prototype;
     jefn.init = function () {
         var that = this, opts = that.opts, pageIdxSize = {}, pgField = opts.pageField;
-        var wrapDiv = $('<div class="' + opts.skin + '"></div>'),
-            theadDiv = $('<div class="' + opts.skin + '-thead"></div>'),
-            tbodyDiv = $('<div class="' + opts.skin + '-tbody"></div>'),
-            fieldDiv = $('<div class="' + opts.skin + '-field"></div>'),
-            maskDiv = $('<div class="' + opts.skin + '-mask"></div>');
-        that.elCell.html(wrapDiv.append(theadDiv.append("<table jetableth><thead><tr></tr></thead></table>")).append(tbodyDiv.append(maskDiv).append("<table jetabletd><tbody></tbody></table>")));
-        wrapDiv.css({width:(opts.width == "100%" ? "auto" : opts.width),position:"relative","overflow":"hidden"});
-        tbodyDiv.after(fieldDiv.append("<h3><span>字段列表</span><em></em></h3><ul></ul>"));
+        var theadDiv = $('<div class="' + opts.skin + '-thead"></div>');
+        var fieldDiv = $('<div class="' + opts.skin + '-field"></div>');
+        var maskDiv = $('<div class="' + opts.skin + '-mask"></div>');
+        that.elCell.html(theadDiv.append("<table ><thead jetableth><tr></tr></thead><tbody jetabletd></tbody></table>"));
+        theadDiv.css({width:(opts.width == "100%" ? "auto" : opts.width),position:"relative","overflow":"hidden"});
         theadDiv.after("<div class='fielddrop'></div>");
         that.setContent();
-        that.showField(fieldDiv);
         pageIdxSize[pgField.pageIndex.field] = pgField.pageIndex.num;
         pageIdxSize[pgField.pageSize.field] = pgField.pageSize.num;
-        that.loadDates(wrapDiv,pageIdxSize);
+        that.loadDates(theadDiv,pageIdxSize);
     };
     
     jefn.loadDates = function (elem,datas) {
-        var that = this, opts = that.opts, colDate = opts.columns, dataObj = opts.datas,
-            pgField = opts.pageField, dataArr = $.extend(dataObj.data,datas),
-            tbody = that.elCell.find("table[jetabletd]"),
-            maskCls = that.elCell.find('.' + opts.skin + '-mask');
+        var that = this, opts = that.opts, colDate = opts.columns, dataObj = opts.datas;
+        var pgField = opts.pageField, dataArr = $.extend(dataObj.data,datas);
+        var tbody = that.elCell.find("tbody[jetabletd]");
         //载入内容前先清空
-        tbody.find('tbody').empty();
-        maskCls.show().html("<div class='loading'>正在载入数据...</div>");
+            tbody.empty();
         //把数据插入到tbody内
         var tbodySuccess = function (data,json) {
             json = json || "";
-            tbody.find('tbody').empty();
+            tbody.empty();
             //循环数据插入内容
             $.each(data,function(idx,val){
                 var tr = $("<tr row='"+idx+"'></tr>");
@@ -91,7 +85,7 @@
                         tdCls = $("<td class='field-"+d.field+"'><div>"+renVal+"</div></td>").addClass("dfields").attr("align",alVal).css({width:d.width});
                     tr.append(isShow ? tdCls : tdCls.hide());
                 });
-                tbody.find('tbody').append(tr);
+                tbody.append(tr);
                 //加载成功后的回调
                 if ($.isFunction(opts.itemfun) || opts.itemfun != ("" || null)) {
                     opts.itemfun && opts.itemfun(tr,val);
@@ -147,7 +141,6 @@
         //拉取数据
         if ($.isArray(dataObj)) {
             tbodySuccess(dataObj,"");
-            maskCls.hide();
         } else {
             $.ajax({
                 url: dataObj.url,
@@ -158,14 +151,9 @@
                 success: function (json) {
                     var rowVal = dataObj.field == "" ? json : json[dataObj.field];
                     if(rowVal.length == 0 || rowVal == undefined){
-                        maskCls.show().html("<div class='nocontent'>抱歉无更多内容了</div>");
                     }else {
                         tbodySuccess(rowVal,json);
-                        maskCls.hide(); 
                     }
-                },
-                error:function (XMLHttpRequest, textStatus, errorThrown) {
-                    maskCls.show().html("<div class='error'>抱歉请求失败了</div>")
                 }
             });
         };
@@ -173,19 +161,18 @@
     //表格基本框架与宽度设置
     jefn.setContent = function () {
         var that = this, opts = that.opts,colDate = opts.columns,
-            thead = that.elCell.find("table[jetableth]"),
-            tbody = that.elCell.find("table[jetabletd]");
+            thead = that.elCell.find("thead[jetableth]"),
+            tbody = that.elCell.find("tbody[jetabletd]");
         var tableSum = 0;
         //设置头部
         $.each(colDate,function (i,d) {
-            var isShow = je.isBool(d.isShow), nameval ,dname = d.name;
+            var  nameval ,dname = d.name;
             nameval = $.isArray(dname) ? ($.isFunction(dname[1]) ? dname[1](dname) : dname[1]) : dname;
-            var althVal = d.align||"left",thCls = $("<th class='field-"+d.field+"'><div>"+nameval+"</div></th>").addClass("dfields").attr("align",althVal).css({width:d.width});
+            var althVal = d.align||"left";
+            var thCls = $("<th class='field-"+d.field+"'><div>"+nameval+"</div></th>").addClass("dfields").attr("align",althVal);
             var col = $("<col class='cols-"+d.field+"' cols='true'>").css({width:d.width});
-            //为table设置隐藏域的宽度
-            $("table[jetableth]",that.elCell).append(isShow ? col : "");
-            thead.find("thead tr").append(isShow ? thCls : thCls.hide());
-            tableSum += parseInt(isShow ? d.width.replace(regPxe,"") : 0);
+            thead.find("tr").append(thCls);
+            tableSum += parseInt(d.width.replace(regPxe,""));
         });
         
         //计算表格的宽度及高度
@@ -204,7 +191,7 @@
     };
     //表格排序
     jefn.tableSorter = function (obj) {
-        var colSort = obj.colSort, eltop = obj.elhead, thCls = eltop.find("thead th"),all = "all", sa = "asc", sd = "desc",
+        var colSort = obj.colSort, eltop = obj.elhead, thCls = eltop.find(" th"),all = "all", sa = "asc", sd = "desc",
             elcon = (obj.elbody == "" || obj.elbody == undefined) ? eltop : obj.elbody;
         $.each(colSort, function(i, d) {
             thCls.eq(d-1).addClass("colsort all").attr("sort", sa).append("<em></em>");
@@ -212,7 +199,7 @@
         //取出TD的值，并存入数组,取出前二个TD值；
         var setSort = function(idx,sorted) {
             var sortedMap = [];
-            elcon.find("tbody tr").each(function() {
+            elcon.find("tr").each(function() {
                 var ts = $(this), tdVal = ts.children("td").eq(idx).text();
                 sortedMap.push({row: ts, vals:tdVal});
             });
@@ -228,14 +215,14 @@
                 return sorted == sa ? dateSort(a, b) : dateSort(b, a);
             });
             $.each(sortedMap,function(key,val){
-                elcon.find("tbody").append(val.row);
+                elcon.append(val.row);
             });
         };
         //点击表格升序/降序
         thCls.on("click",function () {
             var _this = $(this), idx = _this.index();
             if(_this.hasClass("colsort")) {
-                eltop.find("thead th.colsort").addClass(all);
+                eltop.find(" th.colsort").addClass(all);
                 thCls.removeClass(sd).removeClass(sa);
                 var deasc = _this.attr("sort") == sa ? sd : sa;
                 if (_this.attr("sort") == sa) {
@@ -248,41 +235,7 @@
                 setSort(idx, deasc);
             }
         })
-    };
-    
-    //是否显示字段内容
-    jefn.showField = function (fieldCls) {
-        var that = this, opts = that.opts,colDate = opts.columns,
-            thead = that.elCell.find("table[jetableth]"), 
-            tbody = that.elCell.find("table[jetabletd]");
-        //把相应的字段显示
-        $.each(colDate,function (i,d) {
-            var isShow = je.isBool(d.isShow),sname = d.name, 
-                nameval = $.isArray(sname) ? sname[0] : sname;
-            var fp = $("<li class='jetablego-"+d.field+"'><label><input name='field' field='"+d.field+"' "+(isShow ? "checked" : "")+" type='checkbox' value='' /> "+nameval+"</label></li>");
-            fieldCls.find("ul").append(fp);
-        });
-        //点击后对相应的字段内容进行隐藏显示
-        fieldCls.find("li label").on("click",function () {
-            var inputs = $(this).find("input"),
-                isCheck = inputs.prop('checked'),
-                fields = inputs.attr("field");
-            //判断字段复选框是否选中
-            if (isCheck){
-                that.elCell.find(".cols-"+fields).attr("cols","true");
-                that.elCell.find(".field-"+fields).addClass("dfields").show();
-            }else {
-                that.elCell.find(".cols-"+fields).attr("cols","false");
-                that.elCell.find(".field-"+fields).removeClass("dfields").hide();
-            };
-            //获取非隐藏字段的宽度
-            var colW = 0;
-            thead.each(function () {
-                colW += parseInt($(this).find("col[cols=true]").css("width").replace(regPxe,""));
-            });
-            that.elCell.find("table").css({width:colW});
-        })
-    };
+    }
     return jeTable;
 });
 
