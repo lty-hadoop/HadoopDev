@@ -46,11 +46,6 @@ $(function(){
             field: 'sites'
         },
         isPage: false,
-        pageField:{
-            ellipsis:true,
-            dataCount:"totalCount",
-            pageCount:"totalPage"
-        },
         columnSort:[1,2,3,4,5],
         columns:[
             {name:'评价时间',field: 'time', width:"80",isShow:true},
