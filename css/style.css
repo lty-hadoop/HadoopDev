@@ -8,6 +8,8 @@ img{border:none;display: block;}
 /****字体****/
 .f12{font-size:14px;}.f14{font-size:14px;}.f16{font-size:16px;}.f18{font-size:18px;}.f20{font-size:20px;}.f22{font-size:22px;}.f24{font-size:24px;}.f26{font-size:26px;}.f28{font-size:28px;}.f30{font-size:30px;}
 
+
+
 /***外边距***/
 .mg_10{margin:10px;}.mg_15{margin:15px;}.mg_20{margin:20px;}.mg_25{margin:25px;}.mg_30{margin:30px;}.mg_15{margin:35px;}.mg_40{margin:40px;}.mg_45{margin:45px;}.mg_50{margin:50px;}.mg55{margin:55px;}
 /***margin-top***/
@@ -97,7 +99,8 @@ html[xmlns] .clear { display: block; }
 .item_e{align-items:end;}
 /* 换行 */
 .flex-wrap {flex-wrap: wrap;}
-
+/*点击手势*/
+.cursor{cursor: pointer;}
 /***边框****/
 bd_t0{border-top:none;}bd_b0{border-bottom:none;}bd_r0{border-right:none;}bd_r0{border-left:none;}
 .bd_1{border:1px solid #e4e4e4; }.bd_2{border:2px solid #e4e4e4;}
@@ -281,3 +284,5 @@ body.mini-navbar .navbar-default .nav > li > .nav-second-level li a {  font-size
 .EvaluationMap  .evaluate img{float: right;}
 .EvaluationMap  .evaluate .up{transform: rotate(0deg) translateY(5px); }
 .EvaluationMap  .evaluate .down{transform: rotate(180deg)translateY(-5px);}
+.EvaluationMap  .seeDetail .up{transform: rotate(0deg);}
+.EvaluationMap  .seeDetail .down{transform: rotate(180deg);}
