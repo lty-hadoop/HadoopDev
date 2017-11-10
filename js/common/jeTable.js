@@ -55,10 +55,7 @@
     jefn.init = function () {
         var that = this, opts = that.opts, pageIdxSize = {}, pgField = opts.pageField;
         var theadDiv = $('<div class="' + opts.skin + '-thead"></div>');
-        var fieldDiv = $('<div class="' + opts.skin + '-field"></div>');
-        var maskDiv = $('<div class="' + opts.skin + '-mask"></div>');
         that.elCell.html(theadDiv.append("<table ><thead jetableth><tr></tr></thead><tbody jetabletd></tbody></table>"));
-        theadDiv.css({width:(opts.width == "100%" ? "auto" : opts.width),position:"relative","overflow":"hidden"});
         theadDiv.after("<div class='fielddrop'></div>");
         that.setContent();
         pageIdxSize[pgField.pageIndex.field] = pgField.pageIndex.num;
@@ -82,7 +79,7 @@
                 $.each(colDate,function (i,d) {
                     var isShow = je.isBool(d.isShow), alVal = d.align||"left";
                     var renVal = (d.renderer != "" && d.renderer != undefined) ? d.renderer(val,idx) : val[d.field],  
-                        tdCls = $("<td class='field-"+d.field+"'><div>"+renVal+"</div></td>").addClass("dfields").attr("align",alVal).css({width:d.width});
+                        tdCls = $("<td class='field-"+d.field+"'><div>"+renVal+"</div></td>").addClass("dfields").attr("align",alVal);
                     tr.append(isShow ? tdCls : tdCls.hide());
                 });
                 tbody.append(tr);
@@ -125,7 +122,6 @@
             //点击显示字段列表
             fielddrop.on("click",function(){
                 var elfieldCls = that.elCell.find("."+ opts.skin +"-field");
-                elfieldCls.css({top:eltheadCls.outerHeight(true),bottom:that.elCell.find("."+ opts.skin +"-page").outerHeight(true)})
                 fielddrop.hide();
                 elfieldCls.slideDown('fast');
                 //点击隐藏字段列表
@@ -170,20 +166,10 @@
             nameval = $.isArray(dname) ? ($.isFunction(dname[1]) ? dname[1](dname) : dname[1]) : dname;
             var althVal = d.align||"left";
             var thCls = $("<th class='field-"+d.field+"'><div>"+nameval+"</div></th>").addClass("dfields").attr("align",althVal);
-            var col = $("<col class='cols-"+d.field+"' cols='true'>").css({width:d.width});
             thead.find("tr").append(thCls);
             tableSum += parseInt(d.width.replace(regPxe,""));
         });
-        
-        //计算表格的宽度及高度
-        var tbodyHeight = opts.height == "auto" ? "" : opts.height; 
-        tbody.parent().css({height:tbodyHeight});
-        that.elCell.find("table").css({width:tableSum});
-        //让浮动的头部跟着内容滚动
-        tbody.parent().on("scroll",function () {
-            var scVal = parseInt("-"+tbody.parent().scrollLeft());
-            thead.css({left:scVal});
-        });
+
         //进行表格排序
         if (opts.columnSort.length > 0){
             that.tableSorter({elhead:thead, elbody:tbody, colSort:opts.columnSort}); 
