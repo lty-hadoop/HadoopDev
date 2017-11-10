@@ -62,6 +62,14 @@
     font-size: 30px;
     min-width: 145px;
 }
+.table-arrow {
+    background: url(../img/u1403.png) no-repeat;
+    background-size:100% 100%;
+    width: 14px;
+    height: 14px;
+    display: inline-block;
+    margin: 5px 0 0 5px;
+}
 
 /* 乘车时长与满意度分析 */
 .peak-value {
