@@ -60,6 +60,7 @@
 }
 .total {
     font-size: 30px;
+    min-width: 145px;
 }
 
 /* 乘车时长与满意度分析 */

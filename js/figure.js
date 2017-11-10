@@ -117,7 +117,7 @@ function getEchartsData (url, YLnumber, symbol, array) {
             });
         }
 
-        console.log(data[0].waiting)
+        //console.log(data[0].waiting)
         myChart.setOption(option);
     })
 }
