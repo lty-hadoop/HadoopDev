@@ -37,7 +37,7 @@ $(function(){
     //表格控件
     $("#testtable").jeTable({
         width:"100%",
-        height:300,
+        height: "100%",
         datas:{
             url:"js/tableData.json",
             type:"GET",

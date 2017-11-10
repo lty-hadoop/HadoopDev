@@ -71,6 +71,9 @@
     margin: 5px 0 0 5px;
 }
 /*表格样式*/
+.table-identical{
+    padding: 20px 20px 40px;
+}
 .je-grid .je-grid-thead table th {
     position: relative;
     padding: 0 6px;
@@ -140,6 +143,9 @@
     border-right: 1px solid #e0e0e0;
     border-bottom: 1px solid #e0e0e0;
     overflow: hidden;
+}
+.je-grid-field {
+    display: none;
 }
 
 /* 乘车时长与满意度分析 */
