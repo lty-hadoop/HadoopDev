@@ -128,6 +128,8 @@ h2{  font-size:16px;  font-weight: normal;  color: #666666;  height:50px;  width
 body {  font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;  background-color: #2f4050;  font-size: 13px;  color: #676a6c;  height: 100%;  overflow:hidden ;  position: relative;  }
 html{  height:100%;}
 /*top顶部通栏和侧边栏样式*/
+.navbar-static-top{background:url("../img/u12.png");-webkit-background-size: cover;background-size: cover;: }
+/*.nav-header {background:url("../img/u65.png");-webkit-background-size: cover;background-size: cover;: }*/
 .arrow {float: right;}
 .fa.arrow:before {content: "\f104"; }
 .down>a>.fa.arrow:before {content: "\f107";  }
