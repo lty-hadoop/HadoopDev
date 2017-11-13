@@ -42,6 +42,7 @@
 #carzxt {
     width: 100%;
     height: 360px;
+    padding: 30px 0;
 }
 .statistics-area {
     padding: 20px 30px;
@@ -130,6 +131,10 @@
     border: 1px solid #e4e4e4;
 }
 
+/* 满载率与拥挤满意度 */
+#full-load-rate {
+    padding: 30px 0;
+}
 
 /* 乘车时长与满意度分析 */
 .peak-value {
