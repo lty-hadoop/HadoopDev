@@ -1,4 +1,16 @@
 $(function ($) {
+    $.ajax({
+        url:'http://192.168.2.133:9001/Line/list',
+        type:'get',
+        dataType:'json',
+            data: {isPage:true,pageNum:1,pageSize:10,company_id:1048},
+        success:function(data){
+            console.log(data)
+        },
+        error:function(data){
+            console.log(data)
+        }
+    })
     var $navUl = null;
     var $loadContent = $(".loadContent");
     // 针对不同屏幕设置显示样式

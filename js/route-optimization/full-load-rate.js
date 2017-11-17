@@ -2,6 +2,10 @@
 * 满载率与拥挤满意度
 * */
 $(function() {
+
+    var $fullloadrate = $('.full-load-rate');
+    //查看详情
+    $fullloadrate.seaDtail();
     var myChart = echarts.init(document.getElementById('full-load-rate'));
 
     $.get('js/chartData.json', function (data) {

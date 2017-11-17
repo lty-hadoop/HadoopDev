@@ -19,7 +19,7 @@ img{border:none;display: block;}
 /***margin-left****/
 .mg_l10{margin-left:10px;}.mg_l15{margin-left:15px;}.mg_l20{margin-left:20px;}.mg_l25{margin-left:25px;}.mg_l30{margin-left:30px;}.mg_l15{margin-left:35px;}.mg_l40{margin-left:40px;}.mg_l45{margin-left:45px;}.mg_l50{margin-left:50px;}.mg_l55{margin-left:55px;}
 /***margin-bottom****/
-.mg_b5{margin-bottom: 5px;}.mg_b10{margin-bottom:10px;}.mg_b15{margin-bottom:15px;}.mg_b20{margin-bottom:20px;}.mg_b25{margin-bottom:25px;}.mg_b30{margin-bottom:30px;}.mg_b15{margin-bottom:35px;}.mg_b40{margin-bottom:40px;}.mg_b45{margin-bottom:45px;}.mg_b50{margin-bottom:50px;}.mg_b55{margin-bottom:55px;}
+.mg_b0{margin-bottom: 0;}.mg_b5{margin-bottom: 5px;}.mg_b10{margin-bottom:10px;}.mg_b15{margin-bottom:15px;}.mg_b20{margin-bottom:20px;}.mg_b25{margin-bottom:25px;}.mg_b30{margin-bottom:30px;}.mg_b15{margin-bottom:35px;}.mg_b40{margin-bottom:40px;}.mg_b45{margin-bottom:45px;}.mg_b50{margin-bottom:50px;}.mg_b55{margin-bottom:55px;}
 
 /**内边距**/
 .pd_0{padding: 0;}.pd_10{padding:10px;}.pd_15{padding:15px;}.pd_20{padding:20px;}.pd_25{padding:25px;}.pd_30{padding:30px;}.pd_15{padding:35px;}.pd_40{padding:40px;}.pd_45{padding:45px;}.pd_50{padding:50px;}.pd_55{padding:55px;}.pd_60{padding: 60px;}
@@ -107,7 +107,7 @@ bd_t0{border-top:none;}bd_b0{border-bottom:none;}bd_r0{border-right:none;}bd_r0{
 .bd_t1{border-top:1px solid #e4e4e4; }.bd_t2{border-top:2px solid #e4e4e4;}
 .bd_b1{border-bottom:1px solid #e4e4e4; }.bd_b2{border-bottom:2px solid #e4e4e4;}
 .bd_r1{border-right:1px solid #e4e4e4; }.bd_r2{border-right:2px solid #e4e4e4;}
-.bd_r1{border-left:1px solid #e4e4e4; }.bd_l2{border-left:2px solid #e4e4e4;}
+.bd_l1{border-left:1px solid #e4e4e4; }.bd_l2{border-left:2px solid #e4e4e4;}
 /***公用的块****/
 /***一级标题***/
 h1{  color:#cccccc;  font-size:28px;  padding-top:20px;  height:66px;  width:100%;  }
@@ -263,8 +263,10 @@ body.mini-navbar .navbar-default .nav > li > .nav-second-level li a {  font-size
 .selectDiv p{color:#999999;  font-size:18px;font-weight: 500;line-height: 38px;}
 .selectDiv .select{height:30px;line-height: 30px;outline: none;border:1px solid #e4e4e4;border-radius: 3px;width:100%; background: url('../img/icon.png')no-repeat right center;background-size:24px 10px;  cursor: pointer;}
 
-.selectpickDiv{  position:absolute;  border:1px solid #e4e4e4;background:#ffffff;  }
-.selectpickDiv .selectpickUl {margin-bottom: 25px;padding: 0 10px;}
+.selectpickDiv{  position:absolute;  border:1px solid #e4e4e4;background:#ffffff;  -webkit-box-shadow: 3px 3px 3px;
+    -moz-box-shadow: 3px 3px 3px;
+    box-shadow: 3px 3px 3px;  }
+.selectpickDiv .selectpickUl {margin-bottom: 25px;padding: 0 10px; height:310px;}
 .selectpickDiv .selectpickUl li{ padding-left: 10px; list-style:none; font-size:16px;  line-height:30px;  border-bottom:1px solid #e4e4e4;  }
 .selectpickDiv .selectpickUl li:hover{  background:#2f4050;  color:#ffffff;  }
 .selectpickDiv .active{  background:#2f4050;  color:#ffffff;  }
@@ -275,16 +277,16 @@ body.mini-navbar .navbar-default .nav > li > .nav-second-level li a {  font-size
 
 /*地图评价*/
     /*title区域*/
-.EvaluationMap .titleH2 { position: relative;}
-.EvaluationMap .titleH2 p {position:absolute;top:0;right:15px;}
-.EvaluationMap .titleH2  span{padding: 2px 8px;cursor: pointer;}
-.EvaluationMap .titleH2  .active{background:#f2f2f2;}
+ .titleH2 { position: relative;border-top:1px solid #e4e4e4;}
+ .titleH2 p {position:absolute;top:0;right:15px;}
+ .titleH2  span{padding: 2px 8px;cursor: pointer;}
+ .titleH2  .active{background:#f2f2f2;}
 /*站点、线路评价统计*/
-.EvaluationMap  .evaluate .box{height:80px;padding: 5px 20px;}
-.EvaluationMap  .evaluate .progress{background:#f2f2f2;height:5px;overflow: hidden;}
-.EvaluationMap  .evaluate .progress-bar{background-color:#19aa8d;hieght:5px;}
-.EvaluationMap  .evaluate img{float: right;}
-.EvaluationMap  .evaluate .up{transform: rotate(0deg) translateY(5px); }
-.EvaluationMap  .evaluate .down{transform: rotate(180deg)translateY(-5px);}
-.EvaluationMap  .seeDetail .up{transform: rotate(0deg);}
-.EvaluationMap  .seeDetail .down{transform: rotate(180deg);}
+  .evaluate .box{height:80px;padding: 5px 20px;}
+  .evaluate .progress{background:#f2f2f2;height:5px;overflow: hidden;}
+ .evaluate .progress-bar{background-color:#19aa8d;hieght:5px;}
+  .evaluate img{float: right;}
+ .evaluate .up{transform: rotate(0deg) translateY(5px); }
+  .evaluate .down{transform: rotate(180deg)translateY(-5px);}
+  .seeDetail .up{transform: rotate(0deg);}
+ .seeDetail .down{transform: rotate(180deg);}

@@ -1,10 +1,23 @@
 
 ;
 (function($, window, document, undefined) {
+    $.getPath = 'http://192.168.2.133:9001';
     function stopEvent(ev){
         ev = ev || window.event;
         if(ev.stopPropagation) ev.stopPropagation();
         else ev.cancelbubble = true;
+    }
+    function waitDo(_this,id, fn, wait) {
+        //id事件名称  fn执行事件 wait等待时间
+
+        if (_this.timer[id]) {
+            window.clearTimeout(this.timer[id]);
+            delete _this.timer[id];
+        }
+        return _this.timer[id] = window.setTimeout(function() {
+            fn();
+            delete _this.timer[id];
+        },wait);
     }
     //分页插件  样式还可以优化
     $.fn.creatPage = function(option){
@@ -99,21 +112,21 @@
             if(this.pageNum > this.showPage){
                 //当选中当前页数大于 页数偏移量时
                 if(this.nowPage > this.pageOffset){
-                    this.starPage = this.nowPage - this.pageOffset;
+                    this.startPage = this.nowPage - this.pageOffset;
                     this.endPage = this.pageNum>(this.nowPage + this.pageOffset)?(this.nowPage + this.pageOffset):this.pageNum ;
 
                 }else{
-                    this.starPage = 1;
+                    this.startPage = 1;
                     this.endPage = this.showPage ;
                 }
                 if(this.pageNum < this.pageOffset + this.nowPage ){
-                    var star = this.starPage - (this.nowPage  + this.pageOffset - this.endPage);
-                    this.starPage = (this.showPage/2)==this.pageOffset? star+1 : star;
+                    var star = this.startPage - (this.nowPage  + this.pageOffset - this.endPage);
+                    this.startPage = (this.showPage/2)==this.pageOffset? star+1 : star;
                 }
             }
             //修改页码
             var index = 0;
-            for(var i = this.starPage;i<= this.endPage;i++,index++){
+            for(var i = this.startPage;i<= this.endPage;i++,index++){
                 this.$ul.find(".pageLi").eq(index).html(i);
                 if(this.nowPage == i){
                     this.$ul.find(".pageLi").eq(index).addClass('active').siblings().removeClass('active');
@@ -248,6 +261,7 @@
             options.el = $(this);
             var select = new Selectpick(options);
         $(this).on("click",function(ev){
+            $(this).select();
             stopEvent(ev);
             select.show();
         })
@@ -273,6 +287,10 @@
         showNum: 5,
         //一次显示多少页;默认为5页
         showPage: 5,
+        //存放请求数据的容器
+        wrap:null,
+        //是否自动执行回调，选中第一条；
+        atuoCbfn : false
     }
     //构造函数
     function Selectpick(options){
@@ -280,23 +298,25 @@
         this.opts = $.extend({},$.fn.selectpick.opts,options);
         this.cbFn = options.cbFn||function(){};
         this.init();
+        this.timer = {};
     }
     //方法挂载
     Selectpick.prototype = {
         //初始化
         init : function(){
             this.outdiv = $('<div class="of_h selectpickDiv" ></div>');
-            $(document.body).append(this.outdiv);
+            $('.'+this.opts.wrap).append(this.outdiv);
             this.$content = $('<ul class="selectpickUl w_auto"></ul>');
             this.outdiv.append(this.$content);
             this.hide();
             this.getData('');
             this.bindEvent();
+            this.keySearch();
         },
         getData : function(passData){
             var _this = this;
             //这里加查询参数；
-            // _this.opts.data.data = 关键词;
+             _this.opts.data[_this.opts.keyupData] = passData;
             //请求数据
             $.ajax({
                 url:_this.opts.url,
@@ -317,20 +337,26 @@
         //需要分页的
         pagingRander : function(data){
             var _this = this;
+            _this.outdiv.find(".pageInfo").remove();
+            if(data.resPonse[_this.opts.simpleData.data].length==0){
+                _this.$content.html('');
+                _this.$content.append('<li style="color: red">没有相关数据哦</li>');
+                _this.$ele.val('');
+                return;
+            }
             this.outdiv.creatPage({
-                itemSize:data[_this.opts.simpleData.total],
+                itemSize:data.resPonse.page[_this.opts.simpleData.total],
                 showNum : _this.opts.showNum,
                 showPage : _this.opts.showPage,
                 callBack : function(page){
-                    console.log(page)
-                    _this.opts.getData['page'] = page;
+                    _this.opts.data.pageNum = page;
                     $.ajax({
                         url:_this.opts.url,
                         type:_this.opts.sendType,
                         dataType:_this.opts.dataType,
-                        data:_this.opts.getData,
+                        data:_this.opts.data,
                         success:function(data){
-                            _this.rander(data.data);
+                            _this.rander(data);
                         }
                     })
                 }
@@ -338,11 +364,18 @@
         },
         rander:function (data){
             var _this = this;
+            var data = data.resPonse[_this.opts.simpleData.data];
             _this.$content.html('');
             $.each(data,function(index,value){
                 _this.$li = $('<li class="option">'+value[_this.opts.simpleData.name]+'</li>');
                 _this.$content.append(_this.$li);
                 _this.$li.data('data',value);
+                if(index==0&&_this.opts.atuoCbfn){
+                    _this.$li.addClass("active");
+                    _this.opts.atuoCbfn = false;
+                    _this.$ele.val(value[_this.opts.simpleData.name]);
+                    _this.cbFn(value);
+                }
             })
         },
         bindEvent : function(){
@@ -362,9 +395,18 @@
                 _this.hide();
             })
         },
+        keySearch:function(){
+            var _this = this;
+            _this.$ele.on("keyup",function(){
+                var value = $.trim($(this).val());
+                waitDo(_this,"keyup",function(){
+                    _this.getData(value);
+                },200)
+            })
+        },
         setPosition : function(){
             var _this = this;
-            _this.outdiv.css({top:_this.offsetT,left:_this.offsetL});
+            _this.outdiv.css({'z-index':10000});
         },
         show : function(){
             var _this = this;
@@ -379,7 +421,21 @@
             this.outdiv.hide();
         }
     }
-
+    //点击查看评价
+    $.fn.seaDtail = function(){
+        var _this = $(this);
+        _this.on("click",".seeDetail",function(){
+            var $table = _this.find(".pjDetail");
+            var $img = _this.find(".seeDetail").find("img");
+            if($img.hasClass("up")){
+                $img.removeClass("up").addClass("down");
+                $table.slideDown(300);
+            }else{
+                $img.removeClass("down").addClass("up");
+                $table.slideUp(300);
+            }
+        })
+    }
 })(jQuery, window, document);
 
 

@@ -2,6 +2,10 @@
 * 候车时长与满意度分析
 * */
 $(function(){
+
+    var $waitingandanalysis = $('.waiting-and-analysis');
+    //点击查看评价详情
+    $waitingandanalysis.seaDtail();
     getEchartsData ('js/chartData.json', 100, '{value}%',[
         {name: '候车满意度', icon: 'rect'},
         {name: '候车时长', icon: 'rect'}
@@ -11,7 +15,7 @@ $(function(){
 
     //日期控件
     var start = {
-        format: 'YYYY-MM-DD hh:mm:ss',
+        format: 'YYYY-MM-DD',
         maxDate: $.nowDate({DD:0}), //最大日期
         okfun: function(obj){
             end.minDate = obj.val; //开始日选好后，重置结束日的最小日期
@@ -20,7 +24,7 @@ $(function(){
         }
     };
     var end = {
-        format: 'YYYY-MM-DD hh:mm:ss',
+        format: 'YYYY-MM-DD',
         minDate: $.nowDate({DD:0}), //设定最小日期为当前日期
         okfun: function(obj){
             start.maxDate = obj.val; //将结束日的初始值设定为开始日的最大日期
@@ -36,7 +40,6 @@ $(function(){
     $('#test').jeDate(start);
     $('#test1').jeDate(end);
 
-    console.log(end.minDate);
 });
 
 function contrast(title) {
