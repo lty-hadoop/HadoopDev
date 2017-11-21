@@ -266,8 +266,8 @@ body.mini-navbar .navbar-default .nav > li > .nav-second-level li a {  font-size
 .selectpickDiv{  position:absolute;  border:1px solid #e4e4e4;background:#ffffff;  -webkit-box-shadow: 3px 3px 3px;
     -moz-box-shadow: 3px 3px 3px;
     box-shadow: 3px 3px 3px;  }
-.selectpickDiv .selectpickUl {margin-bottom: 25px;padding: 0 10px; height:310px;}
-.selectpickDiv .selectpickUl li{ padding-left: 10px; list-style:none; font-size:16px;  line-height:30px;  border-bottom:1px solid #e4e4e4;  }
+.selectpickDiv .selectpickUl {margin-bottom: 25px;padding: 10px  10px 0 10px;height: 350px;}
+.selectpickDiv .selectpickUl li{ padding-left: 10px;margin: 5px 0; list-style:none; font-size:16px;  line-height:30px;  border-bottom:1px solid #e4e4e4;  }
 .selectpickDiv .selectpickUl li:hover{  background:#2f4050;  color:#ffffff;  }
 .selectpickDiv .active{  background:#2f4050;  color:#ffffff;  }
 

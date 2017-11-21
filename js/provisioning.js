@@ -2,7 +2,7 @@ $(function(){
     $(".getSelect").selectpick({
         url:$.getPath+'/Company/list',
         showNum : 10,
-        wrap:'test_1',
+        wrap:'getSelectWrap',
         atuoCbfn:true,
         data : {isPage:true,pageNum:1,pageSize:10,company_name:""},
         keyupData:'company_name',
@@ -12,6 +12,8 @@ $(function(){
             data:'companyList'
         },
         cbFn : function(data){
+            var $wrapDiv = $('.getSelectLineWrap').find('.selectpickDiv');
+            if(($wrapDiv.length!=0))$wrapDiv.remove();
             getLine(data)
         }
     });
@@ -19,7 +21,7 @@ $(function(){
         $(".getSelectLine").selectpick({
             url:$.getPath+'/Line/list',
             showNum : 10,
-            wrap:'test_2',
+            wrap:'getSelectLineWrap',
             atuoCbfn:true,
             data : {isPage:true,pageNum:1,pageSize:10,company_id:data.company_id},
             keyupData:'line_name',

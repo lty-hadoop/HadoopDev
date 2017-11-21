@@ -20,8 +20,8 @@ $(function ($) {
         $('body').removeClass('body-small')
     }
     $navUl = $("#side-menu");
-    $loadContent.load('html/service-quality/site-evaluation.html',function(){
-        $(document.body).append('<script src="js/service-quality/site-evaluation.js"></script>');
+    $loadContent.load('html/route-optimization/waiting-and-analysis.html',function(){
+        $(document.body).append('<script src="js/route-optimization/waiting-and-analysis.js"></script>');
     });
     var setBarFlag = true;
     //设置侧边栏导航最初显示形式；

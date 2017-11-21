@@ -74,12 +74,11 @@
 /*表格样式*/
 .table-identical{
     width:100%;
-    padding: 30px;
 }
-.je-grid-thead table{
+.table-identical table{
     width:100%;
 }
-.je-grid-thead table th {
+.table-identical table th {
     position: relative;
     padding: 0 6px;
     border: 1px solid #e4e4e4;
@@ -99,6 +98,11 @@
     margin: -6px 0 0 -5px;
     z-index: 10;
     overflow: hidden;
+    cursor: pointer;
+}
+
+.table-identical table td{
+    vertical-align: middle;
 }
 .table-identical table thead tr th em:before {
     content: "";
@@ -126,11 +130,22 @@
     bottom: -5px;
     left: 0;
 }
-.je-grid-thead tbody tr td {
+.table-identical table thead tr .active .ad:after {
+    border-style: solid dashed dashed dashed;
+    border-color: green transparent transparent transparent;
+
+}
+.table-identical table thead tr .active .ae:before{
+    border-style: dashed dashed solid dashed;
+    border-color: transparent transparent green transparent;
+}
+.table-identical tbody tr td {
     padding: 6px;
     border: 1px solid #e4e4e4;
 }
-
+.table-identical tbody tr:nth-child(even){
+    background:#f7f7f7;
+}
 /* 满载率与拥挤满意度 */
 #full-load-rate {
     padding: 30px 0;

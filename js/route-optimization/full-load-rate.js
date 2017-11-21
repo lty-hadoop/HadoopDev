@@ -4,11 +4,8 @@
 $(function() {
 
     var $fullloadrate = $('.full-load-rate');
-    //查看详情
-    $fullloadrate.seaDtail();
-    var myChart = echarts.init(document.getElementById('full-load-rate'));
 
-    $.get('js/chartData.json', function (data) {
+    var myChart = echarts.init(document.getElementById('full-load-rate'));
         option = {
             data: [],
             title: {
@@ -85,7 +82,7 @@ $(function() {
                             }
                         }
                     },
-                    data: data[0].degree
+                    data:[]
                 },
                 {
                     polarIndex: 0,
@@ -102,7 +99,7 @@ $(function() {
                             }
                         }
                     },
-                    data: data[0].waiting
+                    data: []
                 },
                 {
                     name:'发车间隔',
@@ -117,53 +114,44 @@ $(function() {
                             }
                         }
                     },
-                    data: [44,25,76,63,14,28,41,53,62,48,53,62,47,82]
+                    data: []
                 }
             ]
         };
-
-        for (var n = 0; n < data.length; n++) {
-            //console.log(data[n])
-            option.data.push({
-                series: {
-                    data: data[n]
-                }
-            });
-        }
-
         myChart.setOption(option);
-    })
-
+    $fullloadrate.setSelecteTable(setEchartsData);
+    //设置echarts数据
+    function setEchartsData(data){
+        var maxWaiting = 0;
+        var resData = {};
+        resData.degree　= [];
+        resData.waiting = [];
+        resData.
+        var res = data['resPonse']['satisfactionList'];
+        $.each(res,function(index,value){
+            resData.degree.push(value['full_loadration']*100);
+            resData.waiting.push(value['waiting_duration']);
+            ride_satisfaction
+            if(maxWaiting<value['waiting_duration']){
+                maxWaiting = value['waiting_duration'];
+            }
+        });
+        myChart.setOption({
+            yAxis:[{
+                max:100
+            },{
+                max:maxWaiting
+            }],
+            series: [{
+                data: resData.degree
+            },{
+                data: resData.waiting
+            }
+            ]
+        });
+    }
     contrast('说明：满载率与舒适满意度呈现反比趋势');
 
-    //日期控件
-    var start = {
-        format: 'YYYY-MM-DD hh:mm:ss',
-        maxDate: $.nowDate({DD:0}), //最大日期
-        okfun: function(obj){
-            end.minDate = obj.val; //开始日选好后，重置结束日的最小日期
-            endDates();
-            console.log(end.minDate)
-        }
-    };
-    var end = {
-        format: 'YYYY-MM-DD hh:mm:ss',
-        minDate: $.nowDate({DD:0}), //设定最小日期为当前日期
-        okfun: function(obj){
-            start.maxDate = obj.val; //将结束日的初始值设定为开始日的最大日期
-            console.log(start.maxDate)
-        }
-    };
-//这里是日期联动的关键
-    function endDates() {
-        //将结束日期的事件改成 false 即可
-        end.trigger = false;
-        $("#test1").jeDate(end);
-    }
-    $('#test').jeDate(start);
-    $('#test1').jeDate(end);
-
-    console.log(end.minDate);
 });
 
 function contrast(title) {
