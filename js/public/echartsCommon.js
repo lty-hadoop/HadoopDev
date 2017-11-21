@@ -1,90 +1,5 @@
  $(function(){
-    var option = {
-        id: 'test',
-        url: '',
-        title: '候车时长与满意度分时趋势',
-        legendData: [
-            {name: '水电费', icon: 'rect'},
-            {name: '离开', icon: 'rect'}
-        ],
-        ydata: [
-            {
-                splitLine:{show: true},
-                type: 'value',
-                max: 15,
-                axisLabel: {
-                    formatter: '{value}%'
-                }
-            },
-            {
-                type: 'value',
-                max: 25,
-                nameLocation: 'start',
-                axisLabel: {
-                    formatter: '{value}/min'
-                }
-            }
-        ],
-        seriesNumber: 1,
-        seriesFirstData: [
-            {
-                name: '水电费',
-                type:'line',
-                areaStyle: {
-                    normal: {
-                        color: '#e4f6f2'
-                    }
-                },
-                itemStyle: {
-                    normal: {
-                        color: '#3c9',
-                        lineStyle: {
-                            color: '#3c9'
-                        }
-                    }
-                },
-                data: [3,4,4.5, 3.6,3.8,3.2, 2.8, 3, 3.4]
-            }
-        ],
-        seriesSecondData: [
-            {
-                name:'水电费',
-                type:'line',
-                areaStyle: {
-                    normal: {
-                        color: '#e4f6f2'
-                    }
-                },
-                itemStyle: {
-                    normal: {
-                        color: '#3c9',
-                        lineStyle: {
-                            color: '#3c9'
-                        }
-                    }
-                },
-                data: [3,4,4.5, 3.6,3.8,3.2, 2.8, 3, 3.4]
-            },
-            {
-                //polarIndex: 0,
-                name: '离开',
-                type:'line',
-                //yAxisIndex: 1,
-                //step: 'end',
-                // areaStyle: {normal: {}},
-                itemStyle : {
-                    normal : {
-                        color: '#999',
-                        lineStyle: {
-                            color: '#999'
-                        }
-                    }
-                },
-                data: [3.3, 3.5, 4.1, 4.3, 3.5, 3, 2.5, 3.3, 3.6]
-            }
-        ],
-    };
-    var od = new GetData(option);
+
 });
 
 function GetData(option) {
@@ -154,9 +69,10 @@ GetData.prototype.init = function () {
         title: {
             text: this.title,
             textStyle: {
-                color: this.titleColor
+                color: this.titleColor,
+                fontWeight: 'normal'
             },
-            left: '10%'
+            left: '8%'
         },
         tooltip : {
             trigger: 'axis',

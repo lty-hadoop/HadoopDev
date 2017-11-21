@@ -44,4 +44,93 @@ $(function(){
     $(".optimize").creatList(listData);
 
     $(".driverTop").creatList(listData);
+
+
+    var option = {
+        id: 'provisioning',
+        url: '',
+        title: '客流与运力对比图',
+        titleColor: '#999',
+        legendData: [
+            {name: '客流', icon: 'rect'},
+            {name: '运力', icon: 'rect'}
+        ],
+        ydata: [
+            {
+                splitLine:{show: true},
+                type: 'value',
+                max: 5,
+                axisLabel: {
+                    formatter: '{value}'
+                }
+            },
+            {
+                type: 'value',
+                max: 25,
+                nameLocation: 'start',
+                axisLabel: {
+                    formatter: '{value}/min'
+                }
+            }
+        ],
+        seriesNumber: 2,
+        seriesFirstData: [
+            {
+                name: '客流',
+                type:'line',
+                areaStyle: {
+                    normal: {
+                        color: '#e4f6f2'
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        color: '#3c9',
+                        lineStyle: {
+                            color: '#3c9'
+                        }
+                    }
+                },
+                data: [3,4,4.5, 3.6,3.8,3.2, 2.8, 3, 3.4]
+            }
+        ],
+        seriesSecondData: [
+            {
+                name:'客流',
+                type:'line',
+                areaStyle: {
+                    normal: {
+                        color: '#e4f6f2'
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        color: '#3c9',
+                        lineStyle: {
+                            color: '#3c9'
+                        }
+                    }
+                },
+                data: [3,4,4.5, 3.6,3.8,3.2, 2.8, 3, 3.4]
+            },
+            {
+                //polarIndex: 0,
+                name: '运力',
+                type:'line',
+                //yAxisIndex: 1,
+                //step: 'end',
+                // areaStyle: {normal: {}},
+                itemStyle : {
+                    normal : {
+                        color: '#999',
+                        lineStyle: {
+                            color: '#999'
+                        }
+                    }
+                },
+                data: [3.3, 3.5, 4.1, 4.3, 3.5, 3, 2.5, 3.3, 3.6]
+            }
+        ],
+    };
+    var od = new GetData(option);
 });
