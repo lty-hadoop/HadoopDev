@@ -111,7 +111,7 @@ $(function ($) {
         resData.waiting = [];
         var res = data['resPonse']['satisfactionList'];
         $.each(res,function(index,value){
-            resData.degree.push(value['waiting_satisfaction']*100);
+            resData.degree.push(value['waiting_satisfaction']);
             resData.waiting.push(value['waiting_duration']);
             if(maxWaiting<value['waiting_duration']){
                 maxWaiting = value['waiting_duration'];
@@ -186,6 +186,36 @@ $(function ($) {
             });
         }
     })
+
+
+
+    //候车满意度top5
+    var dervList = {
+        url : $.getPath+'/WaitingSatisfaction/list',
+        dataTitle : '候车时长与满意度分析',
+        sourceFlag:false,
+        sendData : {offdate:$.getDateString('-1')},
+        renderFn : function(data){
+            var _this = this;
+            var data = data['resPonse']['waitingSatisfactionList'];
+            this.$content.html("");
+            if(data.dataTitle&&data.dataFrom){
+                _this.opts.dataTitle = data.dataTitle;
+                _this.opts.dataFrom = data.dataFrom;
+            }
+            _this.$title = _this.opts.sourceFlag?$('<div class="title"><div class="titleName">'+_this.opts.titleData+'</div><div class="dataSouce">'+this.opts.dataFrom+'</div>\n' +
+                '        </div>'):$('<h2 class="bd_b1">'+_this.opts.dataTitle+'</h2>');
+            _this.$ul = $('<ul class="pd_25 pd_t5"></ul>');
+            $.each(data,function(index,value){
+                if(index<=_this.opts.allShowNum){
+                    _this.$li = $('<li class="bd_b1 h_40 dis_f jst_sb item_c"><div class="dis_f item_c"><p style="background:'+_this.opts.topColor[index]+'"  class="w_25 h_25 text_c line_h25 mg_r20">'+(index*1+1)+'</p><span>'+value['line_name']+'</span></div><span>'+(value['satisfaction']*100).toFixed(2)+'%</span></li>');
+                    _this.$ul.append( _this.$li);
+                }
+            });
+            _this.$content.append(this.$title).append(this.$ul);
+        }
+    };
+    $(".optimize").creatList(dervList);
 });
 
 

@@ -20,8 +20,8 @@ $(function ($) {
         $('body').removeClass('body-small')
     }
     $navUl = $("#side-menu");
-    $loadContent.load('html/route-optimization/waiting-and-analysis.html',function(){
-        $(document.body).append('<script src="js/route-optimization/waiting-and-analysis.js"></script>');
+    $loadContent.load('html/passengerFlow.html',function(){
+        $(document.body).append('<script src="js/passengerFlow.js"></script>');
     });
     var setBarFlag = true;
     //设置侧边栏导航最初显示形式；
@@ -97,6 +97,10 @@ $(function ($) {
     function navBindEvent() {
         var animate = ["","animation","animation1","animation2","animation3"];
         $navUl.on("click", 'li', function (e) {
+            if($(this).index()==1&&$(this).html()!=='<a>满载率与拥挤满意度</a>'){
+                window.location.reload();
+                return;
+            }
             var index = Math.ceil(Math.random()*4);
             var animateClass = animate[index];
             e.stopPropagation();

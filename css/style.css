@@ -331,11 +331,9 @@ body.mini-navbar .navbar-default .nav > li > .nav-second-level li a {  font-size
     text-align:center;
 
 }
-.echartsBoxMap .end{
-    left:10px;
-}
 .echartsBoxMap .bar{
     float:left;
+    width:0;
     background:#143647;
     height:25px;
     opacity:.8;
