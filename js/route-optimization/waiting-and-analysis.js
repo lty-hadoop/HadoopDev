@@ -94,7 +94,15 @@ $(function ($) {
         ]
     });
     var $waitingandanalysis = $('.waiting-and-analysis');
-    $waitingandanalysis.setSelecteTable(setEchartsData);
+    var theadArr = [{name:'线路',field: 'line_name'},
+        { name:'分时范围',field: 'timeArr'},
+        {name:'上车人数', field: 'up_num'},
+        { name:'运力',field: 'shipping_ability'},
+        { name:'下车人数', field: 'down_num'},
+        {name:'平均发车时间', field: 'waiting_duration'},
+        {name:'候车满意度', field: 'waiting_satisfaction'}
+    ];
+    $waitingandanalysis.setSelecteTable({'fn':setEchartsData,'theadArr':theadArr});
     //设置echarts数据
     function setEchartsData(data){
         var maxWaiting = 0;

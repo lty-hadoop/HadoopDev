@@ -15,8 +15,24 @@
              }else{
                  return myDate.getFullYear()+'-'+(myDate.getMonth()+1)+'-'+myDate.getDate();
              }
-         }
-    });
+         },
+        formatDate : function(now){
+             var   d=new   Date(now);
+        var   hour=d.getHours();
+        var   minute=d.getMinutes();
+        var   second=d.getSeconds();
+        if(hour<10){
+            hour= '0'+hour;
+        }
+        if(minute<10){
+            minute= '0'+minute;
+        }
+        if(second<10){
+            second= '0'+second;
+        }
+        return   hour+":"+minute+":"+second;
+    }
+});
     //阻止时间冒泡
     function stopEvent(ev){
         ev = ev || window.event;
@@ -66,8 +82,8 @@
     Initpage.prototype = {
         init : function(){
             this.$ul = $('<ul class=" pageInfo dis_f jst_r bd_1 w_auto "  style="border-radius: 2px; "><li class="first bd_1 line_h30 text_c w_30 h_30">&lt;&lt;</li><li class="prev bd_1 line_h30 text_c w_30 h_30 ">&lt;</li>' +
-                '            <li class="next bd_1 line_h30 text_c w_30 h_30">&gt;</li>' +
-                '            <li class="last bd_1 line_h30 text_c w_30 h_30">&gt;&gt;</li></ul>');
+                '<li class="next bd_1 line_h30 text_c w_30 h_30">&gt;</li>' +
+                '<li class="last bd_1 line_h30 text_c w_30 h_30">&gt;&gt;</li></ul>');
             this.$elem.append(this.$ul);
         },
         render:function(){
@@ -161,7 +177,7 @@
     };
     $.fn.creatList.opts  = {
         //显示条数
-        showNum : 6,
+        allShowNum : 6,
         //是否显示数据来源,默认不显示
         sourceFlag: false,
         //是需要示分页，默认不需要分页
@@ -181,8 +197,8 @@
         //请求数据类型
         dataType : 'json',
         simpleData:{
-            "name":"name",
-            "hotData":"hotData",
+            "name":"dense_region_site",
+            "hotData":"dense_data",
             "dataTitle":"dataTitle",
             "dataFrom":"dataFrom"
         },
@@ -208,7 +224,7 @@
     CreatList.prototype = {
         //初始化容器
         init : function(){
-            this.$content = $('<div class="plugin-topList w_auto" ></div>');
+            this.$content = $('<div class="plugin-topList w_auto bg_fff" style="min-height:320px;"></div>');
             this.$page = $('<div></div>');
             this.$ele.append(this.$content).append(this.$page);
             //获取初始化数据
@@ -218,14 +234,14 @@
             var _this = this;
             //判断是否需要分页
             if(!this.opts.getPage){
-
                 $.ajax({
                     url : this.opts.url,
                     type : this.opts.type,
                     dataType : this.opts.dataType,
+                    data : this.opts.sendData,
                     success:function(data){
                         //如果用户有传入自定义的渲染函数,就执行用户传入的，没有就自己渲染
-                        _this.renderFn!=null?_this.renderFn(data):randerData.call(_this,data.data);
+                        _this.renderFn!=null?_this.renderFn(data):randerData.call(_this,data);
                     }
                 });
             }else{
@@ -233,6 +249,7 @@
                     url : this.opts.url,
                     type : this.opts.type,
                     dataType : this.opts.dataType,
+                    data : _this.opts.sendData,
                     success:function(data){
                         _this.$page.creatPage({
                             itemSize : data.total,
@@ -256,19 +273,22 @@
             //渲染函数
             function randerData(data){
                 var _this = this;
+                var data = data['resPonse']['DenseRegionList'];
                 this.$content.html("");
                 if(data.dataTitle&&data.dataFrom){
-                    this.opts.dataTitle = data.dataTitle;
-                    this.opts.dataFrom = data.dataFrom;
+                    _this.opts.dataTitle = data.dataTitle;
+                    _this.opts.dataFrom = data.dataFrom;
                 }
-                this.$title = this.opts.sourceFlag?$('<div class="title"><div class="titleName">'+this.opts.titleData+'</div><div class="dataSouce">'+this.opts.dataFrom+'</div>\n' +
-                    '        </div>'):$('<h2 class="bd_b1">'+this.opts.dataTitle+'</h2>');
-                this.$ul = $('<ul class="pd_25 pd_t5"></ul>');
+                _this.$title = _this.opts.sourceFlag?$('<div class="title"><div class="titleName">'+_this.opts.titleData+'</div><div class="dataSouce">'+this.opts.dataFrom+'</div>\n' +
+                    '        </div>'):$('<h2 class="bd_b1">'+_this.opts.dataTitle+'</h2>');
+                _this.$ul = $('<ul class="pd_25 pd_t5"></ul>');
                 $.each(data,function(index,value){
-                    _this.$li = $('<li class="bd_b1 h_40 dis_f jst_sb item_c"><div class="dis_f item_c"><p style="background:'+_this.opts.topColor[index]+'"  class="w_25 h_25 text_c line_h25 mg_r20">'+(index*1+1)+'</p><span>'+value[_this.opts.simpleData.name]+'</span></div><span>'+value[_this.opts.simpleData.hotData]+'</span></li>')
-                    _this.$ul.append( _this.$li);
+                    if(index<=_this.opts.allShowNum){
+                        _this.$li = $('<li class="bd_b1 h_40 dis_f jst_sb item_c"><div class="dis_f item_c"><p style="background:'+_this.opts.topColor[index]+'"  class="w_25 h_25 text_c line_h25 mg_r20">'+(index*1+1)+'</p><span>'+value[_this.opts.simpleData.name]+'</span></div><span>'+value[_this.opts.simpleData.hotData]+'</span></li>')
+                        _this.$ul.append( _this.$li);
+                    }
                 });
-                this.$content.append(this.$title).append(this.$ul);
+                _this.$content.append(this.$title).append(this.$ul);
             }
         }
     };
@@ -428,8 +448,6 @@
         show : function(){
             var _this = this;
             this.setWidth = this.$ele.width();
-            this.offsetL = this.$ele.offset().left;
-            this.offsetT = this.$ele.offset().top*1+6+this.$ele.height();
             this.outdiv.css({width:_this.setWidth});
             this.setPosition();
             this.outdiv.show();
@@ -457,9 +475,9 @@
     //table组件
     $.fn.creatTable = function(opt){
         opt.$ele = $(this);
-        var table = new creatTable(opt);
+        var table = new CreatTable(opt);
     };
-    function creatTable(option){
+    function CreatTable(option){
         var opts = {
             //表头名称和对应字段
             theadArr : [{name:'线路',field: 'line_name'},
@@ -482,7 +500,7 @@
         this.init();
         this.bindEvent();
     }
-    creatTable.prototype = {
+    CreatTable.prototype = {
         //初始化容器
         init : function(){
             var _this = this;
@@ -515,19 +533,23 @@
         randerData : function(obj,sort){
             var _this = this;
             var sort = sort;
+            var dataList;
             _this.tbody.html('');
             if(sort===''){
-                var dataList = obj['resPonse']['satisfactionList'];
+                dataList = obj['resPonse']['satisfactionList'];
             }else{
-                var dataList = obj;
+                dataList = obj;
             }
 
             $.each(dataList,function(index,val){
                 var $tr = $('<tr></tr>');
                 $.each(_this.opts.theadArr,function(i,data){
-                    var dataName = data['field'];
+                    var dataName = data['field']
+                    var isText = String(val[dataName]).indexOf(".");
                     if(dataName==='timeArr'&&sort==='') val['timeArr'] =  _this.opts.timeArr[index];
-                    if(dataName==='waiting_satisfaction'&&String(val[dataName]).indexOf(".")!='-1')val[dataName]=val[dataName]*100+'%';
+                    if(dataName==='waiting_satisfaction'&&isText!='-1')val[dataName]=Math.floor(val[dataName]*100)+'%';
+                    if(dataName==='full_loadratio'&&isText!='-1')val[dataName]=Math.floor(val[dataName]*100)+'%';
+                    if(dataName==='ride_satisfaction'&&isText!='-1')val[dataName]=Math.floor(val[dataName]*100)+'%';
                     var $td = $('<td class="'+dataName+'">'+val[dataName]+'</td>');
                     $tr.append($td);
                 });
@@ -592,8 +614,9 @@
         }
     }
 
-    $.fn.setSelecteTable = function(fn){
+    $.fn.setSelecteTable = function(obj){
         var _this = $(this);
+        var $obj = obj;
         var getData = {line_id: '', isPage: false};
         var isFrist = true;
         var setDataFlag = false;
@@ -704,13 +727,13 @@
                 dataType: 'json',
                 data: getData,
                 success: function (data) {
-                    fn(data);
+                    $obj.fn(data);
                 }
             });
             //动态去设置table
             var $table = $(".table-identical");
             $table.html('');
-            $table.creatTable({'getData':getData,'url':$.getPath + '/Satisfaction/list'});
+            $table.creatTable({'getData':getData,'url':$.getPath + '/Satisfaction/list',theadArr:$obj.theadArr});
         }
         //开始时间
         $('.getStartTime').jeDate(start);
