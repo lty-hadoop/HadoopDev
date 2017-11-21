@@ -1,15 +1,18 @@
-<!doctype html>
-<html lang="zh-cn">
+<!DOCTYPE html>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>登录</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>大数据展示平台</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
-    <link href="css/mge.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/mge.css">
+    <link rel="icon" href="img/data.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/jedate.css">
 </head>
+
 <body>
 <!-- 以下是头部导航区域 -->
 <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
@@ -18,13 +21,13 @@
     </div>
     <ul class="nav navbar-top-links navbar-right font18">
         <li class="dropdown">
-            <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+            <a class="dropdown-toggle count-info" data-toggle="dropdown" href="index.html#">
                 <i class="fa fa-envelope"></i>
             </a>
             <ul class="dropdown-menu dropdown-messages">
                 <li>
                     <div class="dropdown-messages-box">
-                        <a href="#" class="pull-left">
+                        <a href="profile.html" class="pull-left">
                             <img alt="image" class="img-circle" src="">
                         </a>
                         <div class="media-body">
@@ -37,14 +40,14 @@
                 <li class="divider"></li>
                 <li>
                     <div class="dropdown-messages-box">
-                        <a href="#" class="pull-left">
+                        <a href="profile.html" class="pull-left">
                             <img alt="image" class="img-circle" src="">
                         </a>
                     </div>
                 </li>
                 <li>
                     <div class="dropdown-messages-box">
-                        <a href="#" class="pull-left">
+                        <a href="profile.html" class="pull-left">
                             <img alt="image" class="img-circle" src="">
                         </a>
                         <div class="media-body ">
@@ -57,7 +60,7 @@
                 <li class="divider"></li>
                 <li>
                     <div class="text-center link-block">
-                        <a href="#">
+                        <a href="mailbox.html">
                             <i class="fa fa-envelope"></i> <strong>Read All Messages</strong>
                         </a>
                     </div>
@@ -65,12 +68,12 @@
             </ul>
         </li>
         <li class="dropdown">
-            <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+            <a class="dropdown-toggle count-info" data-toggle="dropdown" href="index.html#">
                 <i class="fa fa-bell"></i>
             </a>
         </li>
         <li>
-            <a href="#">
+            <a class="log-out">
                 <i class="fa fa-sign-out"></i> Log out
             </a>
         </li>
@@ -85,11 +88,11 @@
                 <div class="dropdown profile-element"> <span>
                             <img alt="image" class="img-circle" src="img/user.jpg"/>
                              </span>
-                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">userName</strong>
+                    <a data-toggle="dropdown" class="dropdown-toggle">
+                            <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold username"></strong>
                              </span><span class="text-muted text-xs block">数据管理员</span> </span> </a>
                     <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                        <li><a href="#"></a></li>
+                        <li><a href="profile.html">Profile</a></li>
                     </ul>
                 </div>
                 <div class="logo-element">
@@ -141,51 +144,28 @@
 </div>
 
 
-    <div class="login">
-        <span class="login_logo"></span>
-        <form class="form-horizontal">
-            <div class="form-group">
-                <div class="col-sm-12">
-                    <input type="text" class="form-control user" placeholder="用户名">
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-12">
-                    <input type="password" class="form-control pass" placeholder="密码">
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-12">
-                    <button type="button" class="btn btn-primary btn-block enter mg_t10">登陆</button>
-                </div>
-            </div>
-        </form>
-    </div>
 <script type="text/javascript" src="js/common/jquery-2.1.1.js"></script>
+<script type="text/javascript" src="js/common/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/common/echarts.min.js"></script>
+<!-- 引入 echarts.js -->
+<script src="http://api.map.baidu.com/api?v=2.0&ak=ZUONbpqGBsYGXNIYHicvbAbM"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
+<script src="js/common/extendJq.js"></script>
+<script src="js/common/jquery.jedate.min.js"></script>
+<script src="js/index.js"></script>
+<!-- 图形 -->
+<script src="js/public/evaluation-statistics.js"></script>
+<script src="js/public/echartsCommon.js"></script>
 <script type="text/javascript">
     $(function(){
-        $('.enter').on('click', function(){
-            jump();
+        // 退出
+        $('.log-out').on('click', function(){
+            window.location.href = "index.html";
         });
 
-        $(window).keydown(function(event){
-            if (event.keyCode == '13') {
-                jump();
-            }
-        });
-    });
-
-    function jump () {
-        if($('.user').val() !== 'admin' || $('.pass').val() !== 'admin'){
-            console.log('用户名或密码错误');
-            return false
-        } else {
-            console.log('登陆成功！');
-            var userName = $('.user').val();
-            localStorage.setItem('user', userName);
-            window.location.href = "home.html";
-        }
-    }
+        var userName = localStorage.getItem('user');
+        $('.username').text(userName);
+    })
 </script>
 </body>
 </html>
