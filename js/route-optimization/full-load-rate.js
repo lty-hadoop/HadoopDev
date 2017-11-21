@@ -184,9 +184,9 @@ $(function() {
                                 <td>小于40%</td>
                                 <td>
                                 <div>
-                                <p class="mg_t5 total-green">满意，${data[0].satisfaction * 100}%</p>
-                                <p class="mg_t5 total-red">不满意，${data[0].yawp * 100}%</p>
-                                <p class="mg_t5"><span>Total：</span><i class="total-blue">${data[0].total * 100}%</i></p>
+                                <p class="mg_t5 total-green">满意，${(data[0].satisfaction * 100).toFixed(2)}%</p>
+                                <p class="mg_t5 total-red">不满意，${(data[0].yawp * 100).toFixed(2)}%</p>
+                                <p class="mg_t5"><span>Total：</span><i class="total-blue">${(data[0].total * 100).toFixed(2)}%</i></p>
                                 </div>
                                 </td>
                                 </tr>
@@ -194,9 +194,9 @@ $(function() {
                                 <td>40%-80%</td>
                                 <td>
                                 <div>
-                                <p class="mg_t5 total-green">满意，${data[1].satisfaction * 100}%</p>
-                                <p class="mg_t5 total-red">不满意，${data[1].yawp * 100}%</p>
-                                <p class="mg_t5"><span>Total：</span><i class="total-blue">${data[1].total * 100}%</i></p>
+                                <p class="mg_t5 total-green">满意，${(data[1].satisfaction * 100).toFixed(2)}%</p>
+                                <p class="mg_t5 total-red">不满意，${(data[1].yawp * 100).toFixed(2)}%</p>
+                                <p class="mg_t5"><span>Total：</span><i class="total-blue">${(data[1].total * 100).toFixed(2)}%</i></p>
                                 </div>
                                 </td>
                                 </tr>
@@ -204,9 +204,9 @@ $(function() {
                                 <td>大于80%</td>
                                 <td>
                                 <div>
-                                <p class="mg_t5 total-green">满意，${data[2].satisfaction * 100}%</p>
-                                <p class="mg_t5 total-red">不满意，${data[2].yawp * 100}%</p>
-                                <p class="mg_t5"><span>Total：</span><i class="total-blue">${data[2].total * 100}%</i></p>
+                                <p class="mg_t5 total-green">满意，${(data[2].satisfaction * 100).toFixed(2)}%</p>
+                                <p class="mg_t5 total-red">不满意，${(data[2].yawp * 100).toFixed(2)}%</p>
+                                <p class="mg_t5"><span>Total：</span><i class="total-blue">${(data[2].total * 100).toFixed(2)}%</i></p>
                                 </div>
                                 </td>
                                 </tr>
