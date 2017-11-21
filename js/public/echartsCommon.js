@@ -1,7 +1,3 @@
- $(function(){
-
-});
-
 function GetData(option) {
     this.id = option.id;
     this.url = option.url;
