@@ -141,7 +141,6 @@ $(function ($) {
         success: function (res) {
             var res = res.resPonse.waitingDuratisticsList;
             res.map(function(elem, index){
-                console.log(elem);
                 var state = '';
                 switch (elem.type) {
                     case 1:
