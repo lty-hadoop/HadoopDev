@@ -73,7 +73,7 @@
             </a>
         </li>
         <li>
-            <a href="">
+            <a class="log-out">
                 <i class="fa fa-sign-out"></i> Log out
             </a>
         </li>
@@ -88,8 +88,8 @@
                 <div class="dropdown profile-element"> <span>
                             <img alt="image" class="img-circle" src="img/user.jpg"/>
                              </span>
-                    <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
-                            <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">userName</strong>
+                    <a data-toggle="dropdown" class="dropdown-toggle">
+                            <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold username"></strong>
                              </span><span class="text-muted text-xs block">数据管理员</span> </span> </a>
                     <ul class="dropdown-menu animated fadeInRight m-t-xs">
                         <li><a href="profile.html">Profile</a></li>
@@ -156,5 +156,16 @@
 <!-- 图形 -->
 <script src="js/public/evaluation-statistics.js"></script>
 <script src="js/public/echartsCommon.js"></script>
+<script type="text/javascript">
+    $(function(){
+        // 退出
+        $('.log-out').on('click', function(){
+            window.location.href = "index.html";
+        });
+
+        var userName = localStorage.getItem('user');
+        $('.username').text(userName);
+    })
+</script>
 </body>
 </html>

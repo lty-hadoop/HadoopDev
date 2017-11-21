@@ -51,6 +51,8 @@
             return false
         } else {
             console.log('登陆成功！');
+            var userName = $('.user').val();
+            localStorage.setItem('user', userName);
             window.location.href = "home.html";
         }
     }
