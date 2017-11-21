@@ -137,9 +137,9 @@ $(function() {
         resData.comfort = [];
         var res = data['resPonse']['satisfactionList'];
         $.each(res,function(index,value){
-            resData.degree.push((value['full_loadratio']*100).toFixed(0));
+            resData.degree.push((value['full_loadratio']).toFixed(2));
             resData.waiting.push(value['waiting_duration']);
-            resData.comfort.push((value['ride_satisfaction']*100).toFixed(0));
+            resData.comfort.push((value['ride_satisfaction']).toFixed(2));
             if(maxWaiting<value['waiting_duration']){
                 maxWaiting = value['waiting_duration'];
             }
@@ -293,4 +293,60 @@ $(function() {
 
         contrast.setOption(option);
     }
+
+    //舒适满意度排行
+    var dervList = {
+        url : $.getPath+'/RideLloadra/list',
+        dataTitle : '满载率排行TOP5',
+        dataFrom : '来自坐公交APP',
+        sourceFlag:false,
+        sendData : {offdate:$.getDateString('-1'),type:1},
+        renderFn : function(data){
+            var _this = this;
+            var data = data['resPonse']['rideLloadraList'];
+            this.$content.html("");
+            if(data.dataTitle&&data.dataFrom){
+                _this.opts.dataTitle = data.dataTitle;
+                _this.opts.dataFrom = data.dataFrom;
+            }
+            _this.$title = _this.opts.sourceFlag?$('<div class="title"><div class="titleName">'+_this.opts.titleData+'</div><div class="dataSouce">'+this.opts.dataFrom+'</div>\n' +
+                '        </div>'):$('<h2 class="bd_b1">'+_this.opts.dataTitle+'</h2>');
+            _this.$ul = $('<ul class="pd_25 pd_t5"></ul>');
+            $.each(data,function(index,value){
+                if(index<=_this.opts.allShowNum){
+                    _this.$li = $('<li class="bd_b1 h_40 dis_f jst_sb item_c"><div class="dis_f item_c"><p style="background:'+_this.opts.topColor[index]+'"  class="w_25 h_25 text_c line_h25 mg_r20">'+(index*1+1)+'</p><span>'+value['line_name']+'</span></div><span>'+(value['percentage']*100).toFixed(2)+'%</span></li>');
+                    _this.$ul.append( _this.$li);
+                }
+            });
+            _this.$content.append(this.$title).append(this.$ul);
+        }
+    };
+    var manzai = {
+        url : $.getPath+'/RideLloadra/list',
+        dataTitle : '舒适度排行TOP5',
+        dataFrom : '来自坐公交APP',
+        sourceFlag:false,
+        sendData : {offdate:$.getDateString('-1'),type:2},
+        renderFn : function(data){
+            var _this = this;
+            var data = data['resPonse']['rideLloadraList'];
+            this.$content.html("");
+            if(data.dataTitle&&data.dataFrom){
+                _this.opts.dataTitle = data.dataTitle;
+                _this.opts.dataFrom = data.dataFrom;
+            }
+            _this.$title = _this.opts.sourceFlag?$('<div class="title"><div class="titleName">'+_this.opts.titleData+'</div><div class="dataSouce">'+this.opts.dataFrom+'</div>\n' +
+                '        </div>'):$('<h2 class="bd_b1">'+_this.opts.dataTitle+'</h2>');
+            _this.$ul = $('<ul class="pd_25 pd_t5"></ul>');
+            $.each(data,function(index,value){
+                if(index<=_this.opts.allShowNum){
+                    _this.$li = $('<li class="bd_b1 h_40 dis_f jst_sb item_c"><div class="dis_f item_c"><p style="background:'+_this.opts.topColor[index]+'"  class="w_25 h_25 text_c line_h25 mg_r20">'+(index*1+1)+'</p><span>'+value['line_name']+'</span></div><span>'+(value['percentage']*100).toFixed(2)+'%</span></li>');
+                    _this.$ul.append( _this.$li);
+                }
+            });
+            _this.$content.append(this.$title).append(this.$ul);
+        }
+    };
+    $(".optimize").creatList(dervList);
+    $(".manzai").creatList(manzai);
 });

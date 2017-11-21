@@ -1,6 +1,8 @@
 
 ;
 (function($, window, document) {
+    var timerEcharts = null;
+    clearInterval(timerEcharts);
     //请求接口的域名端口
     $.getPath = 'http://192.168.2.133:9001';
     //将方法扩展到$上
@@ -31,7 +33,10 @@
             second= '0'+second;
         }
         return   hour+":"+minute+":"+second;
-    }
+    },
+        qxEcharts : function(){
+            var aa = new Pmgressbar();
+        }
 });
     //阻止时间冒泡
     function stopEvent(ev){
@@ -547,9 +552,9 @@
                     var dataName = data['field']
                     var isText = String(val[dataName]).indexOf(".");
                     if(dataName==='timeArr'&&sort==='') val['timeArr'] =  _this.opts.timeArr[index];
-                    if(dataName==='waiting_satisfaction'&&isText!='-1')val[dataName]=Math.floor(val[dataName]*100)+'%';
-                    if(dataName==='full_loadratio'&&isText!='-1')val[dataName]=Math.floor(val[dataName]*100)+'%';
-                    if(dataName==='ride_satisfaction'&&isText!='-1')val[dataName]=Math.floor(val[dataName]*100)+'%';
+                    if(dataName==='waiting_satisfaction'&&isText!='-1')val[dataName]=(val[dataName]).toFixed(2)+'%';
+                    if(dataName==='full_loadratio'&&isText!='-1')val[dataName]=(val[dataName]).toFixed(2)+'%';
+                    if(dataName==='ride_satisfaction'&&isText!='-1')val[dataName]=(val[dataName]).toFixed(2)+'%';
                     var $td = $('<td class="'+dataName+'">'+val[dataName]+'</td>');
                     $tr.append($td);
                 });
@@ -633,7 +638,7 @@
             data: {isPage: true, pageNum: 1, pageSize: 10, company_name: ""},
             keyupData: 'company_name',
             simpleData: {
-                name: 'company_name',
+                name: 'departmentname',
                 total: 'total',
                 data: 'companyList'
             },
@@ -652,16 +657,16 @@
                 showNum: 10,
                 wrap: 'getSelectLineWrap',
                 atuoCbfn: true,
-                data: {isPage: true, pageNum: 1, pageSize: 10, company_id: data.company_id},
-                keyupData: 'line_name',
+                data: {isPage: true, pageNum: 1, pageSize: 10, departmentid : data.departmentid},
+                keyupData: 'linename',
                 simpleData: {
-                    name: 'line_name',
+                    name: 'linename',
                     total: 'total',
                     data: 'LineList'
                 },
                 cbFn: function (data) {
                     console.log(data);
-                    getData.line_id = data.line_id;
+                    getData.line_id = data.id;
                     if (isFrist) getLineData();
                     if (setDataFlag) getLineData();
                 }
@@ -747,6 +752,177 @@
             $(".getEndTime").jeDate(end);
         }
 
+    }
+
+    //迁徙图
+    function Pmgressbar(){
+        var _this = this;
+        //间隔多少时间触发一次请求，或者说刷新一次显示；单位为分钟默认15分钟
+        this.space = 15;
+        //当前播放进度的宽度；即播放进度；
+        this.changeWidth = 0;
+        //进度条截止点；
+        this.Mwidth = $('.pmgressbar').width();
+        //进度条开始点；
+        this.minWidth = 0;
+        // 根据指定的间隔时间来计算步长
+        this.steep =  Math.floor(_this.Mwidth/24/60*_this.space);
+        //拖动进度条时鼠标点击时的x轴距离
+        this.startX = 0;
+        //拖动进度条时鼠标拖动结束点
+        this.endX = 0;
+        //拖动进度条时鼠标拖动距离
+        this.moveX = 0;
+        //进度条是否能被拖动
+        this.isMove = false;
+        //延时
+        this.timer = {};
+        //进度条是否处于能播放的状态；
+        this.isAction = true;
+        //是否是点击事件
+        this.clickEv = false;
+        this.startBar();
+        this.movebar();
+
+    }
+    Pmgressbar.prototype = {
+        changeBar : function(){
+            var _this = this;
+            if(!this.isMove){
+                this.changeWidth+=1;
+            }
+            if(_this.changeWidth>this.Mwidth||_this.changeWidth<this.minWidth){
+                _this.stopBar();
+            }else{
+                _this.getData();
+                $(".end").css({"top":Math.ceil(this.changeWidth/this.Mwidth*25),"left":this.changeWidth+5});
+                $(".bar").css({'width':this.changeWidth},600);
+            }
+        },
+        movebar : function(){
+            var _this = this;
+            var timers = 0;
+            var run = null;
+            $(document).on("mouseenter",'.pmgressbar',function() {
+                _this.stopBar();
+            }).on("mouseleave",".pmgressbar",function() {
+                if(!_this.isAction){
+                    _this.isAction = true;
+                    _this.startBar();
+                }
+            });
+            $(document).on('mousedown','.pmgressbar',function(){
+                _this.clickEv = false;
+            })
+            $(document).on('mouseup','.pmgressbar', function(event) {
+                if(_this.clickEv)return;
+                if(event.target.className!='pmgressbar'&&event.target.className!='bar')return;
+                _this.stopBar();
+                event.preventDefault();
+                console.log("offset:"+$(this).offset().left+"clientX:"+event.clientX);
+                var clickOffset = event.clientX-$(this).offset().left;
+                if(clickOffset>=_this.Mwidth){
+                    clickOffset=_this.Mwidth;
+                }else if(clickOffset<=_this.minWidth){
+                    clickOffset=_this.minWidth;
+                }
+                clickOffset>=_this.changeWidth?add.call(_this):minus.call(_this);
+                _this.clickEv  = false;
+                //点击位置是需要增加的
+                function add(){
+                    for(this.changeWidth;this.changeWidth<=clickOffset;this.changeWidth++){
+                        this.getData();
+                    }
+                    getMoveTo.call(this);
+                }
+                //点击位置是需要减小的
+                function minus(){
+                    for(this.changeWidth;this.changeWidth>=clickOffset;this.changeWidth--){
+                        this.getData();
+                    }
+                    getMoveTo.call(this);
+                }
+
+                function getMoveTo(){
+                    $(".end").animate({"top":Math.ceil(this.changeWidth/this.Mwidth*25),"left":this.changeWidth+5},600);
+                    $(".bar").animate({'width':this.changeWidth},600);
+                }
+                /* Act on the event */
+            });
+
+//拖动播放条事件
+            $(".pmgressbar").on("mousedown",".end",function(event){
+
+                event.preventDefault();
+                _this.isMove = true;
+                _this.clickEv = true;
+                _this.startX = event.clientX;
+                _this.stopBar();
+            });
+            $(document).on("mouseup",function(e){
+                if(_this.isMove){
+                    _this.isMove = false;
+                    _this.isAction = true;
+                    _this.startBar();
+                }
+
+            });
+            $(document).on('mousemove',function(event) {
+                event.preventDefault();
+                /* Act on the event */
+                if(_this.isMove){
+                    _this.stopBar();
+                    // _this.endX = event.clientX;
+                    _this.changeWidth = event.clientX-$(".pmgressbar").offset().left
+                    // _this.moveX = _this.endX-_this.startX;
+                    // _this.startX =  _this.endX;
+                    if(_this.changeWidth>_this.Mwidth||_this.changeWidth<_this.minWidth){
+                    }else{
+                        _this.changeWidth = _this.changeWidth+_this.moveX;
+                        _this.changeBar();
+                    }
+                }
+            });
+        },
+        stopBar : function(){
+            this.isAction = false;
+            clearInterval(timerEcharts);
+            timerEcharts = null;
+        },
+        startBar : function(){
+            var _this = this;
+            _this.waitDo("waitStart",function(){
+                if(_this.isAction){
+                    timerEcharts = setInterval(function(){
+                        _this.changeBar();
+                        _this.isAction = false;
+                    },50);
+                }
+            },50)
+
+        },
+        getData : function (){
+            if(this.changeWidth%this.steep==0){
+                //满足条件就请求数据，改变图形
+                setEcharts();
+                // console.log(this.changeWidth/this.steep)
+            }
+            function setEcharts(){
+
+            }
+        },
+        waitDo : function (id, fn, wait) {
+            //id事件名称  fn执行事件 wait等待时间
+            var _this = this;
+            if (_this.timer[id]) {
+                window.clearTimeout(this.timer[id]);
+                delete _this.timer[id];
+            }
+            return _this.timer[id] = window.setTimeout(function() {
+                fn();
+                delete _this.timer[id];
+            },wait);
+        }
     }
 })(jQuery, window, document);
 
