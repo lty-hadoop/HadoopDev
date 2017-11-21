@@ -127,11 +127,10 @@ $(function() {
         resData.degree　= [];
         resData.waiting = [];
         resData.
-        var res = data['resPonse']['satisfactionList'];
+        //var res = data['resPonse']['satisfactionList'];
         $.each(res,function(index,value){
             resData.degree.push(value['full_loadration']*100);
             resData.waiting.push(value['waiting_duration']);
-            ride_satisfaction
             if(maxWaiting<value['waiting_duration']){
                 maxWaiting = value['waiting_duration'];
             }
@@ -151,6 +150,60 @@ $(function() {
         });
     }
     contrast('说明：满载率与舒适满意度呈现反比趋势');
+
+
+    //
+    $.ajax({
+        url: 'http://192.168.2.133:9001/RideSatistics/list?offdate=2017-07-06',
+        type: 'GET',
+        dataType: 'json',
+        success: function (res) {
+            var data = res.resPonse.rideSatisticsList;
+            //console.log(data)
+            var total = `<table class="table table-border">
+                            <thead>
+                                <tr>
+                                <td class="text_c f16">满载率</td>
+                                <td class="text_c f16">舒适满意度</td>
+                                </tr>
+                            </thead>
+                            <tbody class="f16">
+                                <tr>
+                                <td>小于40%</td>
+                                <td>
+                                <div>
+                                <p class="mg_t5 total-green">满意，${data[0].satisfaction * 100}%</p>
+                                <p class="mg_t5 total-red">不满意，${data[0].yawp * 100}%</p>
+                                <p class="mg_t5"><span>Total：</span><i class="total-blue">${data[0].total * 100}%</i></p>
+                                </div>
+                                </td>
+                                </tr>
+                                <tr>
+                                <td>40%-80%</td>
+                                <td>
+                                <div>
+                                <p class="mg_t5 total-green">满意，${data[1].satisfaction * 100}%</p>
+                                <p class="mg_t5 total-red">不满意，${data[1].yawp * 100}%</p>
+                                <p class="mg_t5"><span>Total：</span><i class="total-blue">${data[1].total * 100}%</i></p>
+                                </div>
+                                </td>
+                                </tr>
+                                <tr>
+                                <td>大于80%</td>
+                                <td>
+                                <div>
+                                <p class="mg_t5 total-green">满意，${data[2].satisfaction * 100}%</p>
+                                <p class="mg_t5 total-red">不满意，${data[2].yawp * 100}%</p>
+                                <p class="mg_t5"><span>Total：</span><i class="total-blue">${data[2].total * 100}%</i></p>
+                                </div>
+                                </td>
+                                </tr>
+                            </tbody>
+                        </table>`;
+            $('.ride-satistics').append(total);
+        }
+
+    })
 
 });
 
