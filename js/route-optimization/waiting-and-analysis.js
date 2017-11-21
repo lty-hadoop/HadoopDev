@@ -131,6 +131,61 @@ $(function ($) {
             ]
         });
     }
+
+
+    // 候车时长与满意度统计
+    $.ajax({
+        url: 'http://192.168.2.133:9001/WaitingDuratistics/list?offdate=2017-07-06',
+        type: 'GET',
+        dataType: 'json',
+        success: function (res) {
+            var res = res.resPonse.waitingDuratisticsList;
+            res.map(function(elem, index){
+                console.log(elem);
+                var state = '';
+                switch (elem.type) {
+                    case 1:
+                        state = "高峰";
+                        break;
+                    case 2:
+                        state = "平峰";
+                        break;
+                    case 3:
+                        state = "低峰";
+                        break;
+                }
+                var total = `<div class="mg_t20 bg_f3f6fb of_h">
+                                <div class="col-sm-1 col-md-1 col-lg-1 text_c f18 bd_r1 peak-value-high">${state}</div>
+                                <div class="col-sm-11 col-md-11 col-lg-11">
+                                    <div class="other-peak">
+                                        <div class="identical-peak">
+                                            <span class="less-than identical-time">小于三分钟</span>
+                                            <div class="f16">
+                                                <p class="mg_t20"><span class="total-green">满意，${elem.time_slot_one_satisfaction * 100}%</span><em class="mg_l15 total-red">不满意，${elem.time_slot_one_yawp * 100}%</em></p>
+                                                <p class="mg_t20"><b class="color_999">Total：</b><i class="total-blue">${elem.time_slot_one_total * 100}%</i></p>
+                                            </div>
+                                        </div>
+                                        <div class="identical-peak">
+                                            <span class="less-than identical-time">3-8分钟</span>
+                                            <div class="f16">
+                                                <p class="mg_t20"><span class="total-green">满意，${elem.time_slot_two_satisfaction * 100}%</span><em class="mg_l15 total-red">不满意，${elem.time_slot_one_yawp * 100}%</em></p>
+                                                <p class="mg_t20"><b class="color_999">Total：</b><i class="total-blue">${elem.time_slot_two_total * 100}%</i></p>
+                                            </div>
+                                        </div>
+                                        <div class="identical-peak">
+                                            <span class="less-than identical-time">大于8分钟</span>
+                                            <div class="f16">
+                                                <p class="mg_t20"><span class="total-green">满意，${elem.time_slot_three_satisfaction * 100}%</span><em class="mg_l15 total-red">不满意，${elem.time_slot_one_yawp * 100}%</em></p>
+                                                <p class="mg_t20"><b class="color_999">Total：</b><i class="total-blue">${elem.time_slot_three_total * 100}%</i></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>`;
+                $('.content-identical').append(total);
+            });
+        }
+    })
 });
 
 
