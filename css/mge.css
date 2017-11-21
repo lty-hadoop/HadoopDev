@@ -10,9 +10,11 @@
     padding: 10px 40px
 }
 .login_logo {
-    font-size: 30px;
-    text-align: center;
-    margin: 10px 0 30px 0;
+    width: 128px;
+    height: 128px;
+    background: url("../img/logo2.png") no-repeat;
+    margin: 0 auto;
+    display: block;
 }
 
 .flex {
