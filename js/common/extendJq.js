@@ -241,7 +241,7 @@
                     data : this.opts.sendData,
                     success:function(data){
                         //如果用户有传入自定义的渲染函数,就执行用户传入的，没有就自己渲染
-                        _this.renderFn!=null?_this.renderFn(data):randerData.call(_this,data);
+                        _this.renderFn!=null?_this.renderFn.call(_this,data):randerData.call(_this,data);
                     }
                 });
             }else{
