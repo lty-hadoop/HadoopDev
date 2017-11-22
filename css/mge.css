@@ -13,11 +13,16 @@
     padding: 10px 40px
 }
 .login_logo {
-    width: 128px;
-    height: 128px;
+    width: 100px;
+    height: 100px;
     background: url("../img/logo2.png") no-repeat;
     margin: 0 auto;
     display: block;
+}
+.error {
+    color: #ff0000;
+    font-size: 16px;
+    height: 22px;
 }
 
 .flex {
