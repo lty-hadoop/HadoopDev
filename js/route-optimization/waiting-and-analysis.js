@@ -137,6 +137,7 @@ $(function ($) {
 
 function waitFn(data){
     // 候车时长与满意度统计
+    //$.getPath
     $.ajax({
         url: 'http://192.168.2.133:9001/WaitingDuratistics/list',
         type: 'GET',
