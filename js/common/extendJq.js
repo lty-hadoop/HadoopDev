@@ -245,8 +245,13 @@
                     dataType : this.opts.dataType,
                     data : this.opts.sendData,
                     success:function(data){
-                        //如果用户有传入自定义的渲染函数,就执行用户传入的，没有就自己渲染
-                        _this.renderFn!=null?_this.renderFn.call(_this,data):randerData.call(_this,data);
+                        try {
+                            //如果用户有传入自定义的渲染函数,就执行用户传入的，没有就自己渲染
+                            _this.renderFn!=null?_this.renderFn.call(_this,data):randerData.call(_this,data);
+                        }catch (e){
+                            console.log(e)
+                        }
+
                     }
                 });
             }else{
@@ -384,7 +389,7 @@
             if(data.resPonse[_this.opts.simpleData.data].length==0){
                 _this.$content.html('');
                 _this.$content.append('<li style="color: red">没有相关数据哦</li>');
-                _this.$ele.val('');
+                if(_this.opts.atuoCbfn)_this.$ele.html('');
                 return;
             }
             this.outdiv.creatPage({
@@ -819,7 +824,7 @@
                 if(event.target.className!='pmgressbar'&&event.target.className!='bar')return;
                 _this.stopBar();
                 event.preventDefault();
-                console.log("offset:"+$(this).offset().left+"clientX:"+event.clientX);
+                // console.log("offset:"+$(this).offset().left+"clientX:"+event.clientX);
                 var clickOffset = event.clientX-$(this).offset().left;
                 if(clickOffset>=_this.Mwidth){
                     clickOffset=_this.Mwidth;
