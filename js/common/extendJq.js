@@ -13,7 +13,7 @@
              var myDate = new Date();
              if(yesterday==='-1'){
                  // return myDate.getFullYear()+'-'+(myDate.getMonth()+1)+'-'+(myDate.getDate()-1);
-                 return '2017-07-06';
+                 return '2017-11-20';
              }else{
                  return myDate.getFullYear()+'-'+(myDate.getMonth()+1)+'-'+myDate.getDate();
              }
@@ -284,8 +284,9 @@
                     _this.opts.dataTitle = data.dataTitle;
                     _this.opts.dataFrom = data.dataFrom;
                 }
-                _this.$title = _this.opts.sourceFlag?$('<div class="title"><div class="titleName">'+_this.opts.titleData+'</div><div class="dataSouce">'+this.opts.dataFrom+'</div>\n' +
-                    '        </div>'):$('<h2 class="bd_b1">'+_this.opts.dataTitle+'</h2>');
+                _this.formTime = $.getDateString('-1');
+                _this.$title = _this.opts.sourceFlag?$('<div class="title"><div class="titleName">'+_this.opts.dataTitle+'</div><div class="dataSouce">'+this.opts.dataFrom+'</div>\n' +
+                    '        </div>'):$('<h2 class="bd_b1">'+_this.opts.dataTitle+'<span class="f12 color_999">('+_this.formTime+')</span></h2>');
                 _this.$ul = $('<ul class="pd_25 pd_t5"></ul>');
                 $.each(data,function(index,value){
                     if(index<=_this.opts.allShowNum){
@@ -547,14 +548,15 @@
             }
 
             $.each(dataList,function(index,val){
+                debugger
                 var $tr = $('<tr></tr>');
                 $.each(_this.opts.theadArr,function(i,data){
-                    var dataName = data['field']
+                    var dataName = data['field'];
                     var isText = String(val[dataName]).indexOf(".");
                     if(dataName==='timeArr'&&sort==='') val['timeArr'] =  _this.opts.timeArr[index];
-                    if(dataName==='waiting_satisfaction'&&isText!='-1')val[dataName]=(val[dataName]).toFixed(2)+'%';
-                    if(dataName==='full_loadratio'&&isText!='-1')val[dataName]=(val[dataName]).toFixed(2)+'%';
-                    if(dataName==='ride_satisfaction'&&isText!='-1')val[dataName]=(val[dataName]).toFixed(2)+'%';
+                    if(dataName==='waiting_satisfaction'&&isText!='-1'&&sort==='')val[dataName]=(val[dataName])+'%';
+                    if(dataName==='full_loadration'&&isText!='-1'&&sort==='')val[dataName]=((val[dataName])*100).toFixed(2)+'%';
+                    if(dataName==='ride_satisfaction'&&isText!='-1'&&sort==='')val[dataName]=(val[dataName])+'%';
                     var $td = $('<td class="'+dataName+'">'+val[dataName]+'</td>');
                     $tr.append($td);
                 });
@@ -665,7 +667,6 @@
                     data: 'LineList'
                 },
                 cbFn: function (data) {
-                    console.log(data);
                     getData.line_id = data.id;
                     if (isFrist) getLineData();
                     if (setDataFlag) getLineData();
@@ -725,6 +726,7 @@
             } else {
                 getData.offdatess = timerData.join(",");
             }
+            obj.fn2(getData);
             //请求ajax
             $.ajax({
                 url: $.getPath + '/Satisfaction/list',

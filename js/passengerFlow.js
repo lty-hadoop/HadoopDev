@@ -1,4 +1,7 @@
 $(function(){
+
+    //设置title
+    $('.h2Title>span').html('('+$.getDateString('-1')+')')
     var listData = {
         url : $.getPath+'/DenseRegion/list',
         dataTitle : '出行密集区域排行',

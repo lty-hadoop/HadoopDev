@@ -48,10 +48,13 @@ $(function ($) {
             },
             {
                 type: 'value',
-                max: 120,
                 nameLocation: 'start',
                 axisLabel: {
                     formatter: '{value}/min'
+                },
+                //去掉y轴坐标线
+                axisLine:{
+                    show:false
                 }
             }
         ],
@@ -102,7 +105,7 @@ $(function ($) {
         {name:'平均发车时间', field: 'waiting_duration'},
         {name:'候车满意度', field: 'waiting_satisfaction'}
     ];
-    $waitingandanalysis.setSelecteTable({'fn':setEchartsData,'theadArr':theadArr});
+    $waitingandanalysis.setSelecteTable({'fn':setEchartsData,'theadArr':theadArr,'fn2':waitFn});
     //设置echarts数据
     function setEchartsData(data){
         var maxWaiting = 0;
@@ -132,12 +135,13 @@ $(function ($) {
         });
     }
 
-
+function waitFn(data){
     // 候车时长与满意度统计
     $.ajax({
-        url: 'http://192.168.2.133:9001/WaitingDuratistics/list?offdate=2017-07-06',
+        url: 'http://192.168.2.133:9001/WaitingDuratistics/list',
         type: 'GET',
         dataType: 'json',
+        data:data,
         success: function (res) {
             var res = res.resPonse.waitingDuratisticsList;
             res.map(function(elem, index){
@@ -185,14 +189,17 @@ $(function ($) {
             });
         }
     })
+}
+
 
 
 
     //候车满意度top5
     var dervList = {
         url : $.getPath+'/WaitingSatisfaction/list',
-        dataTitle : '候车时长与满意度分析',
-        sourceFlag:false,
+        dataTitle : '候车满意度排行TOP5',
+        sourceFlag:true,
+        dataFrom : '来自坐公交APP',
         sendData : {offdate:$.getDateString('-1')},
         renderFn : function(data){
             var _this = this;
@@ -202,7 +209,7 @@ $(function ($) {
                 _this.opts.dataTitle = data.dataTitle;
                 _this.opts.dataFrom = data.dataFrom;
             }
-            _this.$title = _this.opts.sourceFlag?$('<div class="title"><div class="titleName">'+_this.opts.titleData+'</div><div class="dataSouce">'+this.opts.dataFrom+'</div>\n' +
+            _this.$title = _this.opts.sourceFlag?$('<div class="title"><div class="titleName">'+_this.opts.dataTitle+'</div><div class="dataSouce">'+this.opts.dataFrom+'</div>\n' +
                 '        </div>'):$('<h2 class="bd_b1">'+_this.opts.dataTitle+'</h2>');
             _this.$ul = $('<ul class="pd_25 pd_t5"></ul>');
             $.each(data,function(index,value){

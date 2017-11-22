@@ -23,11 +23,7 @@ $(function() {
                     label: {
                         backgroundColor: '#505765'
                     }
-                },
-                // formatter: function (obj) {
-                //     var value = obj.value;
-                //     return value
-                // }
+                }
             },
             legend: {
                 data: [
@@ -43,25 +39,25 @@ $(function() {
                 {
                     type: 'category',
                     boundaryGap: false,
-
-                    // axisLine: {onZero: false},
                     data: ["06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00"]
                 }
             ],
             yAxis: [
                 {
                     type: 'value',
-                    max: 100,
                     axisLabel: {
-                        formatter: '{value}/kg'
+                        formatter: '{value}%'
                     }
                 },
                 {
                     type: 'value',
-                    max: 25,
                     nameLocation: 'start',
                     axisLabel: {
                         formatter: '{value}/min'
+                    },
+                    //去掉y轴坐标线
+                    axisLine:{
+                        show:false
                     }
                 }
             ],
@@ -84,13 +80,11 @@ $(function() {
                     },
                     data:[]
                 },
+
                 {
-                    polarIndex: 0,
-                    name: '满载率',
-                    type: 'line',
-                    yAxisIndex: 1,
-                    step: 'end',
-                    // areaStyle: {normal: {}},
+                    name:'满载率',
+                    type:'line',
+                    animation: true,
                     itemStyle: {
                         normal: {
                             color: '#ff0000',
@@ -102,9 +96,11 @@ $(function() {
                     data: []
                 },
                 {
-                    name:'发车间隔',
-                    type:'line',
-                    animation: true,
+                    polarIndex: 0,
+                    name: '发车间隔',
+                    type: 'line',
+                    yAxisIndex: 1,
+                    step: 'end',
                     itemStyle: {
                         normal: {
                             color: '#999',
@@ -124,10 +120,10 @@ $(function() {
         { name:'运力',field: 'shipping_ability'},
         { name:'下车人数', field: 'down_num'},
         {name:'平均发车间隔', field: 'waiting_duration'},
-        {name:'舒适度', field: 'full_loadratio'},
-        {name:'满载率', field: 'ride_satisfaction'}
+        {name:'舒适度', field: 'ride_satisfaction'},
+        {name:'满载率', field: 'full_loadration'}
     ];
-    $fullloadrate.setSelecteTable({'fn':setEchartsData,'theadArr':theadArr});
+    $fullloadrate.setSelecteTable({'fn':setEchartsData,'theadArr':theadArr,'fn2':fullfn});
     //设置echarts数据
     function setEchartsData(data){
         var maxWaiting = 0;
@@ -135,11 +131,13 @@ $(function() {
         resData.degree　= [];
         resData.waiting = [];
         resData.comfort = [];
+        var fullMax = 0;
         var res = data['resPonse']['satisfactionList'];
         $.each(res,function(index,value){
-            resData.degree.push((value['full_loadratio']).toFixed(2));
+            var full_loadration = ((value['full_loadration'])*100).toFixed(2);
+            resData.degree.push(full_loadration);
             resData.waiting.push(value['waiting_duration']);
-            resData.comfort.push((value['ride_satisfaction']).toFixed(2));
+            resData.comfort.push(value['ride_satisfaction']);
             if(maxWaiting<value['waiting_duration']){
                 maxWaiting = value['waiting_duration'];
             }
@@ -148,7 +146,8 @@ $(function() {
         //满载率
         myChart.setOption({
             yAxis:[{
-                max:100
+                max:250
+
             },{
                 max:maxWaiting
             }],
@@ -158,17 +157,18 @@ $(function() {
                 data: resData.comfort
             },{
                 data: resData.waiting
+
             }
             ]
         });
     }
     contrast('说明：满载率与舒适满意度呈现反比趋势');
-
-
+function fullfn(option){
     $.ajax({
-        url: 'http://192.168.2.133:9001/RideSatistics/list?offdate=2017-07-06',
+        url: 'http://192.168.2.133:9001/RideSatistics/list',
         type: 'GET',
         dataType: 'json',
+        data: option,
         success: function (res) {
             var data = res.resPonse.rideSatisticsList;
             //console.log(data)
@@ -216,6 +216,8 @@ $(function() {
         }
 
     })
+}
+
     function contrast(title) {
         var contrast = echarts.init(document.getElementById('contrast-chart'));
         option = {
@@ -299,7 +301,7 @@ $(function() {
         url : $.getPath+'/RideLloadra/list',
         dataTitle : '满载率排行TOP5',
         dataFrom : '来自坐公交APP',
-        sourceFlag:false,
+        sourceFlag:true,
         sendData : {offdate:$.getDateString('-1'),type:1},
         renderFn : function(data){
             var _this = this;
@@ -309,7 +311,7 @@ $(function() {
                 _this.opts.dataTitle = data.dataTitle;
                 _this.opts.dataFrom = data.dataFrom;
             }
-            _this.$title = _this.opts.sourceFlag?$('<div class="title"><div class="titleName">'+_this.opts.titleData+'</div><div class="dataSouce">'+this.opts.dataFrom+'</div>\n' +
+            _this.$title = _this.opts.sourceFlag?$('<div class="title"><div class="titleName">'+_this.opts.dataTitle+'</div><div class="dataSouce">'+this.opts.dataFrom+'</div>\n' +
                 '        </div>'):$('<h2 class="bd_b1">'+_this.opts.dataTitle+'</h2>');
             _this.$ul = $('<ul class="pd_25 pd_t5"></ul>');
             $.each(data,function(index,value){
@@ -325,7 +327,7 @@ $(function() {
         url : $.getPath+'/RideLloadra/list',
         dataTitle : '舒适度排行TOP5',
         dataFrom : '来自坐公交APP',
-        sourceFlag:false,
+        sourceFlag:true,
         sendData : {offdate:$.getDateString('-1'),type:2},
         renderFn : function(data){
             var _this = this;
@@ -335,7 +337,7 @@ $(function() {
                 _this.opts.dataTitle = data.dataTitle;
                 _this.opts.dataFrom = data.dataFrom;
             }
-            _this.$title = _this.opts.sourceFlag?$('<div class="title"><div class="titleName">'+_this.opts.titleData+'</div><div class="dataSouce">'+this.opts.dataFrom+'</div>\n' +
+            _this.$title = _this.opts.sourceFlag?$('<div class="title"><div class="titleName">'+_this.opts.dataTitle+'</div><div class="dataSouce">'+this.opts.dataFrom+'</div>\n' +
                 '        </div>'):$('<h2 class="bd_b1">'+_this.opts.dataTitle+'</h2>');
             _this.$ul = $('<ul class="pd_25 pd_t5"></ul>');
             $.each(data,function(index,value){
