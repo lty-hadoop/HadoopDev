@@ -548,7 +548,6 @@
             }
 
             $.each(dataList,function(index,val){
-                debugger
                 var $tr = $('<tr></tr>');
                 $.each(_this.opts.theadArr,function(i,data){
                     var dataName = data['field'];

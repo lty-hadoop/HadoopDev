@@ -165,13 +165,14 @@ $(function() {
     contrast('说明：满载率与舒适满意度呈现反比趋势');
 function fullfn(option){
     $.ajax({
-        url: 'http://192.168.2.133:9001/RideSatistics/list',
+        url: `${$.getPath}/RideSatistics/list`,
         type: 'GET',
         dataType: 'json',
         data: option,
         success: function (res) {
             var data = res.resPonse.rideSatisticsList;
             //console.log(data)
+            $('.ride-satistics').html('');
             var total = `<table class="table table-border">
                             <thead>
                                 <tr>
@@ -184,9 +185,9 @@ function fullfn(option){
                                 <td>小于40%</td>
                                 <td>
                                 <div>
-                                <p class="mg_t5 total-green">满意，${(data[0].satisfaction * 100).toFixed(2)}%</p>
-                                <p class="mg_t5 total-red">不满意，${(data[0].yawp * 100).toFixed(2)}%</p>
-                                <p class="mg_t5"><span>Total：</span><i class="total-blue">${(data[0].total * 100).toFixed(2)}%</i></p>
+                                <p class="mg_t5 total-green">满意，${(data[0].satisfaction).toFixed(2)}%</p>
+                                <p class="mg_t5 total-red">不满意，${(data[0].unsatisfaction).toFixed(2)}%</p>
+                                <p class="mg_t5"><span>Total：</span><i class="total-blue">${(data[0].total).toFixed(2)}%</i></p>
                                 </div>
                                 </td>
                                 </tr>
@@ -194,9 +195,9 @@ function fullfn(option){
                                 <td>40%-80%</td>
                                 <td>
                                 <div>
-                                <p class="mg_t5 total-green">满意，${(data[1].satisfaction * 100).toFixed(2)}%</p>
-                                <p class="mg_t5 total-red">不满意，${(data[1].yawp * 100).toFixed(2)}%</p>
-                                <p class="mg_t5"><span>Total：</span><i class="total-blue">${(data[1].total * 100).toFixed(2)}%</i></p>
+                                <p class="mg_t5 total-green">满意，${(data[1].satisfaction).toFixed(2)}%</p>
+                                <p class="mg_t5 total-red">不满意，${(data[1].unsatisfaction).toFixed(2)}%</p>
+                                <p class="mg_t5"><span>Total：</span><i class="total-blue">${(data[1].total).toFixed(2)}%</i></p>
                                 </div>
                                 </td>
                                 </tr>
@@ -204,9 +205,9 @@ function fullfn(option){
                                 <td>大于80%</td>
                                 <td>
                                 <div>
-                                <p class="mg_t5 total-green">满意，${(data[2].satisfaction * 100).toFixed(2)}%</p>
-                                <p class="mg_t5 total-red">不满意，${(data[2].yawp * 100).toFixed(2)}%</p>
-                                <p class="mg_t5"><span>Total：</span><i class="total-blue">${(data[2].total * 100).toFixed(2)}%</i></p>
+                                <p class="mg_t5 total-green">满意，${(data[2].satisfaction).toFixed(2)}%</p>
+                                <p class="mg_t5 total-red">不满意，${(data[2].unsatisfaction).toFixed(2)}%</p>
+                                <p class="mg_t5"><span>Total：</span><i class="total-blue">${(data[2].total).toFixed(2)}%</i></p>
                                 </div>
                                 </td>
                                 </tr>

@@ -139,7 +139,7 @@ function waitFn(data){
     // 候车时长与满意度统计
     //$.getPath
     $.ajax({
-        url: 'http://192.168.2.133:9001/WaitingDuratistics/list',
+        url: $.getPath + '/WaitingDuratistics/list',
         type: 'GET',
         dataType: 'json',
         data:data,
@@ -165,22 +165,22 @@ function waitFn(data){
                                         <div class="identical-peak">
                                             <span class="less-than identical-time">小于三分钟</span>
                                             <div class="f16">
-                                                <p class="mg_t20"><span class="total-green">满意，${(elem.time_slot_one_satisfaction * 100).toFixed(2)}%</span><em class="mg_l15 total-red">不满意，${(elem.time_slot_one_yawp * 100).toFixed(2)}%</em></p>
-                                                <p class="mg_t20"><b class="color_999">Total：</b><i class="total-blue">${(elem.time_slot_one_total * 100).toFixed(2)}%</i></p>
+                                                <p class="mg_t20"><span class="total-green">满意，${(elem.time_slot_one_satisfaction).toFixed(2)}%</span><em class="mg_l15 total-red">不满意，${(elem.time_slot_one_yawp).toFixed(2)}%</em></p>
+                                                <p class="mg_t20"><b class="color_999">Total：</b><i class="total-blue">${(elem.time_slot_one_total).toFixed(2)}%</i></p>
                                             </div>
                                         </div>
                                         <div class="identical-peak">
                                             <span class="less-than identical-time">3-8分钟</span>
                                             <div class="f16">
-                                                <p class="mg_t20"><span class="total-green">满意，${(elem.time_slot_two_satisfaction * 100).toFixed(2)}%</span><em class="mg_l15 total-red">不满意，${(elem.time_slot_two_yawp * 100).toFixed(2)}%</em></p>
-                                                <p class="mg_t20"><b class="color_999">Total：</b><i class="total-blue">${(elem.time_slot_two_total * 100).toFixed(2)}%</i></p>
+                                                <p class="mg_t20"><span class="total-green">满意，${(elem.time_slot_two_satisfaction).toFixed(2)}%</span><em class="mg_l15 total-red">不满意，${(elem.time_slot_two_yawp).toFixed(2)}%</em></p>
+                                                <p class="mg_t20"><b class="color_999">Total：</b><i class="total-blue">${(elem.time_slot_two_total).toFixed(2)}%</i></p>
                                             </div>
                                         </div>
                                         <div class="identical-peak">
                                             <span class="less-than identical-time">大于8分钟</span>
                                             <div class="f16">
-                                                <p class="mg_t20"><span class="total-green">满意，${(elem.time_slot_three_satisfaction * 100).toFixed(2)}%</span><em class="mg_l15 total-red">不满意，${(elem.time_slot_three_yawp * 100).toFixed(2)}%</em></p>
-                                                <p class="mg_t20"><b class="color_999">Total：</b><i class="total-blue">${(elem.time_slot_three_total * 100).toFixed(2)}%</i></p>
+                                                <p class="mg_t20"><span class="total-green">满意，${(elem.time_slot_three_satisfaction).toFixed(2)}%</span><em class="mg_l15 total-red">不满意，${(elem.time_slot_three_yawp).toFixed(2)}%</em></p>
+                                                <p class="mg_t20"><b class="color_999">Total：</b><i class="total-blue">${(elem.time_slot_three_total).toFixed(2)}%</i></p>
                                             </div>
                                         </div>
                                     </div>
