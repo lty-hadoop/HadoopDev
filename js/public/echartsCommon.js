@@ -91,7 +91,7 @@ GetData.prototype.init = function () {
                 splitLine:{show: true},
                 type : 'category',
                 boundaryGap : false,
-                data : ["06:00", "08:00", "10:00","12:00","14:00","16:00","18:00","20:00","22:00"]
+                data : ["06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00"]
             }
         ],
         yAxis: this.YData,
@@ -99,3 +99,6 @@ GetData.prototype.init = function () {
     };
     this.myChart.setOption(option);
 };
+GetData.prototype.setOption = function(data){
+    this.myChart.setOption(data);
+}

@@ -1,4 +1,8 @@
 $(function(){
+    var getDataInfo = {};
+    var lineFlag = false;
+    var direction =null;
+    var $radioDiv =  $('.radioDiv');
     $(".getSelect").selectpick({
         url:$.getPath+'/Company/list',
         showNum : 10,
@@ -31,72 +35,39 @@ $(function(){
                 data:'LineList'
             },
             cbFn : function(data){
-                console.log(data)
+                lineFlag = true;
+                getDataInfo.line_id = data.id;
+                direction =$radioDiv.find('input:radio[name="route"]:checked').attr('attrType');
+                getEchartsData();
+
+
+            }
+        });
+    }
+    $radioDiv.on('click','input',function(){
+        direction = $(this).attr('attrType');
+        if(lineFlag){
+            getEchartsData();
+        }
+    });
+    function getEchartsData(){
+        getDataInfo.direction = direction;
+        getDataInfo.offdate = $.getDateString('-1');
+        $.ajax({
+            url:$.getPath+'/PassflowCapacity/list',
+            dataType:'json',
+            data:getDataInfo,
+            type : 'GET',
+            success: function(data){
+                setEchartsData (data);
             }
         });
     }
 
-
-
-    var listData = {
-        url : $.getPath+'/PrepoptimLine/list',
-        dataTitle : '待优化线路列表',
-        sourceFlag:false,
-        sendData : {offdate:$.getDateString('-1')},
-        renderFn : function(data){
-            var _this = this;
-            var data = data['resPonse']['prepoptimLineList'];
-            this.$content.html("");
-            if(data.dataTitle&&data.dataFrom){
-                _this.opts.dataTitle = data.dataTitle;
-                _this.opts.dataFrom = data.dataFrom;
-            }
-            _this.$title = _this.opts.sourceFlag?$('<div class="title"><div class="titleName">'+_this.opts.titleData+'</div><div class="dataSouce">'+this.opts.dataFrom+'</div>\n' +
-                '        </div>'):$('<h2 class="bd_b1">'+_this.opts.dataTitle+'</h2>');
-            _this.$ul = $('<ul class="pd_25 pd_t5"></ul>');
-            $.each(data,function(index,value){
-                if(index<=_this.opts.allShowNum){
-                    _this.$li = $('<li class="bd_b1 h_40 dis_f jst_sb item_c"><div class="dis_f item_c"><p style="background:'+_this.opts.topColor[index]+'"  class="w_25 h_25 text_c line_h25 mg_r20">'+(index*1+1)+'</p><span>'+value['line_name']+'</span></div><span>'+value['company_name']+'</span></li>')
-                    _this.$ul.append( _this.$li);
-                }
-            });
-            _this.$content.append(this.$title).append(this.$ul);
-        }
-    };
-    var dervList = {
-        url : $.getPath+'/DriverNum/list',
-        dataTitle : '驾驶员载客量排行',
-        sourceFlag:false,
-        sendData : {offdate:$.getDateString('-1')},
-        renderFn : function(data){
-            var _this = this;
-            var data = data['resPonse']['driverNumList'];
-            this.$content.html("");
-            if(data.dataTitle&&data.dataFrom){
-                _this.opts.dataTitle = data.dataTitle;
-                _this.opts.dataFrom = data.dataFrom;
-            }
-            _this.$title = _this.opts.sourceFlag?$('<div class="title"><div class="titleName">'+_this.opts.titleData+'</div><div class="dataSouce">'+this.opts.dataFrom+'</div>\n' +
-                '        </div>'):$('<h2 class="bd_b1">'+_this.opts.dataTitle+'</h2>');
-            _this.$ul = $('<ul class="pd_25 pd_t5"></ul>');
-            $.each(data,function(index,value){
-                if(index<=_this.opts.allShowNum){
-                    _this.$li = $('<li class="bd_b1 h_40 dis_f jst_sb item_c"><div class="dis_f item_c"><p style="background:'+_this.opts.topColor[index]+'"  class="w_25 h_25 text_c line_h25 mg_r20">'+(index*1+1)+'</p><span>'+value['driver_name']+'</span></div><span>'+value['busload']+'</span></li>');
-                    _this.$ul.append( _this.$li);
-                }
-            });
-            _this.$content.append(this.$title).append(this.$ul);
-        }
-    };
-    $(".optimize").creatList(listData);
-
-    $(".driverTop").creatList(dervList);
-
-
     var option = {
         id: 'provisioning',
         url: '',
-        title: '客流与运力对比图',
+        title: '客流与运力对比图('+$.getDateString('-1')+')',
         titleColor: '#999',
         legendData: [
             {name: '客流', icon: 'rect'},
@@ -158,7 +129,7 @@ $(function(){
                         }
                     }
                 },
-                data: [3,4,4.5, 3.6,3.8,3.2, 2.8, 3, 3.4]
+                data: []
             },
             {
                 //polarIndex: 0,
@@ -175,9 +146,103 @@ $(function(){
                         }
                     }
                 },
-                data: [3.3, 3.5, 4.1, 4.3, 3.5, 3, 2.5, 3.3, 3.6]
+                data: []
             }
-        ],
+        ]
     };
     var od = new GetData(option);
+function setEchartsData (postData){
+
+    var getData  = postData['resPonse']['passflowCapacityList'];
+    var up_num = [];
+    var capacity = [];
+    var upMax = 0;
+    var capaMax = 0;
+    $.each(getData,function(index,val){
+        up_num.push(val.up_num);
+        capacity.push(val.capacity);
+        if(upMax<Number(val.up_num)){
+            upMax = Number(val.up_num).toFixed(0);
+        }
+        if(capaMax<Number(val.capacity)){
+            capaMax = Number(val.capacity).toFixed(0);
+        }
+    })
+    var option = {
+        yAxis :[
+            {
+                max : capaMax
+            },{
+                max : upMax
+            }
+        ],
+        series : [
+            {
+              data: up_num
+            },{
+                data:capacity
+            }
+        ]
+    };
+    od.setOption(option);
+}
+
+
+
+    var listData = {
+        url : $.getPath+'/PrepoptimLine/list',
+        dataTitle : '待优化线路列表',
+        sourceFlag:false,
+        sendData : {offdate:$.getDateString('-1')},
+        renderFn : function(data){
+            var _this = this;
+            var data = data['resPonse']['prepoptimLineList'];
+            this.$content.html("");
+            if(data.dataTitle&&data.dataFrom){
+                _this.opts.dataTitle = data.dataTitle;
+                _this.opts.dataFrom = data.dataFrom;
+            }
+            _this.$title = _this.opts.sourceFlag?$('<div class="title"><div class="titleName">'+_this.opts.titleData+'</div><div class="dataSouce">'+this.opts.dataFrom+'</div>\n' +
+                '        </div>'):$('<h2 class="bd_b1">'+_this.opts.dataTitle+'<span class="f12 color_999">('+$.getDateString('-1')+')</span></h2>');
+            _this.$ul = $('<ul class="pd_25 pd_t5"></ul>');
+            $.each(data,function(index,value){
+                if(index<=_this.opts.allShowNum){
+                    _this.$li = $('<li class="bd_b1 h_40 dis_f jst_sb item_c"><div class="dis_f item_c"><p style="background:'+_this.opts.topColor[index]+'"  class="w_25 h_25 text_c line_h25 mg_r20">'+(index*1+1)+'</p><span>'+value['line_name']+'</span></div><span>'+value['company_name']+'</span></li>')
+                    _this.$ul.append( _this.$li);
+                }
+            });
+            _this.$content.append(this.$title).append(this.$ul);
+        }
+    };
+    var dervList = {
+        url : $.getPath+'/DriverNum/list',
+        dataTitle : '驾驶员载客量排行',
+        sourceFlag:false,
+        sendData : {offdate:$.getDateString('-1')},
+        renderFn : function(data){
+            var _this = this;
+            var data = data['resPonse']['driverNumList'];
+            this.$content.html("");
+            if(data.dataTitle&&data.dataFrom){
+                _this.opts.dataTitle = data.dataTitle;
+                _this.opts.dataFrom = data.dataFrom;
+            }
+            _this.$title = _this.opts.sourceFlag?$('<div class="title"><div class="titleName">'+_this.opts.titleData+'</div><div class="dataSouce">'+this.opts.dataFrom+'</div>\n' +
+                '        </div>'):$('<h2 class="bd_b1">'+_this.opts.dataTitle+'<span class="f12 color_999">('+$.getDateString('-1')+')</span></h2>');
+            _this.$ul = $('<ul class="pd_25 pd_t5"></ul>');
+            $.each(data,function(index,value){
+                if(index<=_this.opts.allShowNum){
+                    _this.$li = $('<li class="bd_b1 h_40 dis_f jst_sb item_c"><div class="dis_f item_c"><p style="background:'+_this.opts.topColor[index]+'"  class="w_25 h_25 text_c line_h25 mg_r20">'+(index*1+1)+'</p><span>'+value['driver_name']+'</span></div><span>'+value['busload']+'</span></li>');
+                    _this.$ul.append( _this.$li);
+                }
+            });
+            _this.$content.append(this.$title).append(this.$ul);
+        }
+    };
+    $(".optimize").creatList(listData);
+
+    $(".driverTop").creatList(dervList);
+
+
+
 });

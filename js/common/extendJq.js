@@ -548,7 +548,6 @@
             }
 
             $.each(dataList,function(index,val){
-                debugger
                 var $tr = $('<tr></tr>');
                 $.each(_this.opts.theadArr,function(i,data){
                     var dataName = data['field'];
@@ -695,7 +694,7 @@
         };
         var end = {
             format: 'YYYY-MM-DD',
-            // minDate: $.getDateString('-1'),//设定最小日期为当前日期
+            minDate: $.getDateString('-1'),//设定最小日期为当前日期前一天
             onClose: false,
             okfun: function (obj) {
                 setDataFlag = true;
@@ -717,7 +716,6 @@
 
         //根据不同参数请求数据
         function getLineData() {
-            console.log(timerData);
             //初次加载默认展示前一天数据,每次赋值时置空；
             getData.offdatess = '';
             if (isFrist) {
@@ -874,10 +872,7 @@
                 /* Act on the event */
                 if(_this.isMove){
                     _this.stopBar();
-                    // _this.endX = event.clientX;
-                    _this.changeWidth = event.clientX-$(".pmgressbar").offset().left
-                    // _this.moveX = _this.endX-_this.startX;
-                    // _this.startX =  _this.endX;
+                    _this.changeWidth = event.clientX-$(".pmgressbar").offset().left;
                     if(_this.changeWidth>_this.Mwidth||_this.changeWidth<_this.minWidth){
                     }else{
                         _this.changeWidth = _this.changeWidth+_this.moveX;
