@@ -72,9 +72,9 @@ $(function() {
                     },
                     itemStyle: {
                         normal: {
-                            color: '#3c9',
+                            color: '#33cc99',
                             lineStyle: {
-                                color: '#3c9'
+                                color: '#33cc99'
                             }
                         }
                     },
@@ -87,9 +87,9 @@ $(function() {
                     animation: true,
                     itemStyle: {
                         normal: {
-                            color: '#ff0000',
+                            color: '#33ffff',
                             lineStyle: {
-                                color: '#ff0000'
+                                color: '#33ffff'
                             }
                         }
                     },
