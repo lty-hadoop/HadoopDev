@@ -170,10 +170,11 @@ function fullfn(option){
         dataType: 'json',
         data: option,
         success: function (res) {
-            var data = res.resPonse.rideSatisticsList;
-            //console.log(data)
-            $('.ride-satistics').html('');
-            var total = `<table class="table table-border">
+            try {
+                var data = res.resPonse.rideSatisticsList;
+                //console.log(data)
+                $('.ride-satistics').html('');
+                var total = `<table class="table table-border">
                             <thead>
                                 <tr>
                                 <td class="text_c f16">满载率</td>
@@ -213,7 +214,11 @@ function fullfn(option){
                                 </tr>
                             </tbody>
                         </table>`;
-            $('.ride-satistics').append(total);
+                $('.ride-satistics').append(total);
+            }catch (e){
+                console.log(e)
+            }
+
         }
 
     })
