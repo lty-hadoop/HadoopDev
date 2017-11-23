@@ -1,7 +1,9 @@
 /*
 * 候车时长与满意度分析
 * */
-$(function ($) {
+$(function ($) {clearInterval($.timerEcharts);
+    clearInterval($.timerEcharts);
+    $.timerEcharts = null;
     //先默认初始化echarts表格，待拿到数据直接赋值
     var myChart = echarts.init(document.getElementById('carzxt'));
     myChart.setOption({

@@ -1,7 +1,7 @@
 ;
-(function ($, window, document) {
-    var timerEcharts = null;
-    clearInterval(timerEcharts);
+(function ($, window, document) {clearInterval($.timerEcharts);
+    //定时器
+    $.timerEcharts = null;
     //请求接口的域名端口
     $.getPath = 'http://192.168.2.133:9001';
     //将方法扩展到$上
@@ -32,9 +32,6 @@
                 second = '0' + second;
             }
             return hour + ":" + minute + ":" + second;
-        },
-        qxEcharts: function (cbFn) {
-            var aa = new Pmgressbar(cbFn);
         }
     });
 
@@ -641,7 +638,7 @@
             //排序重新渲染
             _this.randerData(_this.allSendData, 'sort');
         }
-    }
+    };
 
     $.fn.setSelecteTable = function (obj) {
         var _this = $(this);
@@ -650,6 +647,12 @@
         var isFrist = true;
         var setDataFlag = false;
         var timerData = [];
+        /***临时使用****/
+        //删除 todo
+        var a = {isPage:false,line_id:91,offdatess:"2017-11-20,2017-11-20"};
+        obj.fn2(a);
+        getEcart(a);
+        /***临时使用****/
         //echarts数据
         //点击查看评价详情
         _this.seaDtail();
@@ -690,7 +693,7 @@
                 },
                 cbFn: function (data) {
                     getData.line_id = data.id;
-                    if (isFrist) getLineData();
+                    // if (isFrist) getLineData();
                     if (setDataFlag) getLineData();
                 }
             });
@@ -700,7 +703,7 @@
         var start = {
             //默认日期
             isinitVal: true,
-            initDate: [{DD: '-1'}, true],
+            initDate: [{DD:0}, true],
             //使用的日期格式
             format: 'YYYY-MM-DD',
             //选中日期执行回调，关闭窗口
@@ -749,16 +752,9 @@
                 getData.offdatess = timerData.join(",");
             }
             obj.fn2(getData);
+            debugger
             //请求ajax
-            $.ajax({
-                url: $.getPath + '/Satisfaction/list',
-                type: 'get',
-                dataType: 'json',
-                data: getData,
-                success: function (data) {
-                    $obj.fn(data);
-                }
-            });
+            getEcart(getData);
             //动态去设置table
             var $table = $(".table-identical");
             $table.html('');
@@ -776,187 +772,19 @@
             //结束时间
             $(".getEndTime").jeDate(end);
         }
-
-    }
-
-    //迁徙图
-    function Pmgressbar(cbFn) {
-        var _this = this;
-        this.cbFn = cbFn;
-        //间隔多少时间触发一次请求，或者说刷新一次显示；单位为分钟默认15分钟
-        this.space = 15;
-        //当前播放进度的宽度；即播放进度；
-        this.changeWidth = 0;
-        //进度条截止点；
-        this.Mwidth = $('.pmgressbar').width();
-        //进度条开始点；
-        this.minWidth = 0;
-        // 根据指定的间隔时间来计算步长
-        this.steep = Math.floor(_this.Mwidth / 24 / 60 * _this.space);
-        //拖动进度条时鼠标点击时的x轴距离
-        this.startX = 0;
-        //拖动进度条时鼠标拖动结束点
-        this.endX = 0;
-        //拖动进度条时鼠标拖动距离
-        this.moveX = 0;
-        //进度条是否能被拖动
-        this.isMove = false;
-        //延时
-        this.timer = {};
-        //进度条是否处于能播放的状态；
-        this.isAction = true;
-        //是否是点击事件
-        this.clickEv = false;
-        this.cbFn(1);
-        this.startBar();
-        this.movebar();
-    }
-
-    Pmgressbar.prototype = {
-        changeBar: function () {
-            var _this = this;
-            if (!this.isMove) {
-                this.changeWidth += 1;
-            }
-            if (_this.changeWidth > this.Mwidth || _this.changeWidth < this.minWidth) {
-                _this.stopBar();
-            } else {
-                _this.getData();
-                $(".end").css({"top": Math.ceil(this.changeWidth / this.Mwidth * 25), "left": this.changeWidth + 5});
-                $(".bar").css({'width': this.changeWidth}, 600);
-            }
-        },
-        movebar: function () {
-            var _this = this;
-            var timers = 0;
-            var run = null;
-            $(document).on("mouseenter", '.pmgressbar', function () {
-                _this.stopBar();
-            }).on("mouseleave", ".pmgressbar", function () {
-                if (!_this.isAction) {
-                    _this.isAction = true;
-                    _this.startBar();
+        //获取Echarts数据
+        function getEcart(getData){
+            $.ajax({
+                url: $.getPath + '/Satisfaction/list',
+                type: 'get',
+                dataType: 'json',
+                data: getData,
+                success: function (data) {
+                    $obj.fn(data);
                 }
             });
-            $(document).on('mousedown', '.pmgressbar', function () {
-                _this.clickEv = false;
-            })
-            $(document).on('mouseup', '.pmgressbar', function (event) {
-                if (_this.clickEv) return;
-                if (event.target.className != 'pmgressbar' && event.target.className != 'bar') return;
-                _this.stopBar();
-                event.preventDefault();
-                // console.log("offset:"+$(this).offset().left+"clientX:"+event.clientX);
-                var clickOffset = event.clientX - $(this).offset().left;
-                if (clickOffset >= _this.Mwidth) {
-                    clickOffset = _this.Mwidth;
-                } else if (clickOffset <= _this.minWidth) {
-                    clickOffset = _this.minWidth;
-                }
-                clickOffset >= _this.changeWidth ? add.call(_this) : minus.call(_this);
-                _this.clickEv = false;
-
-                //点击位置是需要增加的
-                function add() {
-                    for (this.changeWidth; this.changeWidth <= clickOffset; this.changeWidth++) {
-                        this.getData();
-                    }
-                    getMoveTo.call(this);
-                }
-
-                //点击位置是需要减小的
-                function minus() {
-                    for (this.changeWidth; this.changeWidth >= clickOffset; this.changeWidth--) {
-                        this.getData();
-                    }
-                    getMoveTo.call(this);
-                }
-
-                function getMoveTo() {
-                    $(".end").animate({
-                        "top": Math.ceil(this.changeWidth / this.Mwidth * 25),
-                        "left": this.changeWidth + 5
-                    }, 600);
-                    $(".bar").animate({'width': this.changeWidth}, 600);
-                }
-
-                /* Act on the event */
-            });
-
-//拖动播放条事件
-            $(".pmgressbar").on("mousedown", ".end", function (event) {
-
-                event.preventDefault();
-                _this.isMove = true;
-                _this.clickEv = true;
-                _this.startX = event.clientX;
-                _this.stopBar();
-            });
-            $(document).on("mouseup", function (e) {
-                if (_this.isMove) {
-                    _this.isMove = false;
-                    _this.isAction = true;
-                    _this.startBar();
-                }
-
-            });
-            $(document).on('mousemove', function (event) {
-                event.preventDefault();
-                /* Act on the event */
-                if (_this.isMove) {
-                    _this.stopBar();
-                    _this.changeWidth = event.clientX - $(".pmgressbar").offset().left;
-                    if (_this.changeWidth > _this.Mwidth || _this.changeWidth < _this.minWidth) {
-                    } else {
-                        _this.changeWidth = _this.changeWidth + _this.moveX;
-                        _this.changeBar();
-                    }
-                }
-            });
-        },
-        stopBar: function () {
-            this.isAction = false;
-            clearInterval(timerEcharts);
-            timerEcharts = null;
-        },
-        startBar: function () {
-            var _this = this;
-            _this.waitDo("waitStart", function () {
-                if (_this.isAction) {
-                    timerEcharts = setInterval(function () {
-                        _this.changeBar();
-                        _this.isAction = false;
-                    }, 288);
-                }
-            }, 50)
-
-        },
-        getData: function () {
-            var _this = this;
-            if (this.changeWidth % this.steep == 0) {
-                //满足条件就请求数据，改变图形
-                var index = Math.floor((this.changeWidth / this.steep));
-                setEcharts(index);
-                // console.log(this.changeWidth/this.steep)
-            }
-
-            function setEcharts(index) {
-                _this.cbFn(index);
-            }
-        },
-        waitDo: function (id, fn, wait) {
-            //id事件名称  fn执行事件 wait等待时间
-            var _this = this;
-            if (_this.timer[id]) {
-                window.clearTimeout(this.timer[id]);
-                delete _this.timer[id];
-            }
-            return _this.timer[id] = window.setTimeout(function () {
-                fn();
-                delete _this.timer[id];
-            }, wait);
         }
-    }
+    };
 })(jQuery, window, document);
 
 

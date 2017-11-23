@@ -1,10 +1,9 @@
 /*
 * 满载率与拥挤满意度
 * */
-$(function () {
-
+$(function () {clearInterval($.timerEcharts);
+    $.timerEcharts = null;
     var $fullloadrate = $('.full-load-rate');
-
     var myChart = echarts.init(document.getElementById('full-load-rate'));
     option = {
         data: [],
@@ -153,9 +152,9 @@ $(function () {
                 max: maxWaiting
             }],
             series: [{
-                data: resData.degree
-            }, {
                 data: resData.comfort
+            }, {
+                data: resData.degree
             }, {
                 data: resData.waiting
 

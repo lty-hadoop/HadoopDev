@@ -1,7 +1,12 @@
-$(function () {
+$(function () {clearInterval($.timerEcharts);
+    $.timerEcharts = null;
     var getDataInfo = {};
     var lineFlag = false;
     var direction = null;
+    /***临时使用****/
+        //删除 todo
+    var isFrist = false;
+    /***临时使用****/
     var $radioDiv = $('.radioDiv');
     $(".getSelect").selectpick({
         url: $.getPath + '/Company/list',
@@ -39,9 +44,8 @@ $(function () {
                 lineFlag = true;
                 getDataInfo.line_id = data.id;
                 direction = $radioDiv.find('input:radio[name="route"]:checked').attr('attrType');
-                getEchartsData();
-
-
+                if(isFrist)getEchartsData();
+                isFrist = true;
             }
         });
     }
@@ -52,7 +56,6 @@ $(function () {
             getEchartsData();
         }
     });
-
     function getEchartsData() {
         getDataInfo.direction = direction;
         getDataInfo.offdate = $.getDateString('-1');
@@ -82,7 +85,7 @@ $(function () {
                 type: 'value',
                 max: 5,
                 axisLabel: {
-                    formatter: '{value}'
+                    formatter: '{value}/'+"人次"
                 }
             },
             {
@@ -154,7 +157,6 @@ $(function () {
         ]
     };
     var od = new GetData(option);
-
     function setEchartsData(postData) {
 
         var getData = postData['resPonse']['passflowCapacityList'];
@@ -190,7 +192,22 @@ $(function () {
         };
         od.setOption(option);
     }
+    /***临时使用****/
+    //删除 todo
+    getEchartsData1();
+    function getEchartsData1() {
+        $.ajax({
+            url: $.getPath + '/PassflowCapacity/list',
+            dataType: 'json',
+            data: {line_id:91,direction:0,offdate:'2017-11-20'},
+            type: 'GET',
+            success: function (data) {
 
+                setEchartsData(data);
+            }
+        });
+    }
+    /***临时使用****/
 
     var listData = {
         url: $.getPath + '/PrepoptimLine/list',
