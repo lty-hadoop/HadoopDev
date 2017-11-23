@@ -1,20 +1,20 @@
-$(function(){
+$(function () {
 
     //设置title
-    $('.h2Title>span').html('('+$.getDateString('-1')+')')
+    $('.h2Title>span').html('(' + $.getDateString('-1') + ')')
     var listData = {
-        url : $.getPath+'/DenseRegion/list',
-        dataTitle : '出行密集区域排行',
-        sourceFlag:false,
-        allShowNum:6,
-        sendData : {type:1,offdate:$.getDateString('-1')}
+        url: $.getPath + '/DenseRegion/list',
+        dataTitle: '出行密集区域排行',
+        sourceFlag: false,
+        allShowNum: 6,
+        sendData: {type: 1, offdate: $.getDateString('-1')}
     };
     var ddData = {
-        url : $.getPath+'/DenseRegion/list',
-        dataTitle : '到达密集区域排行',
-        sourceFlag:false,
-        allShowNum:6,
-        sendData : {type:2,offdate:$.getDateString('-1')}
+        url: $.getPath + '/DenseRegion/list',
+        dataTitle: '到达密集区域排行',
+        sourceFlag: false,
+        allShowNum: 6,
+        sendData: {type: 2, offdate: $.getDateString('-1')}
     };
     $(".depart").creatList(listData);
     $(".arrive").creatList(ddData);
@@ -23,57 +23,60 @@ $(function(){
     //品质路线
     var tbody = $('.table-responsive').find('.list-data');
     $.ajax({
-        url : $.getPath+'/QualityLine/list',
-        type :'get',
-        dataType : 'json',
-        data : {isPage:true,offdate:$.getDateString('-1'),pageNum:1,pageSize:10},
-        success:function (data) {
-            if(data['resPonse']['page']['total']>10){
+        url: $.getPath + '/QualityLine/list',
+        type: 'get',
+        dataType: 'json',
+        data: {isPage: true, offdate: $.getDateString('-1'), pageNum: 1, pageSize: 10},
+        success: function (data) {
+            if (data['resPonse']['page']['total'] > 10) {
                 getRander(data['page']['total'])
-            }else{
+            } else {
                 randerData(data)
             }
 
         }
     });
+
     //加载分页
-    function getRander(data){
+    function getRander(data) {
         $('.tablePage').creatPage({
-            itemSize:data,
-            callBack : function(data){
+            itemSize: data,
+            callBack: function (data) {
                 $.ajax({
-                    url : $.getPath+'/QualityLine/list',
-                    type :'get',
-                    dataType : 'json',
-                    data : {isPage:true,offdate:$.getDateString('-1'),pageNum:1,pageSize:10},
-                    success:function (data) {
-                            randerData(data)
+                    url: $.getPath + '/QualityLine/list',
+                    type: 'get',
+                    dataType: 'json',
+                    data: {isPage: true, offdate: $.getDateString('-1'), pageNum: 1, pageSize: 10},
+                    success: function (data) {
+                        randerData(data)
                     }
                 });
             }
         })
     }
+
     //渲染数据
-    function randerData(data){
+    function randerData(data) {
         tbody.html('');
         var posData = data['resPonse']['qualityLineList'];
-        $.each(posData,function(index,val){
+        $.each(posData, function (index, val) {
             var $tr = $('<tr></tr>');
             var sData = $.formatDate(val['running_time']);
-            var eData =$.formatDate(val['depart_time']);
-            var $td = $('<td>'+val['start_place_name']+'</td><td>'+val['way_site']+'</td><td>'+val['end_place_name']+
-                '</td><td>'+sData+'</td><td>'+eData+'</td><td>'+val['crest_segment_num']+'</td><td>'
-                +val['fitted_out_vehicles']+'</td><td>'+val['fitted_out_person']+'</td>');
+            var eData = $.formatDate(val['depart_time']);
+            var $td = $('<td>' + val['start_place_name'] + '</td><td>' + val['way_site'] + '</td><td>' + val['end_place_name'] +
+                '</td><td>' + sData + '</td><td>' + eData + '</td><td>' + val['crest_segment_num'] + '</td><td>'
+                + val['fitted_out_vehicles'] + '</td><td>' + val['fitted_out_person'] + '</td>');
             $tr.append($td);
             tbody.append($tr);
         })
     }
+
 //迁徙图
     var myChart = echarts.init(document.getElementById('main'));
 // 地图自定义样式
     var bmap = {
-        center:['114.434','36.630'],
-        zoom:14,
+        center: ['114.434', '36.630'],
+        zoom: 14,
         roam: true,
         mapStyle: {
             styleJson: [
@@ -421,7 +424,7 @@ $(function(){
                 curveness: 0.5
             }
         },
-        data:[]
+        data: []
         // data: convertData(GZData)
     }, {
         type: 'lines',
@@ -440,7 +443,7 @@ $(function(){
                 curveness: .5
             }
         },
-        data:[]
+        data: []
         // data: convertData(GZData)
     }, {
         type: 'scatter',
@@ -449,8 +452,8 @@ $(function(){
         rippleEffect: {
             brushType: 'stroke'
         },
-        symbolSize: function(val) {
-            return val[2]*3;
+        symbolSize: function (val) {
+            return val[2] * 3;
         },
         showEffectOn: 'render',
         itemStyle: {
@@ -458,7 +461,7 @@ $(function(){
                 color: '#28cc79'
             }
         },
-        data:[]
+        data: []
         // data: GZData.map(function(dataItem) {
         //     return {
         //         name: dataItem[1].name,
@@ -472,8 +475,8 @@ $(function(){
         rippleEffect: {
             brushType: 'stroke'
         },
-        symbolSize: function(val) {
-            return val[2]*3;
+        symbolSize: function (val) {
+            return val[2] * 3;
         },
         showEffectOn: 'render',
         itemStyle: {
@@ -481,7 +484,7 @@ $(function(){
                 color: 'red'
             }
         },
-        data:[]
+        data: []
         // data: GZData.map(function(dataItem) {
         //     debugger
         //     return {
@@ -494,7 +497,7 @@ $(function(){
 
     option = {
         bmap: bmap,
-        color : ['#28cc79', 'red'],
+        color: ['#28cc79', 'red'],
         backgroundColor: '#404a59',
         tooltip: {
             trigger: 'item'
@@ -508,7 +511,7 @@ $(function(){
             polyline: true,
             progressiveThreshold: 500,
             progressive: 200,
-            zoom:15,
+            zoom: 15,
             label: {
                 emphasis: {
                     show: false
@@ -529,29 +532,31 @@ $(function(){
     };
     myChart.setOption(option);
 
-    setTimeout(function(){
+    setTimeout(function () {
         // 获取百度地图实例，使用百度地图自带的控件
         var getMap = myChart.getModel().getComponent('bmap').getBMap();
         getMap.addControl(new BMap.NavigationControl({type: BMAP_NAVIGATION_CONTROL_ZOOM}));
         // getMap.centerAndZoom("邯郸",15);
-    },0);
+    }, 0);
 
     //Echarts迁徙图
     $.qxEcharts(getEchartsData);
+
     //根据时间轴获取绘制图表数据
-    function getEchartsData(index){
+    function getEchartsData(index) {
         var time_type = index;
         $.ajax({
-            url:$.getPath+'/PassflowMigration/list',
-            type:'get',
-            dataType:'json',
-            data:{offdate:$.getDateString('-1'),time_type:time_type},
-            success:function(res){
+            url: $.getPath + '/PassflowMigration/list',
+            type: 'get',
+            dataType: 'json',
+            data: {offdate: $.getDateString('-1'), time_type: time_type},
+            success: function (res) {
                 setDataFn(res);
             }
 
         })
     }
+
     //格式化获取的数据并设置Echarts
     function setDataFn(data) {
         var toSetData = data['resPonse']['passflowMigrationList'];
@@ -559,35 +564,36 @@ $(function(){
         var toValue = [];
         var fromValue = [];
         console.log(typeof toSetData)
-        $.each(toSetData,function(index,val){
+        $.each(toSetData, function (index, val) {
             fromToData1.push({
                 fromName: val['trip_site'],
                 toName: val['reach_site'],
-                coords: [[val['trip__site_longitude'],val['trip__site_latitude']],[val['reach_site_longitude'],val['reach_site_latitude']]]
+                coords: [[val['trip__site_longitude'], val['trip__site_latitude']], [val['reach_site_longitude'], val['reach_site_latitude']]]
             });
             //到达
             toValue.push({
-                name:val['reach_site'],
-                value:[val['reach_site_longitude'],val['reach_site_latitude'],val['reach_demand']]
+                name: val['reach_site'],
+                value: [val['reach_site_longitude'], val['reach_site_latitude'], val['reach_demand']]
             });
             //出发
             fromValue.push({
-                name:val['trip_site'],
-                value:[val['trip__site_longitude'],val['trip__site_latitude'],val['trip_demand']]
+                name: val['trip_site'],
+                value: [val['trip__site_longitude'], val['trip__site_latitude'], val['trip_demand']]
             });
         });
-        var option = {
-    };
-            myChart.setOption({'series':[
+        var option = {};
+        myChart.setOption({
+            'series': [
                 {
-                    data:fromToData1
-                },{
-                    data:fromToData1
-                },{
-                    data:toValue
-                },{
-                    data:fromValue
+                    data: fromToData1
+                }, {
+                    data: fromToData1
+                }, {
+                    data: toValue
+                }, {
+                    data: fromValue
                 }
-            ]})
+            ]
+        })
     }
 });

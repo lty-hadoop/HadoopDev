@@ -1,8 +1,8 @@
 /*
 * 司机评价
 * */
-$(function(){
-    getEchartsData ('js/chartData.json', 5, '{value}');
+$(function () {
+    getEchartsData('js/chartData.json', 5, '{value}');
     var myChart1 = echarts.init(document.getElementById('driver'));
     var option1 = {
         title: {
@@ -12,7 +12,7 @@ $(function(){
                 fontSize: 16,
                 color: '#666'
             },
-            padding: [10,0,0,30]
+            padding: [10, 0, 0, 30]
         },
         tooltip: {
             axisPointer: {
@@ -38,12 +38,12 @@ $(function(){
                 color: '#666'
             },
             indicator: [
-                { name: '文明行车', max: 5,},
-                { name: '热心服务', max: 5},
-                { name: '着装整齐', max: 5},
-                { name: '态度好', max: 5},
-                { name: '驾驶平稳', max: 5},
-                { name: '按站停靠', max: 5}
+                {name: '文明行车', max: 5,},
+                {name: '热心服务', max: 5},
+                {name: '着装整齐', max: 5},
+                {name: '态度好', max: 5},
+                {name: '驾驶平稳', max: 5},
+                {name: '按站停靠', max: 5}
             ]
         },
         series: [{
@@ -61,9 +61,9 @@ $(function(){
                     type: 'solid'
                 }
             },
-            data : [
+            data: [
                 {
-                    value : [2, 4, 5, 2, 4, 1]
+                    value: [2, 4, 5, 2, 4, 1]
                 }
             ]
         }]

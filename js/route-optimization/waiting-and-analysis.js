@@ -12,7 +12,7 @@ $(function ($) {
             },
             left: '10%'
         },
-        tooltip : {
+        tooltip: {
             trigger: 'axis',
             axisPointer: {
                 type: 'cross',
@@ -23,7 +23,7 @@ $(function ($) {
             }
         },
         legend: {
-            data:[
+            data: [
                 {name: '候车满意度', icon: 'rect'},
                 {name: '候车时长', icon: 'rect'}
             ],
@@ -31,11 +31,11 @@ $(function ($) {
             itemGap: 35,
             itemWidth: 50
         },
-        xAxis : [
+        xAxis: [
             {
-                type : 'category',
-                boundaryGap : false,
-                data : ["06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00"]
+                type: 'category',
+                boundaryGap: false,
+                data: ["06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00"]
             }
         ],
         yAxis: [
@@ -53,15 +53,15 @@ $(function ($) {
                     formatter: '{value}/min'
                 },
                 //去掉y轴坐标线
-                axisLine:{
-                    show:false
+                axisLine: {
+                    show: false
                 }
             }
         ],
-        series : [
+        series: [
             {
-                name:'候车满意度',
-                type:'line',
+                name: '候车满意度',
+                type: 'line',
                 areaStyle: {
                     normal: {
                         color: '#e4f6f2'
@@ -75,90 +75,91 @@ $(function ($) {
                         }
                     }
                 },
-                data:[]
+                data: []
             },
             {
                 polarIndex: 0,
-                name:'候车时长',
-                type:'line',
+                name: '候车时长',
+                type: 'line',
                 yAxisIndex: 1,
                 step: 'end',
                 // areaStyle: {normal: {}},
-                itemStyle : {
-                    normal : {
+                itemStyle: {
+                    normal: {
                         color: '#999',
                         lineStyle: {
                             color: '#999'
                         }
                     }
                 },
-                data:[]
+                data: []
             }
         ]
     });
     var $waitingandanalysis = $('.waiting-and-analysis');
-    var theadArr = [{name:'线路',field: 'line_name'},
-        { name:'分时范围',field: 'timeArr'},
-        {name:'上车人数', field: 'up_num'},
-        { name:'运力',field: 'shipping_ability'},
-        { name:'下车人数', field: 'down_num'},
-        {name:'平均发车时间', field: 'waiting_duration'},
-        {name:'候车满意度', field: 'waiting_satisfaction'}
+    var theadArr = [{name: '线路', field: 'line_name'},
+        {name: '分时范围', field: 'timeArr'},
+        {name: '上车人数', field: 'up_num'},
+        {name: '运力', field: 'shipping_ability'},
+        {name: '下车人数', field: 'down_num'},
+        {name: '平均发车时间', field: 'waiting_duration'},
+        {name: '候车满意度', field: 'waiting_satisfaction'}
     ];
-    $waitingandanalysis.setSelecteTable({'fn':setEchartsData,'theadArr':theadArr,'fn2':waitFn});
+    $waitingandanalysis.setSelecteTable({'fn': setEchartsData, 'theadArr': theadArr, 'fn2': waitFn});
+
     //设置echarts数据
-    function setEchartsData(data){
+    function setEchartsData(data) {
         var maxWaiting = 0;
         var resData = {};
-        resData.degree　= [];
+        resData.degree = [];
         resData.waiting = [];
         var res = data['resPonse']['satisfactionList'];
-        $.each(res,function(index,value){
+        $.each(res, function (index, value) {
             resData.degree.push(value['waiting_satisfaction']);
             resData.waiting.push(value['waiting_duration']);
-            if(maxWaiting<value['waiting_duration']){
+            if (maxWaiting < value['waiting_duration']) {
                 maxWaiting = value['waiting_duration'];
             }
         });
         myChart.setOption({
-            yAxis:[{
-                max:100
-            },{
-                max:maxWaiting
+            yAxis: [{
+                max: 100
+            }, {
+                max: maxWaiting
             }],
             series: [{
                 data: resData.degree
-            },{
+            }, {
                 data: resData.waiting
             }
             ]
         });
     }
 
-function waitFn(data){
-    // 候车时长与满意度统计
-    //$.getPath
-    $.ajax({
-        url: $.getPath + '/WaitingDuratistics/list',
-        type: 'GET',
-        dataType: 'json',
-        data:data,
-        success: function (res) {
-            var res = res.resPonse.waitingDuratisticsList;
-            res.map(function(elem, index){
-                var state = '';
-                switch (elem.type) {
-                    case 1:
-                        state = "高峰";
-                        break;
-                    case 2:
-                        state = "平峰";
-                        break;
-                    case 3:
-                        state = "低峰";
-                        break;
-                }
-                var total = `<div class="mg_t20 bg_f3f6fb of_h">
+    function waitFn(data) {
+        // 候车时长与满意度统计
+        //$.getPath
+        $.ajax({
+            url: $.getPath + '/WaitingDuratistics/list',
+            type: 'GET',
+            dataType: 'json',
+            data: data,
+            success: function (res) {
+                var res = res.resPonse.waitingDuratisticsList;
+                res.map(function (elem, index) {
+                    var state = '';
+                    switch (elem.type) {
+                        case 1:
+                            state = "高峰";
+                            break;
+                        case 2:
+                            state = "平峰";
+                            break;
+                        case 3:
+                            state = "低峰";
+                            break;
+                    }
+                    var total = `<div class="mg_t20 bg_f3f6fb of_h">
                                 <div class="col-sm-1 col-md-1 col-lg-1 text_c f18 bd_r1 peak-value-high">${state}</div>
                                 <div class="col-sm-11 col-md-11 col-lg-11">
                                     <div class="other-peak">
@@ -186,37 +187,35 @@ function waitFn(data){
                                     </div>
                                 </div>
                             </div>`;
-                $('.content-identical').append(total);
-            });
-        }
-    })
-}
-
-
+                    $('.content-identical').append(total);
+                });
+            }
+        })
+    }
 
 
     //候车满意度top5
     var dervList = {
-        url : $.getPath+'/WaitingSatisfaction/list',
-        dataTitle : '候车满意度排行TOP5',
-        sourceFlag:true,
-        dataFrom : '来自坐公交APP',
-        sendData : {offdate:$.getDateString('-1')},
-        renderFn : function(data){
+        url: $.getPath + '/WaitingSatisfaction/list',
+        dataTitle: '候车满意度排行TOP5',
+        sourceFlag: true,
+        dataFrom: '来自坐公交APP',
+        sendData: {offdate: $.getDateString('-1')},
+        renderFn: function (data) {
             var _this = this;
             var data = data['resPonse']['waitingSatisfactionList'];
             this.$content.html("");
-            if(data.dataTitle&&data.dataFrom){
+            if (data.dataTitle && data.dataFrom) {
                 _this.opts.dataTitle = data.dataTitle;
                 _this.opts.dataFrom = data.dataFrom;
             }
-            _this.$title = _this.opts.sourceFlag?$('<div class="title"><div class="titleName">'+_this.opts.dataTitle+'</div><div class="dataSouce">'+this.opts.dataFrom+'</div>\n' +
-                '        </div>'):$('<h2 class="bd_b1">'+_this.opts.dataTitle+'</h2>');
+            _this.$title = _this.opts.sourceFlag ? $('<div class="title"><div class="titleName">' + _this.opts.dataTitle + '</div><div class="dataSouce">' + this.opts.dataFrom + '</div>\n' +
+                '        </div>') : $('<h2 class="bd_b1">' + _this.opts.dataTitle + '</h2>');
             _this.$ul = $('<ul class="pd_25 pd_t5"></ul>');
-            $.each(data,function(index,value){
-                if(index<=_this.opts.allShowNum){
-                    _this.$li = $('<li class="bd_b1 h_40 dis_f jst_sb item_c"><div class="dis_f item_c"><p style="background:'+_this.opts.topColor[index]+'"  class="w_25 h_25 text_c line_h25 mg_r20">'+(index*1+1)+'</p><span>'+value['line_name']+'</span></div><span>'+(value['satisfaction']*100).toFixed(2)+'%</span></li>');
-                    _this.$ul.append( _this.$li);
+            $.each(data, function (index, value) {
+                if (index <= _this.opts.allShowNum) {
+                    _this.$li = $('<li class="bd_b1 h_40 dis_f jst_sb item_c"><div class="dis_f item_c"><p style="background:' + _this.opts.topColor[index] + '"  class="w_25 h_25 text_c line_h25 mg_r20">' + (index * 1 + 1) + '</p><span>' + value['line_name'] + '</span></div><span>' + (value['satisfaction'] * 100).toFixed(2) + '%</span></li>');
+                    _this.$ul.append(_this.$li);
                 }
             });
             _this.$content.append(this.$title).append(this.$ul);
@@ -226,12 +225,9 @@ function waitFn(data){
 });
 
 
-
-
-
-
 //候车时长与候车满意度呈现反比趋势
 contrast('说明：候车时长与候车满意度呈现反比趋势');
+
 function contrast(title) {
     var contrast = echarts.init(document.getElementById('contrast-chart'));
     contrast.setOption({
