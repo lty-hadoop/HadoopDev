@@ -173,7 +173,7 @@ $(function () {clearInterval($.timerEcharts);
             if (capaMax < Number(val.capacity)) {
                 capaMax = Number(val.capacity).toFixed(0);
             }
-        })
+        });
         var option = {
             yAxis: [
                 {
@@ -223,7 +223,7 @@ $(function () {clearInterval($.timerEcharts);
                 _this.opts.dataFrom = data.dataFrom;
             }
             _this.$title = _this.opts.sourceFlag ? $('<div class="title"><div class="titleName">' + _this.opts.titleData + '</div><div class="dataSouce">' + this.opts.dataFrom + '</div>\n' +
-                '        </div>') : $('<h2 class="bd_b1">' + _this.opts.dataTitle + '<span class="f12 color_999">(' + $.getDateString('-1') + ')</span></h2>');
+                '</div>') : $('<h2 class="bd_b1">' + _this.opts.dataTitle + '<span class="f12 color_999">(' + $.getDateString('-1') + ')</span></h2>');
             _this.$ul = $('<ul class="pd_25 pd_t5"></ul>');
             $.each(data, function (index, value) {
                 if (index <= _this.opts.allShowNum) {
