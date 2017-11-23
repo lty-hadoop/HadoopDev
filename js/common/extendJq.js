@@ -34,8 +34,8 @@
         }
         return   hour+":"+minute+":"+second;
     },
-        qxEcharts : function(){
-            var aa = new Pmgressbar();
+        qxEcharts : function(cbFn){
+            var aa = new Pmgressbar(cbFn);
         }
 });
     //阻止时间冒泡
@@ -415,7 +415,7 @@
             var data = data.resPonse[_this.opts.simpleData.data];
             _this.$content.html('');
             $.each(data,function(index,value){
-                _this.$li = $('<li class="option">'+value[_this.opts.simpleData.name]+'</li>');
+                _this.$li = $('<li class="option" style="cursor: pointer;">'+value[_this.opts.simpleData.name]+'</li>');
                 _this.$content.append(_this.$li);
                 _this.$li.data('data',value);
                 if(index==0&&_this.opts.atuoCbfn){
@@ -522,7 +522,12 @@
             this.content.append(_this.thead).append(_this.tbody);
             var $tr = $('<tr></tr>')
             $.each(_this.opts.theadArr,function(index,val){
-                var $th = $('<th field="'+val.field+'">'+val.name+'<em></em></th>');
+                var $th;
+                if(val.name=='线路'){
+                    $th = $('<th field="'+val.field+'">'+val.name+'</th>');
+                }else{
+                    $th = $('<th field="'+val.field+'">'+val.name+'<em></em></th>');
+                }
                 $tr.append($th);
             })
             this.thead.append($tr);
@@ -760,8 +765,9 @@
     }
 
     //迁徙图
-    function Pmgressbar(){
+    function Pmgressbar(cbFn){
         var _this = this;
+        this.cbFn = cbFn;
         //间隔多少时间触发一次请求，或者说刷新一次显示；单位为分钟默认15分钟
         this.space = 15;
         //当前播放进度的宽度；即播放进度；
@@ -786,9 +792,9 @@
         this.isAction = true;
         //是否是点击事件
         this.clickEv = false;
+        this.cbFn(1);
         this.startBar();
         this.movebar();
-
     }
     Pmgressbar.prototype = {
         changeBar : function(){
@@ -898,19 +904,21 @@
                     timerEcharts = setInterval(function(){
                         _this.changeBar();
                         _this.isAction = false;
-                    },50);
+                    },288);
                 }
             },50)
 
         },
         getData : function (){
+            var _this = this;
             if(this.changeWidth%this.steep==0){
                 //满足条件就请求数据，改变图形
-                setEcharts();
+                var index = Math.floor((this.changeWidth/this.steep));
+                setEcharts(index);
                 // console.log(this.changeWidth/this.steep)
             }
-            function setEcharts(){
-
+            function setEcharts(index){
+                _this.cbFn(index);
             }
         },
         waitDo : function (id, fn, wait) {

@@ -85,12 +85,12 @@ $(function ($) {
     function navBindEvent() {
         var animate = ["","animation","animation1","animation2","animation3"];
         $navUl.on("click", 'li', function (e) {
-            if($(this).index()==1&&$(this).html()!=='<a>满载率与拥挤满意度</a>'&&$(this).html()!=='<a>站点评价</a>'){
+            if($(this).index()==1&&$(this).html()!=='<a>满载率与拥挤满意度</a>'&&$(this).html()!=='<a>站点评价</a>') {
                 window.location.reload();
                 return;
-            }else if($(this).index()==3){
-                return;
-            }
+            }// else if($(this).index()==3){
+            //     return;
+            // }
             var index = Math.ceil(Math.random()*4);
             var animateClass = animate[index];
             e.stopPropagation();
