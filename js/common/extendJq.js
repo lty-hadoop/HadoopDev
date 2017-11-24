@@ -3,7 +3,7 @@
     //定时器
     $.timerEcharts = null;
     //请求接口的域名端口
-    $.getPath = 'http://192.168.2.133:9001';
+    $.getPath = 'http://192.168.2.253:9001';
     //将方法扩展到$上
     $.extend({
         //获取前一天日期或者当前日期
@@ -299,7 +299,7 @@
                     '        </div>') : $('<h2 class="bd_b1">' + _this.opts.dataTitle + '<span class="f12 color_999">(' + _this.formTime + ')</span></h2>');
                 _this.$ul = $('<ul class="pd_25 pd_t5"></ul>');
                 $.each(data, function (index, value) {
-                    if (index <= _this.opts.allShowNum) {
+                    if (index < _this.opts.allShowNum) {
                         _this.$li = $('<li class="bd_b1 h_40 dis_f jst_sb item_c"><div class="dis_f item_c"><p style="background:' + _this.opts.topColor[index] + '"  class="w_25 h_25 text_c line_h25 mg_r20">' + (index * 1 + 1) + '</p><span>' + value[_this.opts.simpleData.name] + '</span></div><span>' + value[_this.opts.simpleData.hotData] + '</span></li>')
                         _this.$ul.append(_this.$li);
                     }
@@ -650,8 +650,9 @@
         /***临时使用****/
         //删除 todo
         var a = {isPage:false,line_id:91,offdatess:"2017-11-20,2017-11-20"};
-        obj.fn2(a);
+        $obj.fn2(a);
         getEcart(a);
+        $(".table-identical").creatTable({'getData': a, 'url': $.getPath + '/Satisfaction/list', theadArr: $obj.theadArr});
         /***临时使用****/
         //echarts数据
         //点击查看评价详情
@@ -752,7 +753,6 @@
                 getData.offdatess = timerData.join(",");
             }
             obj.fn2(getData);
-            debugger
             //请求ajax
             getEcart(getData);
             //动态去设置table
