@@ -314,9 +314,11 @@
         options.el = $(this);
         var select = new Selectpick(options);
         $(this).on("click", function (ev) {
-            $(this).select();
             stopEvent(ev);
-            select.show();
+                flag =false;
+                $(this).select();
+                // stopEvent(ev);
+                select.show();
         })
     }
     //基本配置
@@ -444,20 +446,23 @@
                 _this.cbFn(data);
                 _this.hide();
             })
-            $(document.body).on("click", function () {
-                _this.hide();
-            })
+            $(document.body).on("click", function (ev) {
+                stopEvent(ev);
+                if(ev.target!=_this.$ele.get(0)) _this.hide();
+            });
             $(window).on("resize", function () {
                 _this.hide();
             })
         },
         keySearch: function () {
             var _this = this;
-            _this.$ele.on("keyup", function () {
-                var value = $.trim($(this).val());
-                waitDo(_this, "keyup", function () {
-                    _this.getData(value);
-                }, 200)
+            _this.$ele.on("keyup", function (ev) {
+                if(ev.keyCode !== 67&&ev.keyCode !== 17){
+                    var value = $.trim($(this).val());
+                    waitDo(_this, "keyup", function () {
+                        _this.getData(value);
+                    }, 200)
+                }
             })
         },
         setPosition: function () {
@@ -474,7 +479,7 @@
         hide: function () {
             this.outdiv.hide();
         }
-    }
+    };
     //点击查看评价
     $.fn.seaDtail = function () {
         var _this = $(this);
@@ -489,7 +494,7 @@
                 $table.slideUp(300);
             }
         })
-    }
+    };
 
     //table组件
     $.fn.creatTable = function (opt) {

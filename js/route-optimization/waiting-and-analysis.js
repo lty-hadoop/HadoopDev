@@ -69,6 +69,9 @@ $(function ($) {clearInterval($.timerEcharts);
                         color: '#e4f6f2'
                     }
                 },
+                symbol: 'circle',
+                //让折线边的平滑
+                // smooth: true,
                 itemStyle: {
                     normal: {
                         color: '#3c9',
@@ -85,6 +88,9 @@ $(function ($) {clearInterval($.timerEcharts);
                 type: 'line',
                 yAxisIndex: 1,
                 step: 'end',
+                symbol: 'circle',
+                //让折线边的平滑
+                // smooth: true,
                 // areaStyle: {normal: {}},
                 itemStyle: {
                     normal: {
@@ -111,6 +117,7 @@ $(function ($) {clearInterval($.timerEcharts);
 
     //设置echarts数据
     function setEchartsData(data) {
+        var ddddddata = [];
         var maxWaiting = 0;
         var resData = {};
         resData.degree = [];
