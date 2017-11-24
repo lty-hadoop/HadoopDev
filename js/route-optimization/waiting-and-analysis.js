@@ -6,6 +6,7 @@ $(function ($) {clearInterval($.timerEcharts);
     $.timerEcharts = null;
     //先默认初始化echarts表格，待拿到数据直接赋值
     var myChart = echarts.init(document.getElementById('carzxt'));
+    var contrast = echarts.init(document.getElementById('contrast-chart'));
     myChart.setOption({
         title: {
             text: '候车时长与满意度分时趋势',
@@ -143,17 +144,37 @@ $(function ($) {clearInterval($.timerEcharts);
             }
             ]
         });
+        var xAxisData = [];
+        for(var i = 1;i<maxWaiting;i++){
+            xAxisData.push(i);
+        }
+        var dataArr = resData.degree;
+        dataArr.sort(function(a,b){
+            return parseInt(b) - parseInt(a);
+        });
+        contrast.setOption({
+            xAxis: [{
+                data : xAxisData
+            }
+        ],
+            series: [{
+                data:dataArr
+            }
+            ]
+        })
     }
 
     function waitFn(data) {
         // 候车时长与满意度统计
         //$.getPath
+
         $.ajax({
             url: $.getPath + '/WaitingDuratistics/list',
             type: 'GET',
             dataType: 'json',
             data: data,
             success: function (res) {
+                $('.content-identical').html('');
                 var res = res.resPonse.waitingDuratisticsList;
                 res.map(function (elem, index) {
                     var state = '';
@@ -211,84 +232,84 @@ $(function ($) {clearInterval($.timerEcharts);
         }
     };
     $(".optimize").creatList(dervList);
-});
+
+
 
 
 //候车时长与候车满意度呈现反比趋势
-contrast('说明：候车时长与候车满意度呈现反比趋势');
-
-function contrast(title) {
-    var contrast = echarts.init(document.getElementById('contrast-chart'));
-    contrast.setOption({
-        title: {
-            text: title,
-            textStyle: {
-                color: '#999',
-                fontSize: 16,
-                fontWeight: 'normal'
+    contrast1();
+    function contrast1() {
+        contrast.setOption({
+            title: {
+                text: '说明：候车时长与候车满意度呈现反比趋势',
+                textStyle: {
+                    color: '#999',
+                    fontSize: 16,
+                    fontWeight: 'normal'
+                },
+                bottom: 2,
+                padding: [0, 0, 0, 60]
             },
-            bottom: 2,
-            padding: [0, 0, 0, 60]
-        },
-        tooltip: {
-            trigger: 'axis',
-            axisPointer: {
-                type: 'cross',
-                animation: false,
-                label: {
-                    backgroundColor: '#505765'
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'cross',
+                    animation: false,
+                    label: {
+                        backgroundColor: '#505765'
+                    }
                 }
-            }
-        },
-        grid: {
-            containLabel: true
-        },
-        xAxis: [
-            {
-                name: '候车时长',
-                nameLocation: 'center',
-                nameTextStyle: {
-                    color: '#999',
-                    fontSize: 14,
-                    padding: [0, 0, 0, 420]
-                },
-                type: 'category',
-                boundaryGap: false,
-                // axisLine: {onZero: false},
-                data: ['1', '2', '3', '4']
-            }
-        ],
-        yAxis: [
-            {
-                name: '候车满意度',
-                type: 'value',
-                nameTextStyle: {
-                    color: '#999',
-                    fontSize: 14,
-                    padding: [0, 0, 0, 0]
-                },
-                data: []
-            }
-        ],
-        series: [
-            {
-                name: '候车满意度',
-                type: 'line',
-                areaStyle: {
-                    normal: {
-                        color: '#e4f6f2'
-                    }
-                },
-                itemStyle: {
-                    normal: {
-                        color: '#3c9',
-                        lineStyle: {
-                            color: '#3c9'
+            },
+            grid: {
+                containLabel: true
+            },
+            xAxis: [
+                {
+                    name: '候车时长',
+                    nameLocation: 'center',
+                    nameTextStyle: {
+                        color: '#999',
+                        fontSize: 14,
+                        padding: [0, 0, 0, 420]
+                    },
+                    type: 'category',
+                    boundaryGap: false,
+                    // axisLine: {onZero: false},
+                    data: ['1', '2', '3', '4']
+                }
+            ],
+            yAxis: [
+                {
+                    name: '候车满意度',
+                    type: 'value',
+                    nameTextStyle: {
+                        color: '#999',
+                        fontSize: 14,
+                        padding: [0, 0, 0, 0]
+                    },
+                    data: []
+                }
+            ],
+            series: [
+                {
+                    name: '候车满意度',
+                    type: 'line',
+                    areaStyle: {
+                        normal: {
+                            color: '#e4f6f2'
                         }
-                    }
-                },
-                data: [80, 60, 30, 10]
-            }
-        ]
-    });
-}
+                    },
+                    itemStyle: {
+                        normal: {
+                            color: '#3c9',
+                            lineStyle: {
+                                color: '#3c9'
+                            }
+                        }
+                    },
+                    data: []
+                }
+            ]
+        });
+    }
+});

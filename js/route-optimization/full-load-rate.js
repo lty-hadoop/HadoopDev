@@ -5,6 +5,7 @@ $(function () {clearInterval($.timerEcharts);
     $.timerEcharts = null;
     var $fullloadrate = $('.full-load-rate');
     var myChart = echarts.init(document.getElementById('full-load-rate'));
+    var contrast = echarts.init(document.getElementById('contrast-chart'));
     option = {
         data: [],
         title: {
@@ -128,6 +129,7 @@ $(function () {clearInterval($.timerEcharts);
     function setEchartsData(data) {
         var maxWaiting = 0;
         var resData = {};
+        var comfortMax = 0;
         resData.degree = [];
         resData.waiting = [];
         resData.comfort = [];
@@ -140,6 +142,9 @@ $(function () {clearInterval($.timerEcharts);
             resData.comfort.push(value['ride_satisfaction']);
             if (maxWaiting < value['waiting_duration']) {
                 maxWaiting = value['waiting_duration'];
+            }
+            if(comfortMax<value['ride_satisfaction']){
+                comfortMax = value['ride_satisfaction'];
             }
         });
         //舒适满意度
@@ -161,10 +166,28 @@ $(function () {clearInterval($.timerEcharts);
             }
             ]
         });
+        var xAxisData = [];
+        for(var i = 0;i<=comfortMax;i++){
+            if(i%5==0)xAxisData.push(i);
+
+        }
+        xAxisData.sort(function(a,b){
+            return parseInt(b) - parseInt(a);
+        });
+        var dataArr = resData.degree;
+        dataArr.sort(function(a,b){
+            return parseInt(b) - parseInt(a);
+        });
+        contrast.setOption({
+            xAxis : [{
+                data : xAxisData
+            }],
+            series : [{
+                data: dataArr
+            }]
+        })
     }
-
-    contrast('说明：满载率与舒适满意度呈现反比趋势');
-
+    contrast1();
     function fullfn(option) {
         $.ajax({
             url: $.getPath+'/RideSatistics/list',
@@ -181,7 +204,7 @@ $(function () {clearInterval($.timerEcharts);
                                 '<td><div><p class="mg_t5 total-green">满意，'+(data[0].satisfaction).toFixed(2)+'%</p>'+
                                 '<p class="mg_t5 total-red">不满意，'+(data[0].unsatisfaction).toFixed(2)+'%</p><p class="mg_t5"><span>Total：</span><i class="total-blue">'+(data[0].total).toFixed(2)+'%</i></p></div></td></tr><tr><td>40%-80%</td><td>'+
                                 '<div><p class="mg_t5 total-green">满意，'+(data[1].satisfaction).toFixed(2)+'%</p><p class="mg_t5 total-red">不满意，'+(data[1].unsatisfaction).toFixed(2)+'%</p><p class="mg_t5"><span>Total：</span><i class="total-blue">'+(data[1].total).toFixed(2)+'%</i></p>'+
-                                '</div></td></tr><tr><td>大于80%</td><td><div><p class="mg_t5 total-green">满意，${(data[2].satisfaction).toFixed(2)}%</p>'+
+                                '</div></td></tr><tr><td>大于80%</td><td><div><p class="mg_t5 total-green">满意，'+(data[2].satisfaction).toFixed(2)+'%</p>'+
                                 '<p class="mg_t5 total-red">不满意，'+(data[2].unsatisfaction).toFixed(2)+'%</p><p class="mg_t5"><span>Total：</span><i class="total-blue">'+(data[2].total).toFixed(2)+'%</i></p>'+
                                 '</div></td></tr></tbody></table>';
                     $('.ride-satistics').append(total);
@@ -194,81 +217,73 @@ $(function () {clearInterval($.timerEcharts);
         })
     }
 
-    function contrast(title) {
-        var contrast = echarts.init(document.getElementById('contrast-chart'));
-        option = {
-            title: {
-                text: title,
-                textStyle: {
-                    color: '#999',
-                    fontSize: 16,
-                    fontWeight: 'normal'
-                },
-                bottom: 2,
-                padding: [0, 0, 0, 60]
-            },
-            tooltip: {
-                trigger: 'axis',
-                axisPointer: {
-                    type: 'cross',
-                    animation: false,
-                    label: {
-                        backgroundColor: '#505765'
-                    }
-                },
-            },
-            grid: {
-                containLabel: true
-            },
-            xAxis: [
-                {
-                    name: '舒适满意度',
-                    nameLocation: 'center',
-                    nameTextStyle: {
-                        color: '#999',
-                        fontSize: 14,
-                        padding: [0, 0, 0, 420]
-                    },
-                    type: 'category',
-                    boundaryGap: false,
-                    // axisLine: {onZero: false},
-                    data: ['1', '2', '3', '4']
-                }
-            ],
-            yAxis: [
-                {
-                    name: '满载率',
-                    type: 'value',
-                    nameTextStyle: {
-                        color: '#999',
-                        fontSize: 14,
-                        padding: [0, 0, 0, 0]
-                    },
-                    data: []
-                }
-            ],
-            series: [
-                {
-                    name: '候车满意度',
-                    type: 'line',
-                    areaStyle: {
-                        normal: {
-                            color: '#e4f6f2'
-                        }
-                    },
-                    itemStyle: {
-                        normal: {
-                            color: '#3c9',
-                            lineStyle: {
-                                color: '#3c9'
-                            }
-                        }
-                    },
-                    data: [80, 60, 30, 10]
-                }
-            ]
-        };
 
+    function contrast1() {
+
+var option = {
+    title: {
+        text: '说明：满载率与舒适满意度呈现反比趋势',
+        left: 'center'
+    },
+    tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+            type: 'cross',
+            animation: false,
+            label: {
+                backgroundColor: '#505765'
+            }
+        },
+    },
+    legend: {
+        left: 'left'
+    },
+    xAxis: {
+        splitLine: {show: false},
+            name: '舒适度',
+                nameLocation: 'center',
+            nameTextStyle: {
+            color: '#999',
+                fontSize: 14,
+                padding: [0, 0, 0, 420]
+        },
+            type: 'category',
+                boundaryGap: false,
+            // axisLine: {onZero: false},
+            data: ['1', '2', '3', '4']
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+    },
+    yAxis: {
+        type: 'log',
+        name: '满载率'
+    },
+    series: [
+        {
+            name: '满载率',
+            type: 'line',
+            areaStyle: {
+                normal: {
+                    color: '#e4f6f2'
+                }
+            },
+            itemStyle: {
+                normal: {
+                    color: '#3c9',
+                    lineStyle: {
+                        color: '#3c9'
+                    }
+                }
+            },
+            data: [80, 60, 30, 10]
+
+        }
+    ]
+};
         contrast.setOption(option);
     }
 
