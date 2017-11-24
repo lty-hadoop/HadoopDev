@@ -133,7 +133,7 @@ $(function ($) {clearInterval($.timerEcharts);
         });
         myChart.setOption({
             yAxis: [{
-                max: 100
+                max: 100,
             }, {
                 max: maxWaiting
             }],
@@ -258,19 +258,21 @@ $(function ($) {clearInterval($.timerEcharts);
                     label: {
                         backgroundColor: '#505765'
                     }
-                }
+                },
+                formatter: "{a} <br/>{c}%",
             },
             grid: {
                 containLabel: true
             },
             xAxis: [
                 {
-                    name: '候车时长',
+                    splitLine:{show: true},
+                    name: '候车时长(min)',
                     nameLocation: 'center',
                     nameTextStyle: {
                         color: '#999',
                         fontSize: 14,
-                        padding: [0, 0, 0, 420]
+                        padding: [10, 0, 0, 420]
                     },
                     type: 'category',
                     boundaryGap: false,
@@ -280,6 +282,7 @@ $(function ($) {clearInterval($.timerEcharts);
             ],
             yAxis: [
                 {
+                    splitLine:{show: true},
                     name: '候车满意度',
                     type: 'value',
                     nameTextStyle: {

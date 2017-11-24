@@ -171,9 +171,16 @@ $(function () {clearInterval($.timerEcharts);
             if(i%5==0)xAxisData.push(i);
 
         }
+        var yAxisData = [];
+        for(var i = 0;i<=maxWaiting;i++){
+            if(i%5==0)yAxisData.push(i);
+
+        }
         xAxisData.sort(function(a,b){
-            return parseInt(b) - parseInt(a);
+            return parseInt(a) - parseInt(b);
         });
+
+
         var dataArr = resData.degree;
         dataArr.sort(function(a,b){
             return parseInt(b) - parseInt(a);
@@ -181,6 +188,9 @@ $(function () {clearInterval($.timerEcharts);
         contrast.setOption({
             xAxis : [{
                 data : xAxisData
+            }],
+            yAxis : [{
+                data :yAxisData
             }],
             series : [{
                 data: dataArr
@@ -226,6 +236,7 @@ var option = {
         left: 'center'
     },
     tooltip: {
+        formatter: "{a} <br/>{c}%", // 这里是鼠标移上去的显示数据
         trigger: 'axis',
         axisPointer: {
             type: 'cross',
@@ -239,28 +250,30 @@ var option = {
         left: 'left'
     },
     xAxis: {
-        splitLine: {show: false},
+        splitLine:{show: true},
             name: '舒适度',
                 nameLocation: 'center',
             nameTextStyle: {
             color: '#999',
                 fontSize: 14,
-                padding: [0, 0, 0, 420]
+                padding: [5, 0, 0, 450]
         },
             type: 'category',
                 boundaryGap: false,
             // axisLine: {onZero: false},
-            data: ['1', '2', '3', '4']
+            data: []
     },
     grid: {
         left: '3%',
         right: '4%',
-        bottom: '3%',
+        bottom: '5%',
         containLabel: true
     },
     yAxis: {
-        type: 'log',
-        name: '满载率'
+        splitLine:{show: true},
+        type: 'value',
+        name: '满载率',
+        data:[]
     },
     series: [
         {
