@@ -313,12 +313,9 @@
     $.fn.selectpick = function (options) {
         options.el = $(this);
         var select = new Selectpick(options);
-        $(this).on("click", function (ev) {
-            stopEvent(ev);
-                flag =false;
-                $(this).select();
-                // stopEvent(ev);
-                select.show();
+        $(this).on("click", function () {
+            $(this).select();
+            select.show();
         })
     }
     //基本配置
@@ -457,12 +454,10 @@
         keySearch: function () {
             var _this = this;
             _this.$ele.on("keyup", function (ev) {
-                if(ev.keyCode !== 67&&ev.keyCode !== 17){
                     var value = $.trim($(this).val());
                     waitDo(_this, "keyup", function () {
                         _this.getData(value);
                     }, 200)
-                }
             })
         },
         setPosition: function () {
