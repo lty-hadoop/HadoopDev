@@ -161,34 +161,14 @@ $(function ($) {clearInterval($.timerEcharts);
                             state = "低峰";
                             break;
                     }
-                    var total = `<div class="mg_t20 bg_f3f6fb of_h">
-                                <div class="col-sm-1 col-md-1 col-lg-1 text_c f18 bd_r1 peak-value-high">${state}</div>
-                                <div class="col-sm-11 col-md-11 col-lg-11">
-                                    <div class="other-peak">
-                                        <div class="identical-peak">
-                                            <span class="less-than identical-time">小于三分钟</span>
-                                            <div class="f16">
-                                                <p class="mg_t20"><span class="total-green">满意，${(elem.time_slot_one_satisfaction).toFixed(2)}%</span><em class="mg_l15 total-red">不满意，${(elem.time_slot_one_yawp).toFixed(2)}%</em></p>
-                                                <p class="mg_t20"><b class="color_999">Total：</b><i class="total-blue">${(elem.time_slot_one_total).toFixed(2)}%</i></p>
-                                            </div>
-                                        </div>
-                                        <div class="identical-peak">
-                                            <span class="less-than identical-time">3-8分钟</span>
-                                            <div class="f16">
-                                                <p class="mg_t20"><span class="total-green">满意，${(elem.time_slot_two_satisfaction).toFixed(2)}%</span><em class="mg_l15 total-red">不满意，${(elem.time_slot_two_yawp).toFixed(2)}%</em></p>
-                                                <p class="mg_t20"><b class="color_999">Total：</b><i class="total-blue">${(elem.time_slot_two_total).toFixed(2)}%</i></p>
-                                            </div>
-                                        </div>
-                                        <div class="identical-peak">
-                                            <span class="less-than identical-time">大于8分钟</span>
-                                            <div class="f16">
-                                                <p class="mg_t20"><span class="total-green">满意，${(elem.time_slot_three_satisfaction).toFixed(2)}%</span><em class="mg_l15 total-red">不满意，${(elem.time_slot_three_yawp).toFixed(2)}%</em></p>
-                                                <p class="mg_t20"><b class="color_999">Total：</b><i class="total-blue">${(elem.time_slot_three_total).toFixed(2)}%</i></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>`;
+                    var total = '<div class="mg_t20 bg_f3f6fb of_h"><div class="col-sm-1 col-md-1 col-lg-1 text_c f18 bd_r1 peak-value-high">'+state+'</div>'+
+                                '<div class="col-sm-11 col-md-11 col-lg-11"><div class="other-peak"><div class="identical-peak"><span class="less-than identical-time">小于三分钟</span>'+
+                                '<div class="f16"><p class="mg_t20"><span class="total-green">满意，'+(elem.time_slot_one_satisfaction).toFixed(2)+'%</span><em class="mg_l15 total-red">不满意，'+(elem.time_slot_one_yawp).toFixed(2)+'%</em></p>'+
+                                '<p class="mg_t20"><b class="color_999">Total：</b><i class="total-blue">'+(elem.time_slot_one_total).toFixed(2)+'%</i></p></div></div>'+
+                                '<div class="identical-peak"><span class="less-than identical-time">3-8分钟</span><div class="f16"><p class="mg_t20"><span class="total-green">满意，'+(elem.time_slot_two_satisfaction).toFixed(2)+'%</span><em class="mg_l15 total-red">不满意，'+(elem.time_slot_two_yawp).toFixed(2)+'%</em></p>'+
+                                '<p class="mg_t20"><b class="color_999">Total：</b><i class="total-blue">'+(elem.time_slot_two_total).toFixed(2)+'%</i></p></div>'+
+                                '</div><div class="identical-peak"><span class="less-than identical-time">大于8分钟</span><div class="f16"><p class="mg_t20"><span class="total-green">满意，'+(elem.time_slot_three_satisfaction).toFixed(2)+'%</span><em class="mg_l15 total-red">不满意，'+(elem.time_slot_three_yawp).toFixed(2)+'%</em></p>'+
+                                '<p class="mg_t20"><b class="color_999">Total：</b><i class="total-blue">'+(elem.time_slot_three_total).toFixed(2)+'%</i></p></div></div></div></div></div>';
                     $('.content-identical').append(total);
                 });
             }

@@ -55,7 +55,7 @@ $(function ($) {clearInterval($.timerEcharts);
     }
     //配置侧边栏导航
     $.ajax({
-        url: 'nav.json',
+        url: 'json/nav.json',
         type: 'get',
         dataType: 'json',
         success: function (data) {
