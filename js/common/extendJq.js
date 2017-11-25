@@ -568,20 +568,22 @@
             }
 
             $.each(dataList, function (index, val) {
-                var $tr = $('<tr></tr>');
-                $.each(_this.opts.theadArr, function (i, data) {
-                    var dataName = data['field'];
-                    var isText = String(val[dataName]).indexOf(".");
-                    if (dataName === 'timeArr' && sort === '') val['timeArr'] = _this.opts.timeArr[index];
-                    if (dataName === 'waiting_satisfaction' && isText != '-1' && sort === '') val[dataName] = (val[dataName]) + '%';
-                    if (dataName === 'full_loadration' && isText != '-1' && sort === '') val[dataName] = ((val[dataName]) * 100).toFixed(2) + '%';
-                    if (dataName === 'ride_satisfaction' && isText != '-1' && sort === '') val[dataName] = (val[dataName]) + '%';
-                    var $td = $('<td class="' + dataName + '">' + val[dataName] + '</td>');
-                    $tr.append($td);
-                });
-                $tr.data('data', val);
-                _this.tbody.append($tr);
-            });
+                if(index<15){
+                    var $tr = $('<tr></tr>');
+                    $.each(_this.opts.theadArr, function (i, data) {
+                        var dataName = data['field'];
+                        var isText = String(val[dataName]).indexOf(".");
+                        if (dataName === 'timeArr' && sort === '') val['timeArr'] = _this.opts.timeArr[index];
+                        if (dataName === 'waiting_satisfaction' && isText != '-1' && sort === '') val[dataName] = (val[dataName]) + '%';
+                        if (dataName === 'full_loadration' && isText != '-1' && sort === '') val[dataName] = ((val[dataName]) * 100).toFixed(2) + '%';
+                        if (dataName === 'ride_satisfaction' && isText != '-1' && sort === '') val[dataName] = (val[dataName]) + '%';
+                        var $td = $('<td class="' + dataName + '">' + val[dataName] + '</td>');
+                        $tr.append($td);
+                    });
+                    $tr.data('data', val);
+            _this.tbody.append($tr);
+        }
+    });
             //存放排序数据的数组重置
             _this.allSendData = [];
         },

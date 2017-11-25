@@ -233,6 +233,11 @@ $(function () {clearInterval($.timerEcharts);
 var option = {
     title: {
         text: '说明：满载率与舒适满意度呈现反比趋势',
+              textStyle: {
+            color: '#999',
+            fontSize: 16,
+            fontWeight: 'normal'
+        },
         left: 'center'
     },
     tooltip: {

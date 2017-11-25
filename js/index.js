@@ -1,4 +1,11 @@
 $(function ($) {clearInterval($.timerEcharts);
+    // 退出
+    $('.log-out').on('click', function(){
+        window.location.href = "index.html";
+    });
+
+    var userName = localStorage.getItem('user');
+    $('.username').text(userName);
     $.timerEcharts = null;
     var $navUl = null;
     var $loadContent = $(".loadContent");
@@ -88,8 +95,6 @@ $(function ($) {clearInterval($.timerEcharts);
         $navUl.on("click", 'li', function (e) {
             if($(this).index()==1&&$(this).html()!=='<a>满载率与拥挤满意度</a>'&&$(this).html()!=='<a>站点评价</a>') {
                 window.location.reload();
-                return;
-            }else if($(this).index()==3){
                 return;
             }
             var index = Math.ceil(Math.random()*4);

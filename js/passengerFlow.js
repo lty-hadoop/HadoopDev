@@ -585,8 +585,8 @@ $(function () {
             if (_this.changeWidth > this.Mwidth || _this.changeWidth < this.minWidth) {
                 _this.stopBar();
             } else {
-                _this.getData();
-                $(".end").css({"top": Math.ceil(this.changeWidth / this.Mwidth * 25), "left": this.changeWidth + 5});
+                _this.getData('1');
+                // $(".end").css({"top": Math.ceil(this.changeWidth / this.Mwidth * 25), "left": this.changeWidth + 5});
                 $(".bar").css({'width': this.changeWidth}, 600);
             }
         },
@@ -617,30 +617,15 @@ $(function () {
                 } else if (clickOffset <= _this.minWidth) {
                     clickOffset = _this.minWidth;
                 }
-                clickOffset >= _this.changeWidth ? add.call(_this) : minus.call(_this);
                 _this.clickEv = false;
-
-                //点击位置是需要增加的
-                function add() {
-                    for (this.changeWidth; this.changeWidth <= clickOffset; this.changeWidth++) {
-                        this.getData();
-                    }
-                    getMoveTo.call(this);
-                }
-
-                //点击位置是需要减小的
-                function minus() {
-                    for (this.changeWidth; this.changeWidth >= clickOffset; this.changeWidth--) {
-                        this.getData();
-                    }
-                    getMoveTo.call(this);
-                }
-
+                _this.changeWidth =  clickOffset;
+                getMoveTo.call(_this);
+                _this.getData('2');
                 function getMoveTo() {
-                    $(".end").animate({
-                        "top": Math.ceil(this.changeWidth / this.Mwidth * 25),
-                        "left": this.changeWidth + 5
-                    }, 600);
+                    // $(".end").animate({
+                    //     "top": Math.ceil(this.changeWidth / this.Mwidth * 25),
+                    //     "left": this.changeWidth + 5
+                    // }, 600);
                     $(".bar").animate({'width': this.changeWidth}, 600);
                 }
 
@@ -674,6 +659,7 @@ $(function () {
                     } else {
                         _this.changeWidth = _this.changeWidth + _this.moveX;
                         _this.changeBar();
+                        if(this.changeWidth % this.steep != 0)_this.getData('2');
                     }
                 }
             });
@@ -695,14 +681,21 @@ $(function () {
             }, 50)
 
         },
-        getData: function () {
+        getData: function (dataType) {
             var _this = this;
-            if (this.changeWidth % this.steep == 0) {
-                //满足条件就请求数据，改变图形
-                var index = Math.floor((this.changeWidth / this.steep));
+            var index = null;
+            if(dataType === '1' ){
+                if (this.changeWidth % this.steep == 0) {
+                    //满足条件就请求数据，改变图形
+                    index = Math.floor((this.changeWidth / this.steep));
+                    setEcharts(index);
+                    // console.log(this.changeWidth/this.steep)
+                }
+            }else{
+                index = Math.floor((this.changeWidth / this.steep));
                 setEcharts(index);
-                // console.log(this.changeWidth/this.steep)
             }
+
 
             function setEcharts(index) {
                 _this.cbFn(index);

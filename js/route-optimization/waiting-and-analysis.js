@@ -240,16 +240,16 @@ $(function ($) {clearInterval($.timerEcharts);
     contrast1();
     function contrast1() {
         contrast.setOption({
-            title: {
-                text: '说明：候车时长与候车满意度呈现反比趋势',
-                textStyle: {
-                    color: '#999',
-                    fontSize: 16,
-                    fontWeight: 'normal'
-                },
-                bottom: 2,
-                padding: [0, 0, 0, 60]
-            },
+
+                title: {
+        text: '说明：候车时长与候车满意度呈现反比趋势',
+               textStyle: {
+            color: '#999',
+            fontSize: 16,
+            fontWeight: 'normal'
+        },
+        left: 'center'
+    },
             tooltip: {
                 trigger: 'axis',
                 axisPointer: {

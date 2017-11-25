@@ -66,7 +66,8 @@ GetData.prototype.init = function () {
             text: this.title,
             textStyle: {
                 color: this.titleColor,
-                fontWeight: 'normal'
+                fontWeight: 'normal',
+                fontSize:16
             },
             left: '8%'
         },

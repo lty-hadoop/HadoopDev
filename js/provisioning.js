@@ -76,7 +76,7 @@ $(function () {clearInterval($.timerEcharts);
         title: '客流与运力对比图(' + $.getDateString('-1') + ')',
         titleColor: '#999',
         legendData: [
-            {name: '客流', icon: 'rect'},
+            {name: '客流(人次)', icon: 'rect'},
             {name: '运力', icon: 'rect'}
         ],
         ydata: [
@@ -85,7 +85,7 @@ $(function () {clearInterval($.timerEcharts);
                 type: 'value',
                 max: 5,
                 axisLabel: {
-                    formatter: '{value}/'+"人次"
+                    formatter: '{value}'
                 }
             },
             {
@@ -100,7 +100,7 @@ $(function () {clearInterval($.timerEcharts);
         seriesNumber: 2,
         seriesFirstData: [
             {
-                name: '客流',
+                name: '客流(人次)',
                 type: 'line',
                 areaStyle: {
                     normal: {
@@ -120,7 +120,7 @@ $(function () {clearInterval($.timerEcharts);
         ],
         seriesSecondData: [
             {
-                name: '客流',
+                name: '客流(人次)',
                 type: 'line',
                 areaStyle: {
                     normal: {
