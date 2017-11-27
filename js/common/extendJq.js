@@ -1,5 +1,6 @@
 ;
-(function ($, window, document) {clearInterval($.timerEcharts);
+(function ($, window, document) {
+    clearInterval($.timerEcharts);
     //定时器
     $.timerEcharts = null;
     //请求接口的域名端口
@@ -45,7 +46,6 @@
     //延迟执行时间
     function waitDo(_this, id, fn, wait) {
         //id事件名称  fn执行事件 wait等待时间
-
         if (_this.timer[id]) {
             window.clearTimeout(_this.timer[id]);
             delete _this.timer[id];
@@ -445,7 +445,7 @@
             })
             $(document.body).on("click", function (ev) {
                 stopEvent(ev);
-                if(ev.target!=_this.$ele.get(0)) _this.hide();
+                if (ev.target != _this.$ele.get(0)) _this.hide();
             });
             $(window).on("resize", function () {
                 _this.hide();
@@ -453,11 +453,11 @@
         },
         keySearch: function () {
             var _this = this;
-            _this.$ele.on("keyup", function (ev) {
-                    var value = $.trim($(this).val());
-                    waitDo(_this, "keyup", function () {
-                        _this.getData(value);
-                    }, 200)
+            _this.$ele.on("keyup", function () {
+                var value = $.trim($(this).val());
+                waitDo(_this, "keyup", function () {
+                    _this.getData(value);
+                }, 200)
             })
         },
         setPosition: function () {
@@ -568,7 +568,7 @@
             }
 
             $.each(dataList, function (index, val) {
-                if(index<15){
+                if (index < 15) {
                     var $tr = $('<tr></tr>');
                     $.each(_this.opts.theadArr, function (i, data) {
                         var dataName = data['field'];
@@ -581,9 +581,9 @@
                         $tr.append($td);
                     });
                     $tr.data('data', val);
-            _this.tbody.append($tr);
-        }
-    });
+                    _this.tbody.append($tr);
+                }
+            });
             //存放排序数据的数组重置
             _this.allSendData = [];
         },
@@ -650,11 +650,15 @@
         var setDataFlag = false;
         var timerData = [];
         /***临时使用****/
-        //删除 todo
-        var a = {isPage:false,line_id:91,offdatess:"2017-11-20,2017-11-20"};
+            //删除 todo
+        var a = {isPage: false, line_id: 91, offdatess: "2017-11-20,2017-11-20"};
         $obj.fn2(a);
         getEcart(a);
-        $(".table-identical").creatTable({'getData': a, 'url': $.getPath + '/Satisfaction/list', theadArr: $obj.theadArr});
+        $(".table-identical").creatTable({
+            'getData': a,
+            'url': $.getPath + '/Satisfaction/list',
+            theadArr: $obj.theadArr
+        });
         /***临时使用****/
         //echarts数据
         //点击查看评价详情
@@ -706,7 +710,7 @@
         var start = {
             //默认日期
             isinitVal: true,
-            initDate: [{DD:0}, true],
+            initDate: [{DD: 0}, true],
             //使用的日期格式
             format: 'YYYY-MM-DD',
             //选中日期执行回调，关闭窗口
@@ -774,8 +778,9 @@
             //结束时间
             $(".getEndTime").jeDate(end);
         }
+
         //获取Echarts数据
-        function getEcart(getData){
+        function getEcart(getData) {
             $.ajax({
                 url: $.getPath + '/Satisfaction/list',
                 type: 'get',
